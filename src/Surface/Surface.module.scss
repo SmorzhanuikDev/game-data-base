@@ -1,0 +1,20 @@
+$headerHeight: 12vh;
+
+.content {
+  width: 100%;
+  background: #622c2c;
+  padding-top: $headerHeight;
+  min-height: 73vh;
+}
+.footer {
+  height: 15vh;
+  background: #b65757;
+}
+.navigation {
+  height: $headerHeight;
+  width: 100%;
+  background: #4d4444;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
