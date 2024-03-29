@@ -1,8 +1,7 @@
-$text-color: #f1ebeb;
+@use 'base';
 
 body {
-  background: #1f1919;
-  color: $text-color;
+  color: base.$text-color;
   font-family: 'Embed code', sans-serif;
 
   .test {

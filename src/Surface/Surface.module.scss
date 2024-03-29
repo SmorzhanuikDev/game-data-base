@@ -1,20 +1,65 @@
-$headerHeight: 12vh;
+
+@use 'src/base';
 
 .content {
   width: 100%;
   background: #622c2c;
-  padding-top: $headerHeight;
+  padding-top: base.$headerHeight;
   min-height: 73vh;
 }
 .footer {
   height: 15vh;
   background: #b65757;
 }
-.navigation {
-  height: $headerHeight;
+.header {
+  height: base.$headerHeight;
   width: 100%;
-  background: #4d4444;
+  background: rgb(97,81,81);
+  background: linear-gradient(180deg, rgba(97,81,81,1) 4%, rgba(11,8,0,1) 56%);
   position: fixed;
   top: 0;
   left: 0;
+  display: flex;
+  padding: 0 4% 0 4%;
+
+  .logo {
+    cursor: pointer;
+    font-family: "Pixelify Sans", sans-serif;
+    display: grid;
+    text-align: center;
+
+    .logoAbr {
+      font-size: 45px;
+      font-weight: bold;
+      color: white;
+    }
+  }
+  .navigation {
+    margin-left: 5%;
+    display: flex;
+    justify-content: flex-start;
+
+
+    .link {
+      cursor: pointer;
+      text-align: center;
+      display: flex;
+      height: 100%;
+      text-decoration: none;
+      padding: 0 30px;
+
+
+      &:hover {
+        transition: 0.3s;
+        background-color: base.$BGColor;
+      }
+
+      p {
+        align-self: center;
+        height: 30%;
+        margin: 30% 0;
+        color: base.$text-color;
+      }
+    }
+  }
 }

@@ -1,5 +1,6 @@
 import React from 'react';
 import s from './Surface.module.scss'
+import {useNavigate} from "react-router-dom";
 export const Navigation = () => {
 
     let lastscroll = 0
@@ -20,9 +21,32 @@ export const Navigation = () => {
     //     lastscroll = scrollPosition()
     // })
 
+    const navigate = useNavigate()
+
     return (
-        <div id='header' className={s.navigation}>
-nas
+        <div id='header' onClick={()=>navigate('/home')} className={s.header}>
+            <div className={s.logo}>
+                <span className={s.logoAbr}>
+                    GDB
+                </span>
+                <span>
+                    game data base
+                </span>
+            </div>
+            <div className={s.navigation}>
+                <a href="/games" className={s.link}>
+                    <p>Games</p>
+                </a>
+                <a href="/ganres" className={s.link}>
+                    <p>Genres</p>
+                </a>
+                <a href="/developers" className={s.link}>
+                    <p>Developers</p>
+                </a>
+                <a href="/platforms" className={s.link}>
+                    <p>Platforms</p>
+                </a>
+            </div>
         </div>
     );
 };
