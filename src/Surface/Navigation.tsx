@@ -1,10 +1,8 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import s from './Surface.module.scss'
 import {useNavigate} from "react-router-dom";
 import searchIcon from '../Images/search-icon.png'
-import {Avatar, Switch} from "@mui/material";
-import {SwitchTheme} from "./SwitchTheme";
-import {deepOrange} from "@mui/material/colors";
+import blankProfile from '../Images/blank-profile.webp'
 
 export const Navigation = () => {
 
@@ -39,7 +37,7 @@ export const Navigation = () => {
                 <a href="/games" className={s.link}>
                     <p>Games</p>
                 </a>
-                <a href="/ganres" className={s.link}>
+                <a href="/genres" className={s.link}>
                     <p>Genres</p>
                 </a>
                 <a href="/developers" className={s.link}>
@@ -53,11 +51,9 @@ export const Navigation = () => {
                 <img src={searchIcon} alt='searchIcon'/>
                 <input type="text" placeholder='Try to search'/>
             </div>
-
-            <SwitchTheme/>
-
-            <Avatar onClick={() => navigate('/profile')} className={s.avatarLink}>N</Avatar>
-
+            <div onClick={() => navigate('/profile')} className={s.avatarLink}>
+                <img src={blankProfile} alt="avatar"/>
+            </div>
         </header>
     );
 };

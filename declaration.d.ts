@@ -3,3 +3,4 @@ declare module '*.scss' {
     export default classNames;
 }
 declare module '*.png'
+declare module '*.webp'

@@ -1,15 +1,15 @@
 @use 'src/base';
 
 .content {
-  width: 100%;
-  background: #622c2c;
-  padding-top: base.$headerHeight;
+  width: 94%;
+  padding: 20px 3%;
+  margin-top: base.$headerHeight;
   min-height: 73vh;
 }
 
 .footer {
   height: 15vh;
-  background: #b65757;
+  background: #212121;
 }
 
 .visible {
@@ -54,6 +54,7 @@ header {
   .navigation {
     display: flex;
     justify-content: flex-start;
+    height: 100%;
 
 
     .link {
@@ -62,6 +63,7 @@ header {
       height: 100%;
       text-decoration: none;
       padding: 0 30px;
+      transition: 0.3s;
 
 
       &:hover {
@@ -103,5 +105,11 @@ header {
   }
   .avatarLink {
     cursor: pointer;
+    border-radius: 50%;
+
+    img {
+      height: 50px;
+      border-radius: 50%;
+    }
   }
 }

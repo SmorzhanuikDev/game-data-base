@@ -4,6 +4,10 @@ import App from './App';
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
 import {Games} from "./Pages/Games";
 import {Home} from "./Pages/Home";
+import {Developers} from "./Pages/Developers";
+import {Genres} from "./Pages/Genres";
+import {Platforms} from "./Pages/Platforms";
+import {Profile} from "./Pages/Profile";
 
 const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement
@@ -21,7 +25,24 @@ const router = createBrowserRouter([
             {
                 path: '/home',
                 element: <Home/>
-            }
+            },
+            {
+                path: '/developers',
+                element: <Developers/>
+            },
+            {
+                path: '/genres',
+                element: <Genres/>
+            },
+            {
+                path: '/platforms',
+                element: <Platforms/>
+            },
+            {
+                path: '/profile',
+                element: <Profile/>
+            },
+
         ]
     }
 ])
