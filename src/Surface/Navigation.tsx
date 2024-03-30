@@ -1,6 +1,7 @@
 import React, {useEffect, useRef, useState} from 'react';
 import s from './Surface.module.scss'
 import {useNavigate} from "react-router-dom";
+import searchIcon from '../Images/search-icon.png'
 
 export const Navigation = () => {
 
@@ -25,8 +26,8 @@ export const Navigation = () => {
     const navigate = useNavigate()
 
     return (
-        <header  onClick={() => navigate('/home')} className={cls}>
-            <div className={s.logo}>
+        <header className={cls}>
+            <div onClick={() => navigate('/home')} className={s.logo}>
                 <span className={s.logoAbr}>
                     GDB
                 </span>
@@ -47,6 +48,10 @@ export const Navigation = () => {
                 <a href="/platforms" className={s.link}>
                     <p>Platforms</p>
                 </a>
+            </div>
+            <div className={s.searchBarContainer}>
+                <img src={searchIcon} alt='searchIcon'/>
+                <input type="text" placeholder='Try to search'/>
             </div>
         </header>
     );
