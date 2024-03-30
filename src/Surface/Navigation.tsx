@@ -2,28 +2,28 @@ import React, {useEffect, useRef, useState} from 'react';
 import s from './Surface.module.scss'
 import {useNavigate} from "react-router-dom";
 import searchIcon from '../Images/search-icon.png'
+import {Avatar, Switch} from "@mui/material";
+import {SwitchTheme} from "./SwitchTheme";
+import {deepOrange} from "@mui/material/colors";
 
 export const Navigation = () => {
 
     const [position, setPosition] = useState(window.pageYOffset)
     const [visible, setVisible] = useState(true)
-    useEffect(()=> {
+    const cls = visible ? s.visible : s.hidden;
+    const navigate = useNavigate()
+
+    useEffect(() => {
         const handleScroll = () => {
             let moving = window.pageYOffset
-
             setVisible(position > moving);
             setPosition(moving)
         };
         window.addEventListener("scroll", handleScroll);
-        return(() => {
+        return (() => {
             window.removeEventListener("scroll", handleScroll);
         })
     })
-
-    const cls = visible ? s.visible : s.hidden;
-
-
-    const navigate = useNavigate()
 
     return (
         <header className={cls}>
@@ -53,6 +53,11 @@ export const Navigation = () => {
                 <img src={searchIcon} alt='searchIcon'/>
                 <input type="text" placeholder='Try to search'/>
             </div>
+
+            <SwitchTheme/>
+
+            <Avatar onClick={() => navigate('/profile')} className={s.avatarLink}>N</Avatar>
+
         </header>
     );
 };

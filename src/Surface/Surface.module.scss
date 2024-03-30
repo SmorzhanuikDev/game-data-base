@@ -30,8 +30,13 @@ header {
   position: fixed;
   top: 0;
   left: 0;
+  text-align: center;
   display: flex;
-  padding: 0 4% 0 4%;
+  justify-content: space-around;
+
+  div {
+    align-self: center;
+  }
 
   .logo {
     cursor: pointer;
@@ -47,7 +52,6 @@ header {
   }
 
   .navigation {
-    margin-left: 5%;
     display: flex;
     justify-content: flex-start;
 
@@ -55,7 +59,6 @@ header {
     .link {
       cursor: pointer;
       text-align: center;
-      display: flex;
       height: 100%;
       text-decoration: none;
       padding: 0 30px;
@@ -69,7 +72,6 @@ header {
       p {
         font-size: 23px;
         font-weight: bold;
-        align-self: center;
         color: base.$text-color;
       }
     }
@@ -80,7 +82,6 @@ header {
     display: flex;
     height: 100%;
     width: 20%;
-    margin-left: 24px;
 
     img {
       height: 16px;
@@ -95,5 +96,12 @@ header {
       border-radius: 10px;
       padding: 10px 10px 10px 40px;
     }
+  }
+
+  .switchTheme {
+    margin-left: 15px;
+  }
+  .avatarLink {
+    cursor: pointer;
   }
 }
