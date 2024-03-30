@@ -1,30 +1,31 @@
-import React from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import s from './Surface.module.scss'
 import {useNavigate} from "react-router-dom";
+
 export const Navigation = () => {
 
-    let lastscroll = 0
-    const defoultOffset = 300
-    const header = document.getElementById('header')
-    console.log(header)
+    const [position, setPosition] = useState(window.pageYOffset)
+    const [visible, setVisible] = useState(true)
+    useEffect(()=> {
+        const handleScroll = () => {
+            let moving = window.pageYOffset
 
-    // const scrollPosition = () => window.pageYOffset || document.documentElement.scrollTop
-    // const containHide = () => header.classList.contains('hide')
-    //
-    // window.addEventListener('scroll', () => {
-    //     if (scrollPosition() > lastscroll && !containHide() && scrollPosition() > defoultOffset) {
-    //         header.classList.add('hide')
-    //     }
-    //     else if (scrollPosition() < lastscroll && containHide()) {
-    //         header.classList.remove('hide')
-    //     }
-    //     lastscroll = scrollPosition()
-    // })
+            setVisible(position > moving);
+            setPosition(moving)
+        };
+        window.addEventListener("scroll", handleScroll);
+        return(() => {
+            window.removeEventListener("scroll", handleScroll);
+        })
+    })
+
+    const cls = visible ? s.visible : s.hidden;
+
 
     const navigate = useNavigate()
 
     return (
-        <div id='header' onClick={()=>navigate('/home')} className={s.header}>
+        <header  onClick={() => navigate('/home')} className={cls}>
             <div className={s.logo}>
                 <span className={s.logoAbr}>
                     GDB
@@ -47,7 +48,7 @@ export const Navigation = () => {
                     <p>Platforms</p>
                 </a>
             </div>
-        </div>
+        </header>
     );
 };
 

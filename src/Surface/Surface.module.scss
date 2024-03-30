@@ -11,7 +11,18 @@
   height: 15vh;
   background: #b65757;
 }
-.header {
+
+.visible {
+  top: 0;
+  transition: top 0.4s ease-out;
+}
+
+.hidden {
+  top: - base.$headerHeight;
+  transition: top 0.4s ease-out;
+}
+
+header {
   height: base.$headerHeight;
   width: 100%;
   background: rgb(97,81,81);
