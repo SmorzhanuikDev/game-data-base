@@ -2,12 +2,14 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
-import {Games} from "./Pages/Games";
+import {Games} from "./Pages/Games/Games";
 import {Home} from "./Pages/Home";
 import {Developers} from "./Pages/Developers";
 import {Genres} from "./Pages/Genres";
 import {Platforms} from "./Pages/Platforms";
 import {Profile} from "./Pages/Profile";
+import {Provider} from "react-redux";
+import store from './redux-store'
 
 const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement
@@ -49,7 +51,9 @@ const router = createBrowserRouter([
 
 root.render(
     <React.StrictMode>
-        <RouterProvider router={router}/>
+        <Provider store={store}>
+            <RouterProvider router={router}/>
+        </Provider>
     </React.StrictMode>
 );
 
