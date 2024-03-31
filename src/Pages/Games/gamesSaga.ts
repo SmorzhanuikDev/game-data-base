@@ -1,9 +1,8 @@
 import {call, put, takeEvery} from 'redux-saga/effects'
 import {gameAPI} from "../../API/gameAPI";
-import {fetchGamesListType, GAMES_FETCH_SUCCEEDED, gamesListType} from "./types";
+import {fetchGamesListType, FETCH_GAME_LIST, gamesListType, fetchGamesParamsType} from "./types";
 import {setGamesList} from "./gamesSlice";
 
-// worker Saga: will be fired on USER_FETCH_REQUESTED actions
 function* fetchGames({params}: fetchGamesListType) {
     try {
         const gamesList: gamesListType = yield call(gameAPI.getGames, params)
@@ -13,8 +12,12 @@ function* fetchGames({params}: fetchGamesListType) {
     }
 }
 
+export const gamesActions = {
+    fetchGames: (params:fetchGamesParamsType):fetchGamesListType => ({type:FETCH_GAME_LIST, params })
+}
+
 function* gamesSaga() {
-    yield takeEvery(GAMES_FETCH_SUCCEEDED, fetchGames)
+    yield takeEvery(FETCH_GAME_LIST, fetchGames)
 }
 
 export default gamesSaga

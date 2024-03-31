@@ -1,10 +1,9 @@
 import {instance} from "./index";
-import {gamesListType} from "../Pages/Games/types";
+import {fetchGamesParamsType, gamesListType} from "../Pages/Games/types";
 
 export const gameAPI = {
-    getGames: async (params: { page: number, page_size: number }): Promise<gamesListType> => {
-            const response = await instance.get<gamesListType>('games')
-            console.log(response)
+    getGames: async (params: fetchGamesParamsType): Promise<gamesListType> => {
+            const response = await instance.get<gamesListType>('games', {params})
             return response.data
     }
 }

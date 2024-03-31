@@ -1,7 +1,7 @@
 import React from 'react';
 import {gameAPI} from "../../API/gameAPI";
 import {useDispatch} from "react-redux";
-import {GAMES_FETCH_SUCCEEDED} from "./types";
+import {FETCH_GAME_LIST} from "./types";
 
 export const Games = () => {
 
@@ -9,7 +9,7 @@ export const Games = () => {
 
     return (
         <div>
-            <button onClick={()=>dispatch({type: GAMES_FETCH_SUCCEEDED})}>test</button>
+            <button onClick={()=>dispatch({type: FETCH_GAME_LIST})}>test</button>
         </div>
     );
 };

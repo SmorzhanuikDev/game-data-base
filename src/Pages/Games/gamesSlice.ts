@@ -1,8 +1,11 @@
 import {createSlice} from '@reduxjs/toolkit'
+import {gamesListType} from "./types";
 
-type initialStateType = { gamesList: number[] }
+type initialStateType = {
+    gamesList: gamesListType
+}
 const initialState: initialStateType = {
-    gamesList: []
+    gamesList: {} as gamesListType
 }
 const gamesSlice = createSlice({
     name: 'games',
