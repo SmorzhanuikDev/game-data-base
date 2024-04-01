@@ -1,7 +1,7 @@
 @use 'src/base';
 
 .gameItem {
-  height: 200px;
+  height: 180px;
   width: 100%;
   display: flex;
   margin: 10px 0;
@@ -9,8 +9,8 @@
   border-radius: 20px;
 
   img {
-    min-height: 100%;
-    width: 355px;
+    height: 180px;
+    width: 320px;
     cursor: pointer;
     border-bottom-left-radius: 20px;
     border-top-left-radius: 20px;
@@ -53,7 +53,12 @@
         }
       }
     }
-    p {
+    .gameRelease {
+      margin: 0;
+      font-size: 16px;
+      color: #d9d1d1;
+    }
+    .gameRating {
       margin: 0;
       font-size: 16px;
     }
