@@ -1,9 +1,9 @@
 export const FETCH_GAME_LIST = 'FETCH_GAME_LIST'
 export interface fetchGamesListType {
     type: typeof FETCH_GAME_LIST,
-    params: fetchGamesParamsType
+    params: gamesSearchParamsType
 }
-export interface fetchGamesParamsType {
+export interface gamesSearchParamsType {
     page?: number
     page_size?: number
     search?: string

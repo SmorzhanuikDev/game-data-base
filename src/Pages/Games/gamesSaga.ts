@@ -1,11 +1,13 @@
 import {call, put, takeEvery} from 'redux-saga/effects'
 import {gameAPI} from "../../API/gameAPI";
-import {fetchGamesListType, FETCH_GAME_LIST, gamesListType, fetchGamesParamsType} from "./types";
+import {FETCH_GAME_LIST, fetchGamesListType, gamesListType, gamesSearchParamsType} from "./gamesTypes";
 import {setGamesList} from "./gamesSlice";
+import {createAction, PayloadAction} from "@reduxjs/toolkit";
 
-function* fetchGames({params}: fetchGamesListType) {
+function* fetchGames({payload}: PayloadAction<gamesSearchParamsType>) {
+    debugger
     try {
-        const gamesList: gamesListType = yield call(gameAPI.getGames, params)
+        const gamesList: gamesListType = yield call(() => gameAPI.getGames(payload))
         yield put(setGamesList(gamesList))
     } catch (e: any) {
         yield put({type: 'ERROR', message: e.message})
@@ -13,8 +15,11 @@ function* fetchGames({params}: fetchGamesListType) {
 }
 
 export const gamesActions = {
-    fetchGames: (params:fetchGamesParamsType):fetchGamesListType => ({type:FETCH_GAME_LIST, params })
+    fetchGames: (params: gamesSearchParamsType): fetchGamesListType => ({type: FETCH_GAME_LIST, params})
 }
+export const fetchGamesAction = createAction(FETCH_GAME_LIST,
+    (params: gamesSearchParamsType) => ({payload: params})
+)
 
 function* gamesSaga() {
     yield takeEvery(FETCH_GAME_LIST, fetchGames)

@@ -1,5 +1,5 @@
-import {createSlice} from '@reduxjs/toolkit'
-import {gamesListType} from "./types";
+import {createSlice, PayloadAction} from '@reduxjs/toolkit'
+import {gamesListType} from "./gamesTypes";
 
 type initialStateType = {
     gamesList: gamesListType
@@ -11,7 +11,7 @@ const gamesSlice = createSlice({
     name: 'games',
     initialState,
     reducers: {
-        setGamesList: (state, action) => {
+        setGamesList: (state, action:PayloadAction<gamesListType>) => {
             state.gamesList = action.payload
         }
     }
