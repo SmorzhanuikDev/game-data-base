@@ -3,7 +3,6 @@ import {FETCH_GAME_LIST} from "./gamesTypes";
 import {GameItem} from "./Components/GameItem";
 import {fetchGamesAction} from "./gamesSaga";
 import {useAppDispatch, useAppSelector} from "../../hooks";
-import {gameAPI} from "../../API/gameAPI";
 
 export const Games = () => {
 
@@ -16,9 +15,10 @@ export const Games = () => {
 
     return (
         <div>
-            <button onClick={() => dispatch({type: FETCH_GAME_LIST})}>test</button>
-
-            <GameItem/>
+            <button onClick={()=> console.log(gamesList)}>test</button>
+            {
+                gamesList.results && gamesList.results.map(game => <GameItem key={game.id} game={game}/>)
+            }
         </div>
     );
 };
