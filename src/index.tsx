@@ -10,6 +10,7 @@ import {Platforms} from "./Pages/Platforms";
 import {Profile} from "./Pages/Profile";
 import {Provider} from "react-redux";
 import store from './redux-store'
+import GameDetails from "./Pages/GameDetails/GameDetails";
 
 const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement
@@ -23,6 +24,10 @@ const router = createBrowserRouter([
             {
                 path: '/games',
                 element: <Games/>
+            },
+            {
+                path: '/game/:gameId',
+                element: <GameDetails/>
             },
             {
                 path: '/home',
