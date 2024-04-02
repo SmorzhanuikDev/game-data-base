@@ -14,12 +14,12 @@ export interface gameDetailsType {
     background_image: string
     rating: number
     rating_top: number
-    ratings: {
+    ratings: Array<{
         id: number
         title: string
         count: number
         percent: number
-    }
+    }>
     ratings_count: number
     reviews_text_count: string
     added: number
