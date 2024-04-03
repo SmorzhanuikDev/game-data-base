@@ -1,66 +1,43 @@
 @use 'src/base';
 
-.gameItem {
-  height: 180px;
-  width: 100%;
-  display: flex;
-  margin: 10px 0;
-  background: #383835;
-  border-radius: 20px;
+.pageWrapper {
+  display: grid;
+  grid-template-columns: 5fr 4fr;
+  padding: 0 30px;
+  gap: 60px;
+  margin-top: 30px;
 
-  img {
-    height: 180px;
-    width: 320px;
-    cursor: pointer;
-    border-bottom-left-radius: 20px;
-    border-top-left-radius: 20px;
+  p {
+    margin: 0;
   }
-  .descBlock {
+
+  .baseInfo {
     display: flex;
-    flex-direction: column;
     justify-content: space-between;
-    padding: 10px;
+    align-items: flex-start;
 
-    .gameName {
-      font-weight: bold;
-      font-size: 25px;
-    }
-
-    .gameGenre {
-      display: flex;
-
-      a {
-        margin-right: 10px;
-        font-size: 18px;
-
-        &:hover {
-          color: #d9d1d1;
-        }
-      }
-    }
-
-    .gamePlatforms{
-      display: flex;
-
-      a {
-        margin-right: 10px;
-        font-size: 16px;
-        color: #9b9696;
-        text-decoration: underline;
-
-        &:hover {
-          color: base.$text-color;
-        }
-      }
-    }
-    .gameRelease {
+    .gameReleasedHead {
+      text-transform: uppercase;
+      border-radius: 5px;
+      background: #fff;
+      color: #0b0800;
+      padding: 3px 6px;
       margin: 0;
-      font-size: 16px;
-      color: #d9d1d1;
+      font-size: 14px;
     }
-    .gameRating {
-      margin: 0;
-      font-size: 16px;
+
+    .averagePlaytime {
+      text-transform: uppercase;
+      font-size: 14px;
+      border-radius: 5px;
+      background: #fff;
+      color: #0b0800;
+      padding: 3px 6px;
     }
+  }
+
+  .gameName {
+    font-size: 30px;
+    padding: 15px 0;
   }
 }
