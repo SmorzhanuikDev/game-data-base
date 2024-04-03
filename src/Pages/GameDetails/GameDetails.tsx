@@ -4,12 +4,14 @@ import {fetchGameDetailsAction} from "./gameDetailsSaga";
 import {useAppDispatch, useAppSelector} from "../../hooks";
 import s from './GameDetails.module.scss'
 import {format} from "date-fns";
+import {usersRatings} from "./gameDetailsTypes";
 
 const GameDetails = () => {
 
     const {gameId} = useParams()
     const dispatch = useAppDispatch()
     const currentGame = useAppSelector(state => state.gameDetails.currentGame)
+    const ratingsColors = ['#6cb76c', '#465d94', '#f8ec5d', '#e84545']
 
     useEffect(() => {
         if (gameId) {
@@ -17,6 +19,17 @@ const GameDetails = () => {
         }
     }, [dispatch, gameId]);
 
+    const sortRating = (ratings: usersRatings[]) => {
+        const ddf = [...ratings]
+        return ddf.sort((a, b) => {
+            if (a.percent > b.percent) {
+                return -1
+            } else if (a.percent < b.percent) {
+                return 1
+            }
+            return 0
+        })
+    }
 
 
     return (
@@ -30,14 +43,39 @@ const GameDetails = () => {
                         average playtime: {currentGame.additions_count} hours
                     </p>
                 </div>
-                <p className={s.gameName}>{currentGame.name}</p>
-                <div className={s.ratingsBlock}>
+                <p className={s.gameName}>
+                    {currentGame.name}
+                </p>
+                <div className={s.ratingsPercentsBlock}>
                     {currentGame.ratings
-                        ? <div className={s.usersRating}>{currentGame?.ratings[0].title}</div>
-                        : null
-                    }
+                        ? sortRating(currentGame.ratings).map((rating, index) =>
+                            <div key={rating.id} className={s.ratingPercentsItem}
+                                 style={{
+                                     width: `${rating.percent}%`,
+                                     background: ratingsColors[index]
+                                 }}>
+                            </div>
+                        )
+                        : null}
                 </div>
-                <div>{currentGame.description_raw}</div>
+                <div className={s.ratingDetails}>
+                    {currentGame?.ratings?.map((rating, index) =>
+                        <div key={rating.id}
+                             style={{borderLeft: `solid 7px ${ratingsColors[index]}`, paddingLeft: 5}}>
+                            <div>
+                                <span>{rating.title}: </span>
+                                <span>{rating.percent}%</span>
+                            </div>
+                            <span>Votes: {rating.count}</span>
+                        </div>)}
+                </div>
+                <hr/>
+                <div className={s.description}>
+                    <h4>About</h4>
+                    <p>
+                        {currentGame.description_raw}
+                    </p>
+                </div>
                 <hr/>
                 <div className={s.commonInfo}>
                     <div> {currentGame?.platforms?.map(platform =>

@@ -37,7 +37,36 @@
   }
 
   .gameName {
-    font-size: 30px;
+    font-size: 35px;
     padding: 15px 0;
+  }
+
+  .ratingsPercentsBlock {
+    display: flex;
+    margin-top: 20px;
+
+    .ratingPercentsItem {
+      height: 20px;
+      border-radius: 3px;
+    }
+  }
+
+  .ratingDetails {
+    display: flex;
+    justify-content: space-between;
+    text-transform: capitalize;
+    font-size: 17px;
+    margin-top: 15px;
+  }
+
+  .description {
+
+    h4 {
+      margin: 20px 0;
+      font-size: 22px;
+    }
+    p{
+      font-size: 17px;
+    }
   }
 }

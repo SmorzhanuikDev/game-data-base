@@ -14,12 +14,7 @@ export interface gameDetailsType {
     background_image: string
     rating: number
     rating_top: number
-    ratings: Array<{
-        id: number
-        title: string
-        count: number
-        percent: number
-    }>
+    ratings: usersRatings[]
     ratings_count: number
     reviews_text_count: string
     added: number
@@ -143,6 +138,14 @@ export interface gameDetailsType {
         }>
     clip: any,
     description_raw: string
+}
+
+
+export interface usersRatings {
+    id: number
+    title: string
+    count: number
+    percent: number
 }
 
 
