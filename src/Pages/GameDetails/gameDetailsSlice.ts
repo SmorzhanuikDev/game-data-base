@@ -11,7 +11,7 @@ const gameDetailsSlice = createSlice({
     name: 'gameDetails',
     initialState,
     reducers: {
-        setGameDetails: (state, action: PayloadAction<any>) => {
+        setGameDetails: (state, action: PayloadAction<gameDetailsType>) => {
             state.currentGame = action.payload
         }
     }

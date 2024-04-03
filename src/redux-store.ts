@@ -5,6 +5,7 @@ import gamesSaga from './Pages/Games/gamesSaga'
 import gameDetailsSlice from "./Pages/GameDetails/gameDetailsSlice";
 import gameDetailsSaga from "./Pages/GameDetails/gameDetailsSaga";
 import {all} from 'redux-saga/effects'
+import appSlice from "./appSlice";
 
 const sagaMiddleware = createSagaMiddleware()
 
@@ -12,6 +13,7 @@ const store = configureStore({
     reducer: {
         games: gamesSlice,
         gameDetails: gameDetailsSlice,
+        appData: appSlice,
     },
     middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(sagaMiddleware)
 })

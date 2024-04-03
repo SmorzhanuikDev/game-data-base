@@ -4,7 +4,12 @@
   width: 94%;
   padding: 20px 3%;
   margin-top: base.$headerHeight;
-  min-height: 73vh;
+  min-height: 67vh;
+
+  .loader {
+    display: flex;
+    justify-content: space-around;
+  }
 }
 
 .footer {
