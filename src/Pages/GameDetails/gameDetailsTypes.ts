@@ -31,11 +31,7 @@ export interface gameDetailsType {
     playtime: number
     suggestions_count: number
     updated: string
-    esrb_rating: {
-        id: number
-        name: string
-        slug: string
-    } | null
+    esrb_rating: esrb_rating | null
     platforms: Array<{
         "platform": {
 
@@ -146,6 +142,11 @@ export interface usersRatings {
     title: string
     count: number
     percent: number
+}
+export interface esrb_rating {
+    id: number
+    slug: "everyone" | "everyone-10-plus" | "teen" | "mature" | "adults-only" | "rating-pending"
+    name: "Everyone" | "Everyone 10+" | "Teen" | "Mature" | "Adults Only" | "Rating Pending"
 }
 
 

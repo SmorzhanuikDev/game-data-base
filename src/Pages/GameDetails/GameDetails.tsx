@@ -5,6 +5,7 @@ import {useAppDispatch, useAppSelector} from "../../hooks";
 import s from './GameDetails.module.scss'
 import {format} from "date-fns";
 import {usersRatings} from "./gameDetailsTypes";
+import {formatDate, formatESRBRating} from "../../Common/commonFunctions";
 
 const GameDetails = () => {
 
@@ -37,7 +38,7 @@ const GameDetails = () => {
             <div>
                 <div className={s.baseInfo}>
                     <p className={s.gameReleasedHead}>
-                        {currentGame.released && format(new Date(currentGame.released), "MMM dd, yyyy")}
+                        {formatDate(currentGame.released)}
                     </p>
                     <p className={s.averagePlaytime}>
                         average playtime: {currentGame.additions_count} hours
@@ -77,30 +78,65 @@ const GameDetails = () => {
                     </p>
                 </div>
                 <hr/>
+
                 <div className={s.commonInfo}>
-                    <div> {currentGame?.platforms?.map(platform =>
-                        <a href={`platform/${platform.platform.id}`} key={platform.platform.id}>
-                            {platform.platform.name}
-                        </a>
-                    )}</div>
-                    <div>{currentGame.genres?.map(genre =>
-                        <a href={`genre/${genre.id}`} key={genre.id}>
-                            {genre.name}
-                        </a>
-                    )}</div>
-                    <div>{currentGame.metacritic}</div>
-                    <div>released: {currentGame.released}</div>
-                    <div>developer: {currentGame.developers?.map(developers =>
-                        <a href={`developer/${developers.id}`} key={developers.id}>
-                            {developers.name}
-                        </a>
-                    )}</div>
-                    <div>publisher: {currentGame.publishers?.map(publisher =>
-                        <a href={`publisher/${publisher.id}`} key={publisher.id}>
-                            {publisher.name}
-                        </a>
-                    )}</div>
-                    <p>age rating: {currentGame.esrb_rating?.name}</p>
+                    <div>
+                        <h5>Platforms</h5>
+                        <div> {currentGame?.platforms?.map(platform =>
+                            <a href={`/platform/${platform.platform.id}`} key={platform.platform.id}>
+                                {platform.platform.name}
+                            </a>
+                        )}</div>
+                    </div>
+
+                    <div>
+                        <h5>
+                            genres
+                        </h5>
+                        <div>{currentGame.genres?.map(genre =>
+                            <a href={`/genre/${genre.id}`} key={genre.id}>
+                                {genre.name}
+                            </a>
+                        )}</div>
+                    </div>
+
+                    <div>
+                        <h5>metascore</h5>
+                        <span className={s.metacriticScore}>
+                            {currentGame.metacritic}
+                        </span>
+                    </div>
+                    <div>
+                        <h5>release date</h5>
+                        <p className={s.releaseDate}>
+                           {formatDate(currentGame.released)}
+                        </p>
+                    </div>
+
+                    <div>
+                        <h5>developers</h5>
+                        <div>
+                            {currentGame.developers?.map(developers =>
+                                <a href={`/developer/${developers.id}`} key={developers.id}>
+                                    {developers.name}
+                                </a>
+                            )}
+                        </div>
+                    </div>
+                    <div>
+                        <h5>publisher</h5>
+                        <div>
+                            {currentGame.publishers?.map(publisher =>
+                                <a href={`/publisher/${publisher.id}`} key={publisher.id}>
+                                    {publisher.name}
+                                </a>
+                            )}
+                        </div>
+                    </div>
+                    <div>
+                        <h5>age rating</h5>
+                        <span className={s.esrbRating}>{formatESRBRating(currentGame.esrb_rating)}</span>
+                    </div>
                 </div>
             </div>
             <div>right side</div>
