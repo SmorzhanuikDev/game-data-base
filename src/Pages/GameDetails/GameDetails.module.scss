@@ -65,7 +65,8 @@
       margin: 20px 0;
       font-size: 22px;
     }
-    p{
+
+    p {
       font-size: 17px;
     }
   }
@@ -86,6 +87,19 @@
       font-size: 16px;
       text-decoration: underline;
       margin-right: 5px;
+      transition: 0.2s;
+
+      &:hover {
+        color: #8a8080;
+        transition: 0.2s;
+
+      }
+      &:not(&:last-child) {
+        &:after {
+          content: ',';
+        }
+      }
+
     }
 
     .metacriticScore {
@@ -95,11 +109,17 @@
       color: #3db643;
       border-radius: 5px;
     }
+
     .releaseDate {
       font-size: 16px;
     }
+
     .esrbRating {
       font-size: 16px;
+    }
+
+    .fullWidthElenet {
+      grid-column: 1/3;
     }
   }
 

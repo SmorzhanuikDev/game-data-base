@@ -1,24 +1,21 @@
 import React, {useEffect} from 'react';
 import {useParams} from "react-router-dom";
-import {fetchGameAdditionsAction, fetchGameDetailsAction} from "./gameDetailsSaga";
+import {fetchGameAdditionsAction, fetchGameDetailsAction, fetchGameSeriesAction} from "./gameDetailsSaga";
 import {useAppDispatch, useAppSelector} from "../../hooks";
 import s from './GameDetails.module.scss'
 import {formatDate, formatESRBRating} from "../../Common/commonFunctions";
 import {usersRatings} from "../Games/gamesTypes";
+import {useBgImage} from "../../Surface/Content";
 
 const GameDetails = () => {
 
+    const {sendImage} = useBgImage()
     const {gameId} = useParams()
     const dispatch = useAppDispatch()
     const currentGame = useAppSelector(state => state.gameDetails.currentGame)
+    const currentGameAdditions = useAppSelector(state => state.gameDetails.additionalContent)
+    const currentGameSeries = useAppSelector(state => state.gameDetails.gameSeries)
     const ratingsColors = ['#6cb76c', '#465d94', '#f8ec5d', '#e84545']
-
-    useEffect(() => {
-        if (gameId) {
-            dispatch(fetchGameDetailsAction(Number(gameId)))
-            dispatch(fetchGameAdditionsAction(Number(gameId)))
-        }
-    }, [dispatch, gameId]);
 
     const sortRating = (ratings: usersRatings[]) => {
         const ddf = [...ratings]
@@ -32,9 +29,23 @@ const GameDetails = () => {
         })
     }
 
+    useEffect(() => {
+        if (gameId) {
+            dispatch(fetchGameDetailsAction(Number(gameId)))
+            dispatch(fetchGameAdditionsAction(Number(gameId)))
+            dispatch(fetchGameSeriesAction(Number(gameId)))
+        }
+    }, [dispatch, gameId]);
+
+    useEffect(() => {
+        if (currentGame.background_image || currentGame.background_image_additional) {
+            sendImage(currentGame.background_image || currentGame.background_image_additional)
+        }
+    }, [currentGame.background_image, currentGame.background_image_additional, sendImage]);
+
 
     return (
-        <div className={s.pageWrapper}>
+        <div className={s.pageWrapper} style={{backgroundImage: `url:(${currentGame.background_image})`}}>
             <div>
                 <div className={s.baseInfo}>
                     <p className={s.gameReleasedHead}>
@@ -82,7 +93,7 @@ const GameDetails = () => {
                 <div className={s.commonInfo}>
                     <div>
                         <h5>Platforms</h5>
-                        <div> {currentGame?.platforms?.map(platform =>
+                        <div className={s.mapping}> {currentGame?.platforms?.map(platform =>
                             <a href={`/platform/${platform.platform.id}`} key={platform.platform.id}>
                                 {platform.platform.name}
                             </a>
@@ -137,9 +148,37 @@ const GameDetails = () => {
                         <h5>age rating</h5>
                         <span className={s.esrbRating}>{formatESRBRating(currentGame.esrb_rating)}</span>
                     </div>
+                    <div>
+                        <h5>
+                            website
+                        </h5>
+                        <a href={currentGame.website}>{currentGame.website}</a>
+                    </div>
+                    <div className={s.fullWidthElenet}>
+                        <h5>DLC's and editions</h5>
+                        {currentGameAdditions.results?.map(additions =>
+                            <a href={'/game/' + additions.id} key={additions.id}>
+                                {additions.name}
+                            </a>)}
+                    </div>
+                    <div className={s.fullWidthElenet}>
+                        <h5>Other game in the series</h5>
+                        {currentGameSeries.results?.map(game =>
+                            <a href={'/game/' + game.id} key={game.id}>
+                                {game.name}
+                            </a>)}
+                    </div>
+                    <div className={s.fullWidthElenet}>
+                        <h5>tags</h5>
+                        {currentGame.tags?.map(tag =>
+                            <a href={'/game'} key={tag.id}>
+                                {tag.name}
+                            </a>)}
+                    </div>
                 </div>
+
             </div>
-            <div>right side</div>
+            <div>системні </div>
         </div>
     );
 };

@@ -1,18 +1,10 @@
 import {gameType} from "../Games/gamesTypes";
+import {defaultResponse} from "../../Common/commonTypes";
 
 export const FETCH_GAME_DETAILS = 'FETCH_GAME_DETAILS'
-
-export interface fetchGameDetailsType {
-    type: typeof FETCH_GAME_DETAILS,
-    id: number
-}
-
 export const FETCH_GAME_ADDITIONAL_CONTENT = 'FETCH_GAME_ADDITIONAL_CONTENT'
+export const FETCH_GAME_SERIES = 'FETCH_GAME_SERIES'
 
-export interface fetchGameAdditionalContentType {
-    type: typeof FETCH_GAME_ADDITIONAL_CONTENT,
-    id: number
-}
 
 
 export interface gameDetailsType extends gameType {
@@ -61,8 +53,12 @@ export interface gameDetailsType extends gameType {
 export interface gameAdditionsType {
     count: 6
     next: string | null
-    previous: string  | null
-    result: gameType[]
+    previous: string | null
+    results: gameType[]
+}
+
+export interface gameSeriesType extends defaultResponse {
+    results: gameType[]
 }
 
 

@@ -1,3 +1,4 @@
+import {defaultResponse} from "../../Common/commonTypes";
 
 export const FETCH_GAME_LIST = 'FETCH_GAME_LIST'
 export interface fetchGamesListType {
@@ -21,10 +22,7 @@ export interface gamesSearchParamsType {
 }
 
 
-export interface gamesListType {
-    count: 865190,
-    next: string | null
-    previous: string | null,
+export interface gamesListType extends defaultResponse{
     results: gameType[]
     seo_title: string
     seo_description: string
