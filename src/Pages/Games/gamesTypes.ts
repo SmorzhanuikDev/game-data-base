@@ -1,3 +1,4 @@
+
 export const FETCH_GAME_LIST = 'FETCH_GAME_LIST'
 export interface fetchGamesListType {
     type: typeof FETCH_GAME_LIST,
@@ -59,12 +60,7 @@ export interface gameType {
     background_image: string
     rating: number
     rating_top: number
-    ratings: {
-        id: number
-        title: string
-        count: number
-        percent: number
-    }
+    ratings: usersRatings[]
     ratings_count: number
     reviews_text_count: string
     added: number
@@ -81,11 +77,7 @@ export interface gameType {
     playtime: number
     suggestions_count: number
     updated: string
-    esrb_rating: {
-        id: number
-        name: string
-        slug: string
-    } | null
+    esrb_rating: esrb_rating | null
     platforms: Array<{
         "platform": {
 
@@ -145,4 +137,17 @@ export interface gameType {
         id: number
         image: string
     }>
+}
+
+export interface usersRatings {
+    id: number
+    title: string
+    count: number
+    percent: number
+}
+
+export interface esrb_rating {
+    id: number
+    slug: "everyone" | "everyone-10-plus" | "teen" | "mature" | "adults-only" | "rating-pending"
+    name: "Everyone" | "Everyone 10+" | "Teen" | "Mature" | "Adults Only" | "Rating Pending"
 }

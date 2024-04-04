@@ -1,5 +1,5 @@
 import {format} from "date-fns";
-import {esrb_rating} from "../Pages/GameDetails/gameDetailsTypes";
+import {esrb_rating} from "../Pages/Games/gamesTypes";
 
 export const formatDate = (date: string) => {
     if (date) {

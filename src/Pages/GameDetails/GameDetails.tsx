@@ -1,11 +1,10 @@
 import React, {useEffect} from 'react';
 import {useParams} from "react-router-dom";
-import {fetchGameDetailsAction} from "./gameDetailsSaga";
+import {fetchGameAdditionsAction, fetchGameDetailsAction} from "./gameDetailsSaga";
 import {useAppDispatch, useAppSelector} from "../../hooks";
 import s from './GameDetails.module.scss'
-import {format} from "date-fns";
-import {usersRatings} from "./gameDetailsTypes";
 import {formatDate, formatESRBRating} from "../../Common/commonFunctions";
+import {usersRatings} from "../Games/gamesTypes";
 
 const GameDetails = () => {
 
@@ -17,6 +16,7 @@ const GameDetails = () => {
     useEffect(() => {
         if (gameId) {
             dispatch(fetchGameDetailsAction(Number(gameId)))
+            dispatch(fetchGameAdditionsAction(Number(gameId)))
         }
     }, [dispatch, gameId]);
 
@@ -109,7 +109,7 @@ const GameDetails = () => {
                     <div>
                         <h5>release date</h5>
                         <p className={s.releaseDate}>
-                           {formatDate(currentGame.released)}
+                            {formatDate(currentGame.released)}
                         </p>
                     </div>
 

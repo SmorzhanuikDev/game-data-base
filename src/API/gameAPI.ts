@@ -1,6 +1,6 @@
 import {instance} from "./index";
 import {gamesSearchParamsType, gamesListType} from "../Pages/Games/gamesTypes";
-import {gameDetailsType} from "../Pages/GameDetails/gameDetailsTypes";
+import {gameAdditionsType, gameDetailsType} from "../Pages/GameDetails/gameDetailsTypes";
 
 export const gameAPI = {
     getGames: async (params: gamesSearchParamsType): Promise<gamesListType> => {
@@ -9,6 +9,10 @@ export const gameAPI = {
     },
     getGameDetails: async (gameId: number): Promise<gameDetailsType> => {
             const response = await instance.get<gameDetailsType>(`games/${gameId}`)
+            return response.data
+    },
+    getGameAdditions: async (gameId: number): Promise<gameAdditionsType> => {
+            const response = await instance.get<gameAdditionsType>(`games/${gameId}/additions`)
             return response.data
     }
 }
