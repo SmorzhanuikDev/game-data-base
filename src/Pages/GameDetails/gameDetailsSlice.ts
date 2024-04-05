@@ -1,15 +1,17 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit'
-import {gameAdditionsType, gameDetailsType, gameSeriesType} from "./gameDetailsTypes";
+import {gameAdditionsType, gameDetailsType, gameScreenshotsType, gameSeriesType} from "./gameDetailsTypes";
 
 type initialStateType = {
     currentGame: gameDetailsType
     additionalContent: gameAdditionsType
     gameSeries: gameSeriesType
+    gameScreenshots: gameScreenshotsType
 }
 const initialState: initialStateType = {
     currentGame: {} as gameDetailsType,
     additionalContent: {} as gameAdditionsType,
-    gameSeries: {} as gameSeriesType
+    gameSeries: {} as gameSeriesType,
+    gameScreenshots: {} as gameScreenshotsType
 }
 const gameDetailsSlice = createSlice({
     name: 'gameDetails',
@@ -23,10 +25,13 @@ const gameDetailsSlice = createSlice({
         },
         setGameSeries: (state, action: PayloadAction<gameSeriesType>) => {
             state.gameSeries = action.payload
+        },
+        setGameScreenshots: (state, action: PayloadAction<gameScreenshotsType>) => {
+            state.gameScreenshots = action.payload
         }
     }
 })
 
-export const {setGameDetails, setAdditionalContent, setGameSeries} = gameDetailsSlice.actions
+export const {setGameDetails, setAdditionalContent, setGameSeries, setGameScreenshots} = gameDetailsSlice.actions
 
 export default gameDetailsSlice.reducer

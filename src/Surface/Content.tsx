@@ -27,9 +27,10 @@ export const Content = () => {
     }, [location.pathname, navigate]);
 
     return (
-        <div className={s.content} style={{
+        <div className={s.content} style={bgImage ? {
             backgroundImage: `linear-gradient(rgba(33, 32, 24, 0.9), rgba(11, 8, 0, 1)), url("${bgImage}")`
-        }}>
+        } : {}
+        }>
             <div hidden={!isAppLoading}>
                 <div className={s.loader}>
                     <RotatingSquare

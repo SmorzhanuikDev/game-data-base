@@ -4,6 +4,7 @@ import {defaultResponse} from "../../Common/commonTypes";
 export const FETCH_GAME_DETAILS = 'FETCH_GAME_DETAILS'
 export const FETCH_GAME_ADDITIONAL_CONTENT = 'FETCH_GAME_ADDITIONAL_CONTENT'
 export const FETCH_GAME_SERIES = 'FETCH_GAME_SERIES'
+export const FETCH_GAME_SCREENSHOTS = 'FETCH_GAME_SCREENSHOTS'
 
 
 
@@ -59,6 +60,21 @@ export interface gameAdditionsType {
 
 export interface gameSeriesType extends defaultResponse {
     results: gameType[]
+}
+
+export interface gameScreenshotsType {
+    count: number
+    next: string | null
+    previous: string | null
+    results:  screenshotType[]
+}
+
+export interface screenshotType {
+    id: number
+    image: string
+    width: number
+    height: number
+    is_deleted: boolean
 }
 
 

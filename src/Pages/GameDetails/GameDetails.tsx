@@ -1,11 +1,20 @@
 import React, {useEffect} from 'react';
 import {useParams} from "react-router-dom";
-import {fetchGameAdditionsAction, fetchGameDetailsAction, fetchGameSeriesAction} from "./gameDetailsSaga";
+import {
+    fetchGameAdditionsAction,
+    fetchGameDetailsAction,
+    fetchGameScreenshotsAction,
+    fetchGameSeriesAction
+} from "./gameDetailsSaga";
 import {useAppDispatch, useAppSelector} from "../../hooks";
 import s from './GameDetails.module.scss'
 import {formatDate, formatESRBRating} from "../../Common/commonFunctions";
 import {usersRatings} from "../Games/gamesTypes";
 import {useBgImage} from "../../Surface/Content";
+import "react-image-gallery/styles/scss/image-gallery.scss";
+import ImageGallery from "react-image-gallery";
+import {screenshotType} from "./gameDetailsTypes";
+import {setIsAppLoading} from "../../appSlice";
 
 const GameDetails = () => {
 
@@ -15,6 +24,7 @@ const GameDetails = () => {
     const currentGame = useAppSelector(state => state.gameDetails.currentGame)
     const currentGameAdditions = useAppSelector(state => state.gameDetails.additionalContent)
     const currentGameSeries = useAppSelector(state => state.gameDetails.gameSeries)
+    const gameScreenshots = useAppSelector(state => state.gameDetails.gameScreenshots)
     const ratingsColors = ['#6cb76c', '#465d94', '#f8ec5d', '#e84545']
 
     const sortRating = (ratings: usersRatings[]) => {
@@ -31,9 +41,12 @@ const GameDetails = () => {
 
     useEffect(() => {
         if (gameId) {
+            dispatch(setIsAppLoading(true))
             dispatch(fetchGameDetailsAction(Number(gameId)))
             dispatch(fetchGameAdditionsAction(Number(gameId)))
             dispatch(fetchGameSeriesAction(Number(gameId)))
+            dispatch(fetchGameScreenshotsAction(Number(gameId)))
+            dispatch(setIsAppLoading(true))
         }
     }, [dispatch, gameId]);
 
@@ -43,6 +56,12 @@ const GameDetails = () => {
         }
     }, [currentGame.background_image, currentGame.background_image_additional, sendImage]);
 
+    const formatScreenshot = (screenshot: screenshotType) => {
+        return {
+            original: screenshot.image,
+            thumbnail: screenshot.image,
+        }
+    }
 
     return (
         <div className={s.pageWrapper} style={{backgroundImage: `url:(${currentGame.background_image})`}}>
@@ -178,7 +197,16 @@ const GameDetails = () => {
                 </div>
 
             </div>
-            <div>системні </div>
+            <div>
+                <div className={s.screenshot}>
+                    {gameScreenshots.results
+                        ? < ImageGallery showPlayButton={false}
+                                         items={gameScreenshots.results?.map(screenshot => formatScreenshot(screenshot))}/>
+                        : null
+                    }
+                </div>
+                системні
+            </div>
         </div>
     );
 };

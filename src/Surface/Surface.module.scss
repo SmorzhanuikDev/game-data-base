@@ -19,6 +19,7 @@
 }
 
 .visible {
+  z-index: 5;
   top: 0;
   transition: top 0.4s ease-out;
 }

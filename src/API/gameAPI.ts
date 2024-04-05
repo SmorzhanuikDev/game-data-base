@@ -1,6 +1,11 @@
 import {instance} from "./index";
 import {gamesSearchParamsType, gamesListType} from "../Pages/Games/gamesTypes";
-import {gameAdditionsType, gameDetailsType, gameSeriesType} from "../Pages/GameDetails/gameDetailsTypes";
+import {
+    gameAdditionsType,
+    gameDetailsType,
+    gameScreenshotsType,
+    gameSeriesType
+} from "../Pages/GameDetails/gameDetailsTypes";
 
 export const gameAPI = {
     getGames: async (params: gamesSearchParamsType): Promise<gamesListType> => {
@@ -22,6 +27,14 @@ export const gameAPI = {
     },
     getGameSeries: async (gameId: number): Promise<gameSeriesType> => {
         const response = await instance.get<gameSeriesType>(`games/${gameId}/game-series`, {
+            params: {
+                page_size: 30
+            }
+        })
+        return response.data
+    },
+    getGameScreenshots: async (gameId: number): Promise<gameScreenshotsType> => {
+        const response = await instance.get<gameScreenshotsType>(`games/${gameId}/screenshots`, {
             params: {
                 page_size: 30
             }
