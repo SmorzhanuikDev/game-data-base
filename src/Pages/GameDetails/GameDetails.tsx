@@ -8,13 +8,17 @@ import {
 } from "./gameDetailsSaga";
 import {useAppDispatch, useAppSelector} from "../../hooks";
 import s from './GameDetails.module.scss'
-import {formatDate, formatESRBRating} from "../../Common/commonFunctions";
-import {usersRatings} from "../Games/gamesTypes";
 import {useBgImage} from "../../Surface/Content";
 import "react-image-gallery/styles/scss/image-gallery.scss";
 import ImageGallery from "react-image-gallery";
 import {screenshotType} from "./gameDetailsTypes";
 import {setIsAppLoading} from "../../appSlice";
+import {GameDetailsBaseInfo} from "./Componets/GameDetailsBaseInfo";
+import {GameDetailsCommonInfo} from "./Componets/GameDetailsCommonInfo";
+import {GameDetailsBottomInfo} from "./Componets/GameDetailsBottomInfo";
+import {GameDetailsDesc} from "./Componets/GameDetailsDesc";
+import {platform} from "../Games/gamesTypes";
+import {SideBarSliderAndRequirements} from "./Componets/SideBarSliderAndRequirements";
 
 const GameDetails = () => {
 
@@ -25,19 +29,7 @@ const GameDetails = () => {
     const currentGameAdditions = useAppSelector(state => state.gameDetails.additionalContent)
     const currentGameSeries = useAppSelector(state => state.gameDetails.gameSeries)
     const gameScreenshots = useAppSelector(state => state.gameDetails.gameScreenshots)
-    const ratingsColors = ['#6cb76c', '#465d94', '#f8ec5d', '#e84545']
 
-    const sortRating = (ratings: usersRatings[]) => {
-        const ddf = [...ratings]
-        return ddf.sort((a, b) => {
-            if (a.percent > b.percent) {
-                return -1
-            } else if (a.percent < b.percent) {
-                return 1
-            }
-            return 0
-        })
-    }
 
     useEffect(() => {
         if (gameId) {
@@ -56,156 +48,20 @@ const GameDetails = () => {
         }
     }, [currentGame.background_image, currentGame.background_image_additional, sendImage]);
 
-    const formatScreenshot = (screenshot: screenshotType) => {
-        return {
-            original: screenshot.image,
-            thumbnail: screenshot.image,
-        }
-    }
+
 
     return (
         <div className={s.pageWrapper} style={{backgroundImage: `url:(${currentGame.background_image})`}}>
             <div>
-                <div className={s.baseInfo}>
-                    <p className={s.gameReleasedHead}>
-                        {formatDate(currentGame.released)}
-                    </p>
-                    <p className={s.averagePlaytime}>
-                        average playtime: {currentGame.additions_count} hours
-                    </p>
-                </div>
-                <p className={s.gameName}>
-                    {currentGame.name}
-                </p>
-                <div className={s.ratingsPercentsBlock}>
-                    {currentGame.ratings
-                        ? sortRating(currentGame.ratings).map((rating, index) =>
-                            <div key={rating.id} className={s.ratingPercentsItem}
-                                 style={{
-                                     width: `${rating.percent}%`,
-                                     background: ratingsColors[index]
-                                 }}>
-                            </div>
-                        )
-                        : null}
-                </div>
-                <div className={s.ratingDetails}>
-                    {currentGame?.ratings?.map((rating, index) =>
-                        <div key={rating.id}
-                             style={{borderLeft: `solid 7px ${ratingsColors[index]}`, paddingLeft: 5}}>
-                            <div>
-                                <span>{rating.title}: </span>
-                                <span>{rating.percent}%</span>
-                            </div>
-                            <span>Votes: {rating.count}</span>
-                        </div>)}
-                </div>
-                <hr/>
-                <div className={s.description}>
-                    <h4>About</h4>
-                    <p>
-                        {currentGame.description_raw}
-                    </p>
-                </div>
-                <hr/>
-
-                <div className={s.commonInfo}>
-                    <div>
-                        <h5>Platforms</h5>
-                        <div className={s.mapping}> {currentGame?.platforms?.map(platform =>
-                            <a href={`/platform/${platform.platform.id}`} key={platform.platform.id}>
-                                {platform.platform.name}
-                            </a>
-                        )}</div>
-                    </div>
-
-                    <div>
-                        <h5>
-                            genres
-                        </h5>
-                        <div>{currentGame.genres?.map(genre =>
-                            <a href={`/genre/${genre.id}`} key={genre.id}>
-                                {genre.name}
-                            </a>
-                        )}</div>
-                    </div>
-
-                    <div>
-                        <h5>metascore</h5>
-                        <span className={s.metacriticScore}>
-                            {currentGame.metacritic}
-                        </span>
-                    </div>
-                    <div>
-                        <h5>release date</h5>
-                        <p className={s.releaseDate}>
-                            {formatDate(currentGame.released)}
-                        </p>
-                    </div>
-
-                    <div>
-                        <h5>developers</h5>
-                        <div>
-                            {currentGame.developers?.map(developers =>
-                                <a href={`/developer/${developers.id}`} key={developers.id}>
-                                    {developers.name}
-                                </a>
-                            )}
-                        </div>
-                    </div>
-                    <div>
-                        <h5>publisher</h5>
-                        <div>
-                            {currentGame.publishers?.map(publisher =>
-                                <a href={`/publisher/${publisher.id}`} key={publisher.id}>
-                                    {publisher.name}
-                                </a>
-                            )}
-                        </div>
-                    </div>
-                    <div>
-                        <h5>age rating</h5>
-                        <span className={s.esrbRating}>{formatESRBRating(currentGame.esrb_rating)}</span>
-                    </div>
-                    <div>
-                        <h5>
-                            website
-                        </h5>
-                        <a href={currentGame.website}>{currentGame.website}</a>
-                    </div>
-                    <div className={s.fullWidthElenet}>
-                        <h5>DLC's and editions</h5>
-                        {currentGameAdditions.results?.map(additions =>
-                            <a href={'/game/' + additions.id} key={additions.id}>
-                                {additions.name}
-                            </a>)}
-                    </div>
-                    <div className={s.fullWidthElenet}>
-                        <h5>Other game in the series</h5>
-                        {currentGameSeries.results?.map(game =>
-                            <a href={'/game/' + game.id} key={game.id}>
-                                {game.name}
-                            </a>)}
-                    </div>
-                    <div className={s.fullWidthElenet}>
-                        <h5>tags</h5>
-                        {currentGame.tags?.map(tag =>
-                            <a href={'/game'} key={tag.id}>
-                                {tag.name}
-                            </a>)}
-                    </div>
-                </div>
-
+                <GameDetailsBaseInfo currentGame={currentGame}/>
+                <GameDetailsDesc desc={currentGame.description_raw}/>
+                <GameDetailsCommonInfo currentGame={currentGame} />
+                <GameDetailsBottomInfo currentGame={currentGame} currentGameAdditions={currentGameAdditions}
+                                       currentGameSeries={currentGameSeries}/>
             </div>
             <div>
-                <div className={s.screenshot}>
-                    {gameScreenshots.results
-                        ? < ImageGallery showPlayButton={false}
-                                         items={gameScreenshots.results?.map(screenshot => formatScreenshot(screenshot))}/>
-                        : null
-                    }
-                </div>
-                системні
+                <SideBarSliderAndRequirements platforms={currentGame.platforms} screenshots={gameScreenshots.results}/>
+
             </div>
         </div>
     );

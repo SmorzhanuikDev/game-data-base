@@ -11,6 +11,33 @@
     margin: 0;
   }
 
+  h5 {
+    font-weight: normal;
+    margin: 20px 0 10px 0;
+    color: #8a8080;
+    text-transform: capitalize;
+  }
+
+  a {
+    font-size: 16px;
+    text-decoration: underline;
+    margin-right: 5px;
+    transition: 0.2s;
+
+    &:hover {
+      color: #8a8080;
+      transition: 0.2s;
+
+    }
+
+    &:not(&:last-child) {
+      &:after {
+        content: ',';
+      }
+    }
+
+  }
+
   .baseInfo {
     display: flex;
     justify-content: space-between;
@@ -76,31 +103,7 @@
     grid-template-columns: 1fr 1fr;
     grid-template-rows: auto auto auto;
 
-    h5 {
-      font-weight: normal;
-      margin: 20px 0 10px 0;
-      color: #8a8080;
-      text-transform: capitalize;
-    }
 
-    a {
-      font-size: 16px;
-      text-decoration: underline;
-      margin-right: 5px;
-      transition: 0.2s;
-
-      &:hover {
-        color: #8a8080;
-        transition: 0.2s;
-
-      }
-      &:not(&:last-child) {
-        &:after {
-          content: ',';
-        }
-      }
-
-    }
 
     .metacriticScore {
       font-size: 18px;
@@ -123,8 +126,36 @@
     }
   }
 
-  .screenshot {
+  .rightSideBar {
 
+    .platformRequirements {
+      margin-bottom: 20px;
+
+      .requirements {
+        &:not(&:first-child) {
+          &:before {
+            content: '- ';
+          }
+        }
+      }
+
+      h4 {
+        font-weight: normal;
+        font-size: 25px;
+        margin: 20px 0;
+      }
+
+      h5 {
+        font-weight: normal;
+        font-size: 20px;
+        margin: 15px 0 10px 0;
+      }
+
+      span {
+        font-size: 17px;
+        color: #e5dcdc;
+        white-space: pre-line
+      }
+    }
   }
-
 }

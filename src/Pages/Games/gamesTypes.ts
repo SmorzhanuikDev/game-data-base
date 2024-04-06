@@ -1,10 +1,12 @@
 import {defaultResponse} from "../../Common/commonTypes";
 
 export const FETCH_GAME_LIST = 'FETCH_GAME_LIST'
+
 export interface fetchGamesListType {
     type: typeof FETCH_GAME_LIST,
     params: gamesSearchParamsType
 }
+
 export interface gamesSearchParamsType {
     page?: number
     page_size?: number
@@ -22,7 +24,7 @@ export interface gamesSearchParamsType {
 }
 
 
-export interface gamesListType extends defaultResponse{
+export interface gamesListType extends defaultResponse {
     results: gameType[]
     seo_title: string
     seo_description: string
@@ -76,25 +78,7 @@ export interface gameType {
     suggestions_count: number
     updated: string
     esrb_rating: esrb_rating | null
-    platforms: Array<{
-        "platform": {
-
-            "id": number
-            "name": string
-            "slug": string
-            "image": string | null
-            "year_end": string | null,
-            "year_start": string | null
-            "games_count": number
-            "image_background": string | null
-        },
-        "released_at": string
-        "requirements_en": {
-            "minimum": string
-            "recommended": string
-        },
-        "requirements_ru": null
-    }>
+    platforms: platform[]
     reviews_count: number
     saturated_color: string | null
     dominant_color: string | null
@@ -148,4 +132,23 @@ export interface esrb_rating {
     id: number
     slug: "everyone" | "everyone-10-plus" | "teen" | "mature" | "adults-only" | "rating-pending"
     name: "Everyone" | "Everyone 10+" | "Teen" | "Mature" | "Adults Only" | "Rating Pending"
+}
+
+export interface platform {
+    "platform": {
+        "id": number
+        "name": string
+        "slug": string
+        "image": string | null
+        "year_end": string | null,
+        "year_start": string | null
+        "games_count": number
+        "image_background": string | null
+    },
+    "released_at": string
+    requirements: {
+        "minimum": string
+        "recommended": string
+    }
+
 }
