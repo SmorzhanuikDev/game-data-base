@@ -126,7 +126,25 @@
     }
   }
 
+
   .rightSideBar {
+
+    .platformName{
+      background-color: rgba(255, 255, 255, 0);
+      cursor: pointer;
+      margin: 5px 0;
+
+      span {
+        transition: .3s;
+        padding: 3px;
+        border-radius: 3px;
+
+        &:hover{
+          background: #3a3434;
+          transition: .3s;
+        }
+      }
+    }
 
     .platformRequirements {
       margin-bottom: 20px;
@@ -143,12 +161,6 @@
         font-weight: normal;
         font-size: 25px;
         margin: 20px 0;
-      }
-
-      h5 {
-        font-weight: normal;
-        font-size: 20px;
-        margin: 15px 0 10px 0;
       }
 
       span {

@@ -3,6 +3,14 @@ import ImageGallery from "react-image-gallery";
 import {platform} from "../../Games/gamesTypes";
 import {screenshotType} from "../gameDetailsTypes";
 import s from "../GameDetails.module.scss";
+import {
+    Accordion,
+    AccordionItem,
+    AccordionItemHeading,
+    AccordionItemButton,
+    AccordionItemPanel,
+} from 'react-accessible-accordion';
+import 'react-accessible-accordion/dist/fancy-example.css';
 
 interface props {
     screenshots: screenshotType[]
@@ -40,34 +48,43 @@ export const SideBarSliderAndRequirements: React.FC<props> = ({screenshots, plat
                     : null
                 }
             </div>
-            <div>
-                <h4>System requirements</h4>
-                {pullOutGameRequirements(platforms)?.map(platformItem =>
-                    <div>
-                        <h4>{platformItem.platform.name}</h4>
-                        <div className={s.platformRequirements}>
-                            {platformItem.platform.name === 'PC'
-                                ? formatRequirements(platformItem.requirements.minimum)?.map(item =>
-                                    <div className={s.requirements}>
-                                        <span style={{fontWeight: "bold"}}>{item.split(':')[0]}:</span>
-                                        <span>{item.split(':')[1]}</span>
-                                    </div>
-                                )
-                                : < span>{platformItem.requirements.minimum}</span>}
-                        </div>
-                        <div className={s.platformRequirements}>
-                            {platformItem.platform.name
-                                ? formatRequirements(platformItem.requirements.recommended)?.map(item =>
-                                    <div className={s.requirements}>
-                                        <span style={{fontWeight: "bold"}}>{item.split(':')[0]}:</span>
-                                        <span>{item.split(':')[1]}</span>
-                                    </div>
-                                )
-                                : <span>{platformItem.requirements.minimum}</span>
-                            }
-                        </div>
-                    </div>)}
-            </div>
+            {pullOutGameRequirements(platforms)?.length
+                ? <Accordion allowMultipleExpanded allowZeroExpanded>
+                    <h4>System requirements</h4>
+                    {pullOutGameRequirements(platforms)?.map(platformItem =>
+                        <AccordionItem key={platformItem.platform.id}>
+                            <AccordionItemHeading>
+                                <AccordionItemButton className={s.platformName}>
+                                    <span>{platformItem.platform.name}</span>
+                                </AccordionItemButton>
+                            </AccordionItemHeading>
+                            <AccordionItemPanel className={s.test}>
+                                <div className={s.platformRequirements}>
+                                    {platformItem.platform.name === 'PC'
+                                        ? formatRequirements(platformItem.requirements.minimum)?.map((item, index) =>
+                                            <div key={index} className={s.requirements}>
+                                                <span style={{fontWeight: "bold"}}>{item.split(':')[0]}:</span>
+                                                <span>{item.split(':')[1]}</span>
+                                            </div>
+                                        )
+                                        : < span>{platformItem.requirements.minimum}</span>}
+                                </div>
+                                <div className={s.platformRequirements}>
+                                    {platformItem.platform.name
+                                        ? formatRequirements(platformItem.requirements.recommended)?.map((item, index) =>
+                                            <div key={index} className={s.requirements}>
+                                                <span style={{fontWeight: "bold"}}>{item.split(':')[0]}:</span>
+                                                <span>{item.split(':')[1]}</span>
+                                            </div>
+                                        )
+                                        : <span>{platformItem.requirements.minimum}</span>
+                                    }
+                                </div>
+                            </AccordionItemPanel>
+                        </AccordionItem>)}
+                </Accordion>
+                : null
+            }
         </div>
     );
 };
