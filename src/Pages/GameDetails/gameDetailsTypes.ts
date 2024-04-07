@@ -5,6 +5,8 @@ export const FETCH_GAME_DETAILS = 'FETCH_GAME_DETAILS'
 export const FETCH_GAME_ADDITIONAL_CONTENT = 'FETCH_GAME_ADDITIONAL_CONTENT'
 export const FETCH_GAME_SERIES = 'FETCH_GAME_SERIES'
 export const FETCH_GAME_SCREENSHOTS = 'FETCH_GAME_SCREENSHOTS'
+export const FETCH_GAME_STORES = 'FETCH_GAME_STORES'
+export const FETCH_STORES_LIST = 'FETCH_STORES_LIST'
 
 
 
@@ -51,21 +53,11 @@ export interface gameDetailsType extends gameType {
     description_raw: string
 }
 
-export interface gameAdditionsType {
-    count: 6
-    next: string | null
-    previous: string | null
+export interface gameListType extends defaultResponse{
     results: gameType[]
 }
 
-export interface gameSeriesType extends defaultResponse {
-    results: gameType[]
-}
-
-export interface gameScreenshotsType {
-    count: number
-    next: string | null
-    previous: string | null
+export interface gameScreenshotsType extends defaultResponse{
     results:  screenshotType[]
 }
 
@@ -76,6 +68,30 @@ export interface screenshotType {
     height: number
     is_deleted: boolean
 }
+
+export interface gameStoresType extends defaultResponse {
+    results: gameStoreItem[]
+}
+
+export interface gameStoreItem {
+    id: number
+    game_id: number
+    store_id: number
+    url: string
+}
+export interface storesListType extends defaultResponse {
+    results: storeItem[]
+}
+
+export interface storeItem {
+    id:number
+    name:string
+    domain:string
+    slug:string
+    games_count:number
+    image_background:string
+}
+
 
 
 

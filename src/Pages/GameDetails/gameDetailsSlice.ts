@@ -1,17 +1,21 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit'
-import {gameAdditionsType, gameDetailsType, gameScreenshotsType, gameSeriesType} from "./gameDetailsTypes";
+import {gameListType, gameDetailsType, gameScreenshotsType, gameStoresType, storesListType} from "./gameDetailsTypes";
 
 type initialStateType = {
     currentGame: gameDetailsType
-    additionalContent: gameAdditionsType
-    gameSeries: gameSeriesType
+    additionalContent: gameListType
+    gameSeries: gameListType
     gameScreenshots: gameScreenshotsType
+    gameStores: gameStoresType
+    storesList: storesListType
 }
 const initialState: initialStateType = {
     currentGame: {} as gameDetailsType,
-    additionalContent: {} as gameAdditionsType,
-    gameSeries: {} as gameSeriesType,
-    gameScreenshots: {} as gameScreenshotsType
+    additionalContent: {} as gameListType,
+    gameSeries: {} as gameListType,
+    gameScreenshots: {} as gameScreenshotsType,
+    gameStores: {} as gameStoresType,
+    storesList: {} as storesListType
 }
 const gameDetailsSlice = createSlice({
     name: 'gameDetails',
@@ -20,18 +24,24 @@ const gameDetailsSlice = createSlice({
         setGameDetails: (state, action: PayloadAction<gameDetailsType>) => {
             state.currentGame = action.payload
         },
-        setAdditionalContent: (state, action: PayloadAction<gameAdditionsType>) => {
+        setAdditionalContent: (state, action: PayloadAction<gameListType>) => {
             state.additionalContent = action.payload
         },
-        setGameSeries: (state, action: PayloadAction<gameSeriesType>) => {
+        setGameSeries: (state, action: PayloadAction<gameListType>) => {
             state.gameSeries = action.payload
         },
         setGameScreenshots: (state, action: PayloadAction<gameScreenshotsType>) => {
             state.gameScreenshots = action.payload
+        },
+        setGameStores: (state, action: PayloadAction<gameStoresType>) => {
+            state.gameStores = action.payload
+        },
+        setStoreList: (state, action: PayloadAction<storesListType>) => {
+            state.storesList = action.payload
         }
     }
 })
 
-export const {setGameDetails, setAdditionalContent, setGameSeries, setGameScreenshots} = gameDetailsSlice.actions
+export const {setGameDetails, setAdditionalContent, setGameSeries, setGameScreenshots, setGameStores, setStoreList} = gameDetailsSlice.actions
 
 export default gameDetailsSlice.reducer

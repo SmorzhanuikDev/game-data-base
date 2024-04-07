@@ -58,7 +58,7 @@ export const SideBarSliderAndRequirements: React.FC<props> = ({screenshots, plat
                                     <span>{platformItem.platform.name}</span>
                                 </AccordionItemButton>
                             </AccordionItemHeading>
-                            <AccordionItemPanel className={s.test}>
+                            <AccordionItemPanel>
                                 <div className={s.platformRequirements}>
                                     {platformItem.platform.name === 'PC'
                                         ? formatRequirements(platformItem.requirements.minimum)?.map((item, index) =>

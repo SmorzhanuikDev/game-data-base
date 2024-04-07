@@ -4,21 +4,20 @@ import {
     fetchGameAdditionsAction,
     fetchGameDetailsAction,
     fetchGameScreenshotsAction,
-    fetchGameSeriesAction
+    fetchGameSeriesAction,
+    fetchGameStoresAction, fetchStoresListAction
 } from "./gameDetailsSaga";
 import {useAppDispatch, useAppSelector} from "../../hooks";
 import s from './GameDetails.module.scss'
 import {useBgImage} from "../../Surface/Content";
 import "react-image-gallery/styles/scss/image-gallery.scss";
-import ImageGallery from "react-image-gallery";
-import {screenshotType} from "./gameDetailsTypes";
 import {setIsAppLoading} from "../../appSlice";
 import {GameDetailsBaseInfo} from "./Componets/GameDetailsBaseInfo";
 import {GameDetailsCommonInfo} from "./Componets/GameDetailsCommonInfo";
 import {GameDetailsBottomInfo} from "./Componets/GameDetailsBottomInfo";
 import {GameDetailsDesc} from "./Componets/GameDetailsDesc";
-import {platform} from "../Games/gamesTypes";
 import {SideBarSliderAndRequirements} from "./Componets/SideBarSliderAndRequirements";
+import {GameStores} from "./Componets/GameStores";
 
 const GameDetails = () => {
 
@@ -38,7 +37,9 @@ const GameDetails = () => {
             dispatch(fetchGameAdditionsAction(Number(gameId)))
             dispatch(fetchGameSeriesAction(Number(gameId)))
             dispatch(fetchGameScreenshotsAction(Number(gameId)))
-            dispatch(setIsAppLoading(true))
+            dispatch(fetchGameStoresAction(Number(gameId)))
+            dispatch(fetchStoresListAction())
+            dispatch(setIsAppLoading(false))
         }
     }, [dispatch, gameId]);
 
@@ -49,19 +50,18 @@ const GameDetails = () => {
     }, [currentGame.background_image, currentGame.background_image_additional, sendImage]);
 
 
-
     return (
         <div className={s.pageWrapper} style={{backgroundImage: `url:(${currentGame.background_image})`}}>
             <div>
                 <GameDetailsBaseInfo currentGame={currentGame}/>
                 <GameDetailsDesc desc={currentGame.description_raw}/>
-                <GameDetailsCommonInfo currentGame={currentGame} />
+                <GameDetailsCommonInfo currentGame={currentGame}/>
                 <GameDetailsBottomInfo currentGame={currentGame} currentGameAdditions={currentGameAdditions}
                                        currentGameSeries={currentGameSeries}/>
             </div>
             <div>
                 <SideBarSliderAndRequirements platforms={currentGame.platforms} screenshots={gameScreenshots.results}/>
-
+                <GameStores/>
             </div>
         </div>
     );
