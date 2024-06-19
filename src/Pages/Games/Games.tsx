@@ -1,5 +1,4 @@
 import React, {useEffect} from 'react';
-import {FETCH_GAME_LIST} from "./gamesTypes";
 import {GameItem} from "./Components/GameItem";
 import {fetchGamesAction} from "./gamesSaga";
 import {useAppDispatch, useAppSelector} from "../../hooks";
@@ -15,7 +14,6 @@ export const Games = () => {
 
     return (
         <div>
-            <button onClick={()=> console.log(gamesList)}>test</button>
             {
                 gamesList.results && gamesList.results.map(game => <GameItem key={game.id} game={game}/>)
             }

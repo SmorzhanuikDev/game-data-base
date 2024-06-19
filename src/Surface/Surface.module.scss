@@ -66,12 +66,12 @@ header {
 
     .link {
       cursor: pointer;
-      text-align: center;
       height: 100%;
       text-decoration: none;
       padding: 0 30px;
       transition: 0.3s;
-
+      display: flex;
+      align-items: center;
 
       &:hover {
         transition: 0.3s;
@@ -79,8 +79,12 @@ header {
       }
 
       p {
+        margin: 0;
         font-size: 23px;
+        box-sizing: content-box;
         font-weight: bold;
+        text-align: center;
+        vertical-align: center;
         color: base.$text-color;
       }
     }

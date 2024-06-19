@@ -29,19 +29,23 @@ const GameDetails = () => {
     const currentGameSeries = useAppSelector(state => state.gameDetails.gameSeries)
     const gameScreenshots = useAppSelector(state => state.gameDetails.gameScreenshots)
 
-
-    useEffect(() => {
+    useEffect( () => {
         if (gameId) {
-            dispatch(setIsAppLoading(true))
+             dispatch(setIsAppLoading(true))
             dispatch(fetchGameDetailsAction(Number(gameId)))
             dispatch(fetchGameAdditionsAction(Number(gameId)))
             dispatch(fetchGameSeriesAction(Number(gameId)))
             dispatch(fetchGameScreenshotsAction(Number(gameId)))
             dispatch(fetchGameStoresAction(Number(gameId)))
             dispatch(fetchStoresListAction())
-            dispatch(setIsAppLoading(false))
         }
     }, [dispatch, gameId]);
+
+    useEffect(() => {
+        if (gameScreenshots.results && currentGame.name && currentGameAdditions.results && currentGameSeries.results) {
+            dispatch(setIsAppLoading(false))
+        }
+    }, [currentGame, currentGameAdditions, currentGameSeries, dispatch, gameScreenshots]);
 
     useEffect(() => {
         if (currentGame.background_image || currentGame.background_image_additional) {
