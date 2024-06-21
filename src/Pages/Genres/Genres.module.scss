@@ -1,0 +1,31 @@
+.container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+
+  .card {
+    border-radius: 10px;
+    height: 300px;
+    margin: 11px;
+    background: linear-gradient(180deg, rgba(39,37,37,0.7411415249693627) 0%, rgba(20,18,18,0.9288165949973739) 37%, rgba(20,18,18,1) 62%),
+    url("../../Images/no-image.png");
+
+    .cardInner {
+      margin: 55px 25px 0 25px;
+      text-align: center;
+
+
+      a {
+        font-size: 24px;
+        font-weight: bold;
+        transition: 0.5s;
+        color: #faf8f8;
+        border-bottom: 1px solid #b3b3b3;
+
+        &:hover {
+          color: #8a8080;
+          transition: 0.5s;
+        }
+      }
+    }
+  }
+}
