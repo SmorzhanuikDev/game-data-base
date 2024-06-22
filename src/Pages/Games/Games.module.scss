@@ -1,66 +1,119 @@
 @use 'src/base';
 
-.gameItem {
-  height: 180px;
-  width: 100%;
+@mixin navBarIcon {
+  border-radius: 7px;
+  width: 35px;
+  height: 35px;
+  object-fit: cover;
+  object-position: 50% 50%;
+}
+
+@mixin navBarButton {
   display: flex;
-  margin: 10px 0;
-  background: #383835;
-  border-radius: 20px;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+  border-radius: 8px;
 
-  img {
-    height: 180px;
-    width: 320px;
+  &:hover {
     cursor: pointer;
-    border-bottom-left-radius: 20px;
-    border-top-left-radius: 20px;
+    text-decoration: underline;
+    color: #cdc1c1;
   }
-  .descBlock {
+}
+
+
+.gamePageContainer {
+  display: grid;
+  grid-template-columns: 1fr 5fr;
+
+
+  .gameNavBar {
+
+    .genresBlock {
+
+      .blockName {
+        font-size: 22px;
+        padding-bottom: 20px;
+        margin: 0;
+      }
+
+      .genresItem {
+        @include navBarButton;
+
+        img {
+          @include navBarIcon
+        }
+
+        span {
+          font-size: 16px;
+        }
+      }
+    }
+  }
+
+  .gameItem {
+    height: 180px;
+    width: 100%;
     display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    padding: 10px;
+    margin: 10px 0;
+    background: #383835;
+    border-radius: 20px;
 
-    .gameName {
-      font-weight: bold;
-      font-size: 25px;
+    img {
+      height: 180px;
+      width: 320px;
+      cursor: pointer;
+      border-bottom-left-radius: 20px;
+      border-top-left-radius: 20px;
     }
-
-    .gameGenre {
+    .descBlock {
       display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 10px;
 
-      a {
-        margin-right: 10px;
-        font-size: 18px;
+      .gameName {
+        font-weight: bold;
+        font-size: 25px;
+      }
 
-        &:hover {
-          color: #d9d1d1;
+      .gameGenre {
+        display: flex;
+
+        a {
+          margin-right: 10px;
+          font-size: 18px;
+
+          &:hover {
+            color: #d9d1d1;
+          }
         }
       }
-    }
 
-    .gamePlatforms{
-      display: flex;
+      .gamePlatforms{
+        display: flex;
 
-      a {
-        margin-right: 10px;
+        a {
+          margin-right: 10px;
+          font-size: 16px;
+          color: #9b9696;
+          text-decoration: underline;
+
+          &:hover {
+            color: base.$text-color;
+          }
+        }
+      }
+      .gameRelease {
+        margin: 0;
         font-size: 16px;
-        color: #9b9696;
-        text-decoration: underline;
-
-        &:hover {
-          color: base.$text-color;
-        }
+        color: #d9d1d1;
       }
-    }
-    .gameRelease {
-      margin: 0;
-      font-size: 16px;
-      color: #d9d1d1;
-    }
-    .gameRating {
-      margin: 0;
-      font-size: 16px;
+      .gameRating {
+        margin: 0;
+        font-size: 16px;
+      }
     }
   }
 }
