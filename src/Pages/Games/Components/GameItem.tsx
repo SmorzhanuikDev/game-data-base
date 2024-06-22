@@ -8,7 +8,6 @@ interface props {
 
 export const GameItem: React.FC<props> = ({game}) => {
 
-
     return (
         <div className={s.gameItem}>
             <a href={`game/${game.id}`}>
