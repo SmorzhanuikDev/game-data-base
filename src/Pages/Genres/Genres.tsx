@@ -3,6 +3,7 @@ import {GenreCard} from "./Components/GenreCard";
 import s from "./Genres.module.scss";
 import {fetchGenresAction} from "./genresSaga";
 import {useAppDispatch, useAppSelector} from "../../hooks";
+import {setIsAppLoading} from "../../appSlice";
 
 export const Genres = () => {
 
@@ -12,6 +13,10 @@ export const Genres = () => {
     useEffect(() => {
         dispatch(fetchGenresAction())
     }, [dispatch]);
+
+    useEffect(() => {
+        dispatch(setIsAppLoading(false))
+    }, [genres, dispatch]);
 
     return (
         <div className={s.container}>

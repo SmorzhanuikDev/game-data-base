@@ -1,6 +1,7 @@
 import React from 'react';
 import s from '../Games.module.scss'
 import {gameType} from "../gamesTypes";
+import noImage from '../../../Images/no-image.png'
 
 interface props {
     game: gameType
@@ -11,17 +12,17 @@ export const GameItem: React.FC<props> = ({game}) => {
     return (
         <div className={s.gameItem}>
             <a href={`game/${game.id}`}>
-                <img src={game.background_image} alt='gameImage'/>
+                <img src={game.background_image || noImage} alt='gameImage'/>
             </a>
             <div className={s.descBlock}>
                 <div>
                     <a href={`game/${game.id}`} className={s.gameName}>{game.name}</a>
                 </div>
                 <div className={s.gameGenre}>
-                    {game.genres.map(genre => <a href={'games'} key={genre.id}>{genre.name}</a>)}
+                    {game.genres?.map(genre => <a href={'games'} key={genre.id}>{genre.name}</a>)}
                 </div>
                 <div className={s.gamePlatforms}>
-                    {game.platforms.map(({platform}) => <a href={'games'} key={platform.id}>
+                    {game.platforms?.map(({platform}) => <a href={'games'} key={platform.id}>
                         {platform.name}
                     </a>)}
                 </div>

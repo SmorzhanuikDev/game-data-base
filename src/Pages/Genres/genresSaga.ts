@@ -10,7 +10,6 @@ function* fetchGenres() {
         yield put(setIsAppLoading(true))
         const genres: genresType = yield call(() => genreAPI.getGenres())
         yield put(setGenres(genres))
-        yield put(setIsAppLoading(false))
     } catch (e: any) {
         yield put({type: 'ERROR', message: e.message})
     }

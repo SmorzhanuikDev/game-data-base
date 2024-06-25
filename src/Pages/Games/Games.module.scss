@@ -27,6 +27,26 @@
   display: grid;
   grid-template-columns: 1fr 5fr;
 
+  .loader {
+    display: flex;
+    justify-content: space-around;
+  }
+
+  .filterBlock {
+    margin-bottom: 20px;
+
+    .ordering {
+      display: flex;
+      width: 230px;
+      font-size: 18px;
+      align-items: baseline;
+      justify-content: space-between;
+
+      .orderingSelect {
+        width: 150px;
+      }
+    }
+  }
 
   .gameNavBar {
 
