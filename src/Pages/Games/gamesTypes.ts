@@ -19,8 +19,7 @@ export interface gamesSearchParamsType {
     ordering?: ordering
 }
 
-export type ordering = 'name' | 'released' | 'added' | 'created' | 'updated' | 'rating' | 'metacritic'
-| '-name' |  '-released' |'-added' |'-created' |'-updated' |'-rating' |'-metacritic' | undefined
+export type ordering = string | undefined
 
 
 export interface gamesListType extends defaultResponse {
