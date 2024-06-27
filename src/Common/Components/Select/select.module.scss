@@ -35,14 +35,19 @@
     top: 0;
     font-size: 16px;
     border-radius: 5px;
-    padding: 12px 12px 14px 12px;
+    padding: 12px 0 14px 0;
     background: base.$text-color;
     color: base.$BGColor;
     width: 100%;
     @include selectShadow;
 
+    .border {
+      margin: 10px 12px;
+    }
+
     .selectListTitleContainer {
       display: flex;
+      padding: 0 12px;
       justify-content: space-between;
       align-items: baseline;
 
@@ -66,9 +71,9 @@
       }
 
       .selectCloseIcon {
-        font-size: 25px;
+        font-size: 20px;
         position: relative;
-        top: 10px;
+        top: 3px;
         cursor: pointer;
         transition: .3s;
 
@@ -80,14 +85,19 @@
     }
 
     .selectListContainer {
+      padding: 0 12px;
 
       .selectListItem {
-        width: 100%;
         transition: .3s;
-        padding: 5px;
         position: relative;
         display: flex;
         justify-content: space-between;
+        align-items: baseline;
+
+        .option {
+          width: 100%;
+          padding: 10px;
+        }
 
         .selectSubOptions {
           position: absolute;

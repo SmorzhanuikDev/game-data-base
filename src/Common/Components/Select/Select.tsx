@@ -27,27 +27,28 @@ const whiteBG = {
 export const Select: React.FC<props> = ({options, onChangeSelect, title}) => {
 
     const [isSelectOpen, setIsSelectOpen] = useState(false)
-    const [currentValue, setCurrentValue] = useState<string | undefined>(undefined)
+    const [currentTitle, setCurrentTitle] = useState<string | undefined>(undefined)
 
     const openSelect = () => {
         setIsSelectOpen(true)
     }
-    const closeSelect = (value: string | undefined) => {
+    const closeSelect = (value: string | undefined, title: string | undefined) => {
         onChangeSelect(value)
         setIsSelectOpen(false)
-        setCurrentValue(value)
+        setCurrentTitle(title)
     }
 
     return (
         <div className={s.selectContainer}>
-            <div className={s.select} style={currentValue ? whiteBG : blackBG} onClick={openSelect}>
-                <span className={s.selectCurrentItem}>{currentValue || title}</span>
+            <div className={s.select} style={currentTitle ? whiteBG : blackBG} onClick={openSelect}>
+                <span className={s.selectCurrentItem}>{currentTitle || title}</span>
                 <IoIosArrowDown className={s.selectIcon}/>
             </div>
             {
                 isSelectOpen
-                    ? <SelectList title={title} closeSelect={closeSelect} setIsSelectOpen={setIsSelectOpen} options={options}
-                                  currentValue={currentValue}/>
+                    ? <SelectList title={title} closeSelect={closeSelect} setIsSelectOpen={setIsSelectOpen}
+                                  options={options}
+                                  currentValue={currentTitle}/>
                     : null
             }
         </div>

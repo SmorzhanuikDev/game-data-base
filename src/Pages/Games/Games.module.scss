@@ -33,8 +33,16 @@
 
   .filterBlock {
     margin: 10px 0 20px 0;
+    display: flex;
 
-
+    .sortButton {
+      background: base.$cardBGColor;
+      padding: 13px;
+      border-radius: 5px;
+      margin-left: 10px;
+      cursor: pointer;
+      font-size: 20px;
+    }
   }
 
   .gameNavBar {

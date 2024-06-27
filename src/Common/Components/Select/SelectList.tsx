@@ -6,7 +6,7 @@ import {option} from "./Select";
 
 interface props {
     currentValue: string | undefined
-    closeSelect: (value: string | undefined) => void
+    closeSelect: (value: string | undefined, title: string | undefined) => void
     setIsSelectOpen: (isOpen: boolean) => void
     options: option[],
     title: string
@@ -22,16 +22,17 @@ export const SelectList: React.FC<props> = ({currentValue, setIsSelectOpen, clos
                     {
                         currentValue
                             ? <div className={s.selectClearButton}
-                                   onClick={() => closeSelect(undefined)}>clear</div>
+                                   onClick={() => closeSelect(undefined, undefined)}>clear</div>
                             : null
                     }
                 </div>
                 <IoMdClose className={s.selectCloseIcon} onClick={() => setIsSelectOpen(false)}/>
             </div>
-            <hr/>
+            <hr className={s.border}/>
             <div className={s.selectListContainer}>
                 {
-                    options.map(option => <SelectOption key={option.value} closeSelect={closeSelect} option={option}/>)
+                    options.map(option => <SelectOption key={option.value} closeSelect={closeSelect}
+                                                        option={option}/>)
                 }
             </div>
         </div>
