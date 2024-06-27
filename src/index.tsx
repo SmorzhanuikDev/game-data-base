@@ -6,7 +6,7 @@ import {Games} from "./Pages/Games/Games";
 import {Home} from "./Pages/Home";
 import {Developers} from "./Pages/Developers";
 import {Genres} from "./Pages/Genres/Genres";
-import {Platforms} from "./Pages/Platforms";
+import {Platforms} from "./Pages/Platforms/Platforms";
 import {Profile} from "./Pages/Profile";
 import {Provider} from "react-redux";
 import store from './redux-store'

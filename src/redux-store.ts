@@ -8,6 +8,8 @@ import {all} from 'redux-saga/effects'
 import appSlice from "./appSlice";
 import genresSlice from "./Pages/Genres/genresSlice";
 import genresSaga from "./Pages/Genres/genresSaga";
+import platformsSlice from "./Pages/Platforms/platformsSlice";
+import platformsSaga from "./Pages/Platforms/platformsSaga";
 
 const sagaMiddleware = createSagaMiddleware()
 
@@ -17,6 +19,7 @@ const store = configureStore({
         genresData: genresSlice,
         gameDetails: gameDetailsSlice,
         appData: appSlice,
+        platformsData: platformsSlice,
     },
     middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(sagaMiddleware)
 })
@@ -26,7 +29,8 @@ function* rootSaga() {
     yield all([
         gamesSaga(),
         gameDetailsSaga(),
-        genresSaga()
+        genresSaga(),
+        platformsSaga(),
     ])
 }
 

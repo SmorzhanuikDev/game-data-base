@@ -17,7 +17,7 @@ export const Games = () => {
 
     useEffect(() => {
         setIsGameLoading(true)
-        dispatch(fetchGamesAction({page: 1, page_size: 10}))
+        dispatch(fetchGamesAction({page: 1, page_size: 10, platforms: '4'}))
     }, [dispatch]);
 
     useEffect(() => {
@@ -29,7 +29,7 @@ export const Games = () => {
         const ordering = isRevered ? '-' + order : order
         dispatch(setGamesList({} as gamesListType))
         setIsGameLoading(true)
-        dispatch(fetchGamesAction({page: 1, page_size: 10, ordering: ordering, metacritic: '1,100'}))
+        dispatch(fetchGamesAction({page: 1, page_size: 10, platforms: '1', ordering: ordering, metacritic: '1,100'}))
     }
 
 

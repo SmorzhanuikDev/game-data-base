@@ -1,0 +1,128 @@
+@use 'src/base';
+
+@mixin selectShadow {
+  box-shadow: 0 0 5px 1px #858585;
+}
+
+.selectContainer {
+  position: relative;
+  text-transform: capitalize;
+  width: 300px;
+
+  .select {
+    font-size: 16px;
+    border-radius: 5px;
+    padding: 12px 12px 14px 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    cursor: pointer;
+    transition: .3s;
+
+    &:hover {
+      color: #8a8080;
+      transition: .3s;
+    }
+
+    .selectIcon {
+      position: relative;
+      top: 3px;
+    }
+  }
+
+  .selectList {
+    position: absolute;
+    top: 0;
+    font-size: 16px;
+    border-radius: 5px;
+    padding: 12px 12px 14px 12px;
+    background: base.$text-color;
+    color: base.$BGColor;
+    width: 100%;
+    @include selectShadow;
+
+    .selectListTitleContainer {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+
+      .selectListTitle {
+        color: #a19f9f;
+        margin-top: 10px;
+        padding-left: 5px;
+      }
+      .selectClearButton {
+        color: #df6767;
+        transition: .3s;
+        margin-bottom: 10p
+        mt10x;
+        padding-left: 5px;
+
+        &:hover {
+          color: red;
+          transition: .3s;
+          cursor: pointer;
+        }
+      }
+
+      .selectCloseIcon {
+        font-size: 25px;
+        position: relative;
+        top: 10px;
+        cursor: pointer;
+        transition: .3s;
+
+        &:hover {
+          color: red;
+          transition: .3s;
+        }
+      }
+    }
+
+    .selectListContainer {
+
+      .selectListItem {
+        width: 100%;
+        transition: .3s;
+        padding: 5px;
+        position: relative;
+        display: flex;
+        justify-content: space-between;
+
+        .selectSubOptions {
+          position: absolute;
+          top: 0;
+          left: 100%;
+          background: base.$text-color;
+          border-radius: 3px;
+          @include selectShadow;
+          z-index: 2;
+          padding: 12px;
+          cursor: default;
+
+          div {
+            padding: 3px 10px;
+            transition: .3s;
+
+            &:hover {
+              background: #e1dcdc;
+              transition: .3s;
+              border-radius: 4px;
+              cursor: pointer;
+            }
+          }
+          .selectAllSubOption {
+            color: #3db643;
+          }
+        }
+
+        &:hover {
+          background: #e1dcdc;
+          transition: .3s;
+          border-radius: 4px;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}
