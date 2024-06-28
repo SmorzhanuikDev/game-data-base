@@ -30,7 +30,7 @@ export const GameDetailsCommonInfo: React.FC<props> = ({currentGame}) => {
                 <div>
                     <h5>metascore</h5>
                     <span className={s.metacriticScore}>
-                            {currentGame.metacritic}
+                            {currentGame.metacritic || 'No rate'}
                         </span>
                 </div>
                 <div>
@@ -49,24 +49,36 @@ export const GameDetailsCommonInfo: React.FC<props> = ({currentGame}) => {
                         )}
                     </div>
                 </div>
-                <div>
-                    <h5>publisher</h5>
-                    <div>
-                        {currentGame.publishers?.map(publisher =>
-                            <a href={`/publisher/${publisher.id}`} key={publisher.id}>
-                                {publisher.name}
-                            </a>
-                        )}
-                    </div>
-                </div>
-                <div>
-                    <h5>age rating</h5>
-                    <span className={s.esrbRating}>{formatESRBRating(currentGame.esrb_rating)}</span>
-                </div>
-                <div>
-                    <h5>website</h5>
-                    <a href={currentGame.website}>{currentGame.website}</a>
-                </div>
+                {
+                    currentGame.publishers.length
+                        ? <div>
+                            <h5>publisher</h5>
+                            <div>
+                                {currentGame.publishers?.map(publisher =>
+                                    <a href={`/publisher/${publisher.id}`} key={publisher.id}>
+                                        {publisher.name}
+                                    </a>
+                                )}
+                            </div>
+                        </div>
+                        : null
+                }
+                {
+                    currentGame.esrb_rating
+                        ? <div>
+                            <h5>age rating</h5>
+                            <span className={s.esrbRating}>{formatESRBRating(currentGame.esrb_rating)}</span>
+                        </div>
+                        : null
+                }
+                {
+                    currentGame.website
+                        ? <div>
+                            <h5>website</h5>
+                            <a href={currentGame.website}>{currentGame.website}</a>
+                        </div>
+                        : null
+                }
             </div>
 
         </div>
