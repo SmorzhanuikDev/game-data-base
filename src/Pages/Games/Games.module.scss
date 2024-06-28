@@ -22,36 +22,18 @@
   }
 }
 
+@mixin paginationItem {
+  padding: 12px 16px;
+  border-radius: 5px;
+  transition: .3s;
+  font-size: 18px;
+}
+
 .gamePageContainer {
   display: grid;
   grid-template-columns: 1fr 5fr;
 
-  .loader {
-    display: flex;
-    justify-content: space-around;
-  }
-
-  .filterBlock {
-    margin: 10px 0 20px 0;
-    display: flex;
-    gap: 30px;
-
-    .orderingSection {
-      display: flex;
-
-      .sortButton {
-        background: base.$cardBGColor;
-        padding: 13px;
-        border-radius: 5px;
-        margin-left: 10px;
-        cursor: pointer;
-        font-size: 20px;
-      }
-    }
-  }
-
-  .gameNavBar {
-
+  .sideBar {
     .genresBlock {
 
       .blockName {
@@ -74,68 +56,128 @@
     }
   }
 
-  .gameItem {
-    height: 180px;
-    width: 100%;
+  .pagination {
+    margin-top: 20px;
     display: flex;
-    margin: 10px 0;
-    background: base.$cardBGColor;
-    border-radius: 20px;
+    justify-content: center;
+    gap: 20px;
+    width: 100%;
+    grid-column-start: 1;
+    grid-column-end: 3;
 
-    img {
-      height: 180px;
-      width: 320px;
-      cursor: pointer;
-      border-bottom-left-radius: 20px;
-      border-top-left-radius: 20px;
+    .disabled {
+      @include paginationItem;
+      background: #6a6a6a;
     }
-    .descBlock {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      padding: 10px;
 
-      .gameName {
-        font-weight: bold;
-        font-size: 25px;
+    .paginationItem {
+      @include paginationItem;
+      background: base.$cardBGColor;
+      cursor: pointer;
+
+      &:hover {
+        background: #575757;
+        transition: .3s;
       }
 
-      .gameGenre {
-        display: flex;
-
-        a {
-          margin-right: 10px;
-          font-size: 18px;
-
-          &:hover {
-            color: #d9d1d1;
-          }
-        }
-      }
-
-      .gamePlatforms{
-        display: flex;
-
-        a {
-          margin-right: 10px;
-          font-size: 16px;
-          color: #9b9696;
-          text-decoration: underline;
-
-          &:hover {
-            color: base.$text-color;
-          }
-        }
-      }
-      .gameRelease {
-        margin: 0;
-        font-size: 16px;
-        color: #d9d1d1;
-      }
-      .gameRating {
-        margin: 0;
-        font-size: 16px;
-      }
+    }
+    .paginationItem[aria-selected=true] {
+      background: #eaeaea;
+      color: #0b0800;
+      cursor: auto;
     }
   }
 }
+
+.loader {
+  display: flex;
+  justify-content: space-around;
+}
+
+.filterBlock {
+  margin: 10px 0 20px 0;
+  display: flex;
+  gap: 30px;
+
+  .orderingSection {
+    display: flex;
+
+    .sortButton {
+      background: base.$cardBGColor;
+      padding: 13px;
+      border-radius: 5px;
+      margin-left: 10px;
+      cursor: pointer;
+      font-size: 20px;
+    }
+  }
+}
+
+.gameItem {
+  height: 180px;
+  width: 100%;
+  display: flex;
+  margin: 10px 0;
+  background: base.$cardBGColor;
+  border-radius: 20px;
+
+  img {
+    height: 180px;
+    width: 320px;
+    cursor: pointer;
+    border-bottom-left-radius: 20px;
+    border-top-left-radius: 20px;
+  }
+
+  .descBlock {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 10px;
+
+    .gameName {
+      font-weight: bold;
+      font-size: 25px;
+    }
+
+    .gameGenre {
+      display: flex;
+
+      a {
+        margin-right: 10px;
+        font-size: 18px;
+
+        &:hover {
+          color: #d9d1d1;
+        }
+      }
+    }
+
+    .gamePlatforms {
+      display: flex;
+
+      a {
+        margin-right: 10px;
+        font-size: 16px;
+        color: #9b9696;
+        text-decoration: underline;
+
+        &:hover {
+          color: base.$text-color;
+        }
+      }
+    }
+
+    .gameRelease {
+      margin: 0;
+      font-size: 16px;
+      color: #d9d1d1;
+    }
+
+    .gameRating {
+      margin: 0;
+      font-size: 16px;
+    }
+  }
+}
+
