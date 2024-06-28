@@ -25,11 +25,11 @@ export const Games = () => {
             setIsGameLoading(false)
     }, [dispatch, gamesList.results, isGameLoading]);
 
-    const changeOrder = (order: ordering | undefined, isRevered: boolean) => {
+    const changeGamesList = (order: ordering | undefined, isRevered: boolean, platforms: string | undefined) => {
         const ordering = isRevered ? '-' + order : order
         dispatch(setGamesList({} as gamesListType))
         setIsGameLoading(true)
-        dispatch(fetchGamesAction({page: 1, page_size: 10, ordering: ordering, metacritic: '1,100'}))
+        dispatch(fetchGamesAction({page: 1, page_size: 10, ordering, metacritic: '1,100', platforms}))
     }
 
 
@@ -37,7 +37,7 @@ export const Games = () => {
         <div className={s.gamePageContainer}>
             <GenresBlock/>
             <div>
-                <Filters changeOrder={changeOrder}/>
+                <Filters changeGamesList={changeGamesList}/>
                 {isGameLoading
                     ? <div hidden={!isGameLoading}>
                         <div className={s.loader}>

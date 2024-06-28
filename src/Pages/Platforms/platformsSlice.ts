@@ -1,10 +1,11 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit'
+import {platforms} from "./platformsTypes";
 
 type initialStateType = {
-    platforms: any
+    platforms: platforms
 }
 const initialState: initialStateType = {
-    platforms: {} as any
+    platforms: {} as platforms
 }
 const platformsSlice = createSlice({
     name: 'platforms',

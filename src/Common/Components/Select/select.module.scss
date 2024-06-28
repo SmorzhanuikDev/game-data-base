@@ -7,7 +7,7 @@
 .selectContainer {
   position: relative;
   text-transform: capitalize;
-  width: 300px;
+  min-width: 200px;
 
   .select {
     font-size: 16px;
@@ -101,6 +101,7 @@
 
         .selectSubOptions {
           position: absolute;
+          width: max-content;
           top: 0;
           left: 100%;
           background: base.$text-color;
@@ -111,7 +112,7 @@
           cursor: default;
 
           div {
-            padding: 3px 10px;
+            padding: 7px 10px;
             transition: .3s;
 
             &:hover {

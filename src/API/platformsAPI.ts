@@ -1,10 +1,9 @@
-import {genresType} from "../Pages/Genres/genresTypes";
 import {instance} from "./index";
-import {platformsType} from "../Pages/Platforms/platformsTypes";
+import {platforms} from "../Pages/Platforms/platformsTypes";
 
 export const platformAPI = {
-    getPlatforms: async (): Promise<platformsType> => {
-        const response = await instance.get<platformsType>('platforms')
+    getPlatforms: async (): Promise<platforms> => {
+        const response = await instance.get<platforms>('platforms')
         return response.data
     },
 }

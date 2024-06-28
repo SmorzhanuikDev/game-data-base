@@ -12,10 +12,10 @@ export interface genreType {
     image_background: string
     name: string
     slug: string
-    games: gameFromGenre[]
+    games: gameSmallData[]
 }
 
-export interface gameFromGenre {
+export interface gameSmallData {
     added: number
     id: number
     name: string

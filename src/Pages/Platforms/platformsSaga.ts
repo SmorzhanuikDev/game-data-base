@@ -1,13 +1,12 @@
 import {call, put, takeEvery} from 'redux-saga/effects'
-import {FETCH_PLATFORMS} from "./platformsTypes";
+import {FETCH_PLATFORMS, platforms} from "./platformsTypes";
 import {setPlatforms} from "./platformsSlice";
 import {createAction} from "@reduxjs/toolkit";
 import {platformAPI} from "../../API/platformsAPI";
 
 function* fetchPlatforms() {
     try {
-        // @ts-ignore
-        const platforms: genresType = yield call(() => platformAPI.getPlatforms())
+        const platforms: platforms = yield call(() => platformAPI.getPlatforms())
         yield put(setPlatforms(platforms))
     } catch (e: any) {
         yield put({type: 'ERROR', message: e.message})
