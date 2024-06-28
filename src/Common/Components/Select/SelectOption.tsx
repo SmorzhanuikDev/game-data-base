@@ -23,7 +23,7 @@ export const SelectOption: React.FC<props> = ({option, closeSelect}) => {
             <div className={s.option} onClick={() => closeSelect(option.value, option.title)}>
                 {option.title}
             </div>
-            {option.subOptions ? <IoIosArrowForward/> : null}
+            {option.subOptions ? <IoIosArrowForward className={s.subOptionArrow}/> : null}
             {
                 option.subOptions
                     ?

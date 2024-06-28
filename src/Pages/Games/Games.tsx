@@ -9,6 +9,13 @@ import {gamesListType, ordering} from "./gamesTypes";
 import {setGamesList} from "./gamesSlice";
 import {RotatingSquare} from "react-loader-spinner";
 
+export interface changeGamesListProp {
+    order: ordering | undefined,
+    isReversed: boolean,
+    platforms: string | undefined,
+    dates: string | undefined
+}
+
 export const Games = () => {
 
     const dispatch = useAppDispatch()
@@ -25,11 +32,11 @@ export const Games = () => {
             setIsGameLoading(false)
     }, [dispatch, gamesList.results, isGameLoading]);
 
-    const changeGamesList = (order: ordering | undefined, isRevered: boolean, platforms: string | undefined) => {
-        const ordering = isRevered ? '-' + order : order
+    const changeGamesList = ({dates, platforms, order, isReversed}: changeGamesListProp) => {
+        const ordering = isReversed ? '-' + order : order
         dispatch(setGamesList({} as gamesListType))
         setIsGameLoading(true)
-        dispatch(fetchGamesAction({page: 1, page_size: 10, ordering, metacritic: '1,100', platforms}))
+        dispatch(fetchGamesAction({page: 1, page_size: 10, ordering, platforms, dates}))
     }
 
 

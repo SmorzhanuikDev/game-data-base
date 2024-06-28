@@ -1,4 +1,3 @@
-
 export const orderOptions = [
     {value: 'name', title: 'Name'},
     {value: 'released', title: 'Released'},
@@ -83,3 +82,50 @@ export const platformsOptions = [
         "value": '6'
     },
 ]
+
+export const releasedOptions = () => {
+    const options = []
+
+    const createReleaseOption = (year: number, yearCount: number) => {
+        const startDate = '-01-01,'
+        const endDate = '-12-31'
+        const checkDateFormat = (date: number) => {
+            return String(date).length === 2 ? String(date) : '0' + String(date)
+        }
+
+        const fillSubOption = () => {
+            const options = []
+            const currentDate = '-' + checkDateFormat(new Date().getMonth()) + '-' + checkDateFormat(new Date().getDay())
+
+            for (let i = 0; i <= yearCount; i++) {
+                options.push(
+                    year + i === new Date().getFullYear()
+                        ?{
+                            value: (year + i) + startDate + (year + i) + currentDate,
+                            title: String(year + i),
+                        }
+                        : {
+
+                            value: (year + i) + startDate + (year + i) + endDate,
+                            title: String(year + i),
+                        }
+                )
+            }
+            return options
+        }
+
+        return {
+            value: year + startDate + (year + yearCount) + endDate,
+            title: year + '-' + (year + yearCount),
+            subOptions: fillSubOption()
+        }
+    }
+
+    for (let i = 1980; i < 2020; i = i + 10) {
+        options.push(createReleaseOption(i, 9))
+    }
+
+    options.push(createReleaseOption(2020, new Date().getFullYear() - 2020))
+    return options
+}
+

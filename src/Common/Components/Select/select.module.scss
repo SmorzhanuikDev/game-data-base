@@ -94,6 +94,11 @@
         justify-content: space-between;
         align-items: baseline;
 
+        .subOptionArrow {
+          position: relative;
+          top: 3px;
+        }
+
         .option {
           width: 100%;
           padding: 10px;
