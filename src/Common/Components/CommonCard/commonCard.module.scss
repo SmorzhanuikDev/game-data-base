@@ -1,0 +1,87 @@
+.card {
+  border-radius: 10px;
+  position: relative;
+  height: 300px;
+  margin: 11px;
+
+  .cardInner {
+    margin: 55px 25px 0 25px;
+    text-align: center;
+
+    a {
+      font-size: 24px;
+      font-weight: bold;
+      transition: 0.5s;
+      color: #faf8f8;
+      border-bottom: 1px solid #b3b3b3;
+
+      &:hover {
+        color: #b1a8a8;
+        transition: 0.5s;
+      }
+    }
+
+    .popularGameContainer {
+      margin-top: 40px;
+
+      .popularGameTitle {
+        border-bottom: #494848 solid 1px;
+        font-weight: bold;
+        margin-bottom: 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+
+        .gameCount {
+          font-weight: normal;
+          font-size: 12px;
+          color: #9e9494;
+          padding-bottom: 5px;
+
+          span {
+            font-size: 15px;
+            margin-right: 3px;
+          }
+        }
+      }
+
+      .gameItem {
+        display: grid;
+        grid-template-columns: 70% 30%;
+        align-items: baseline;
+
+        .gameName {
+          text-align: start;
+
+          a {
+            color: #e4e3e3;
+            font-size: 15px;
+            font-weight: normal;
+            margin-top: 18px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;
+            border-bottom: none;
+            text-decoration: underline;
+          }
+        }
+
+
+        .gameAdded {
+          text-align: end;
+          font-size: 12px;
+          color: #9e9494;
+
+          span {
+            margin-right: 4px;
+            font-size: 15px;
+          }
+        }
+      }
+
+
+    }
+  }
+}

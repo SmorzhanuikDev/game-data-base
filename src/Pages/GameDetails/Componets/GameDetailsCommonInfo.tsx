@@ -50,7 +50,7 @@ export const GameDetailsCommonInfo: React.FC<props> = ({currentGame}) => {
                     </div>
                 </div>
                 {
-                    currentGame.publishers.length
+                    currentGame.publishers?.length
                         ? <div>
                             <h5>publisher</h5>
                             <div>

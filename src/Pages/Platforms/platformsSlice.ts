@@ -11,8 +11,12 @@ const platformsSlice = createSlice({
     name: 'platforms',
     initialState,
     reducers: {
-        setPlatforms: (state, action: PayloadAction<any>) => {
-            state.platforms = action.payload
+        setPlatforms: (state, action: PayloadAction<platforms>) => {
+            if (action.payload.previous) {
+                state.platforms.results = state.platforms.results.concat(action.payload.results)
+            } else {
+                state.platforms = action.payload
+            }
         }
     }
 })

@@ -12,7 +12,7 @@ export const GameDetailsBottomInfo: React.FC<props> = ({currentGameSeries, curre
     return (
         <div>
             {
-                currentGameAdditions.results.length
+                currentGameAdditions.results?.length
                     ? <div className={s.fullWidthElement}>
                         <h5>DLC's and editions</h5>
                         {currentGameAdditions.results?.map(additions =>
@@ -23,7 +23,7 @@ export const GameDetailsBottomInfo: React.FC<props> = ({currentGameSeries, curre
                     : null
             }
             {
-                currentGameSeries.results.length
+                currentGameSeries.results?.length
                     ? <div className={s.fullWidthElement}>
                         <h5>Other game in the series</h5>
                         {currentGameSeries.results?.map(game =>
@@ -34,7 +34,7 @@ export const GameDetailsBottomInfo: React.FC<props> = ({currentGameSeries, curre
                     : null
             }
             {
-                currentGame.tags.length
+                currentGame.tags?.length
                     ? <div className={s.fullWidthElement}>
                         <h5>tags</h5>
                         {currentGame.tags?.map(tag =>

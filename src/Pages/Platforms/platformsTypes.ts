@@ -8,7 +8,7 @@ export interface platforms extends defaultResponse {
 }
 
 export interface platformItem {
-    games: gameSmallData
+    games: gameSmallData[]
     games_count: number
     id: number
     image: string | null
