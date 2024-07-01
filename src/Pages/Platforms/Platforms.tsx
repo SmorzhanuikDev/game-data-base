@@ -1,17 +1,20 @@
 import React, {useEffect, useState} from 'react';
 import {fetchPlatformsAction} from "./platformsSaga";
 import {useAppDispatch, useAppSelector} from "../../hooks";
-import s from "./Platforms.module.scss";
+import s from "./platforms.module.scss";
 import mainS from '../../main.module.scss'
 import {CommonCard} from "../../Common/Components/CommonCard/CommonCard";
 
 export const Platforms = () => {
 
     const dispatch = useAppDispatch()
-
     const platforms = useAppSelector(state => state.platformsData.platforms)
     const [fetching, setFetching] = useState(false)
 
+    const scrollHandler = (e: any) => {
+        if (e.target.documentElement.scrollHeight - (e.target.documentElement.scrollTop + window.innerHeight) < 100)
+            setFetching(true)
+    }
 
     useEffect(() => {
         if (fetching) {
@@ -21,13 +24,8 @@ export const Platforms = () => {
     }, [dispatch, fetching]);
 
     useEffect(() => {
-        dispatch(fetchPlatformsAction(1))
+            dispatch(fetchPlatformsAction(1))
     }, [dispatch]);
-
-    const scrollHandler = (e: any) => {
-        if (e.target.documentElement.scrollHeight - (e.target.documentElement.scrollTop + window.innerHeight) < 100)
-            setFetching(true)
-    }
 
     useEffect(() => {
         document.addEventListener('scroll', scrollHandler)
@@ -44,7 +42,7 @@ export const Platforms = () => {
 
                 {
                     platforms.results?.map(platform => <CommonCard
-                        key={platform.name} games={platform.games}
+                        key={platform.id} games={platform.games}
                         gameCount={platform.games_count} title={platform.name} bgImage={platform.image_background}
                     />)
                 }

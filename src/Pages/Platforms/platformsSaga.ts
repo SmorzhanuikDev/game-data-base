@@ -1,15 +1,15 @@
 import {call, put, takeEvery} from 'redux-saga/effects'
 import {FETCH_PLATFORMS, platforms} from "./platformsTypes";
-import {setPlatforms} from "./platformsSlice";
 import {createAction, PayloadAction} from "@reduxjs/toolkit";
+import {setPlatforms} from "./platformsSlice";
 import {platformAPI} from "../../API/platformsAPI";
 
 function* fetchPlatforms({payload}: PayloadAction<number>) {
     try {
         const platforms: platforms = yield call(() => platformAPI.getPlatforms(payload))
-        yield put(setPlatforms(platforms))
+        yield put(setPlatforms({platforms, page: payload}))
     } catch (e: any) {
-        yield put({type: 'ERROR', message: e.message})
+        yield put({type: 'ERRORs', message: e.message})
     }
 }
 

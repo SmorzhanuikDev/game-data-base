@@ -4,6 +4,7 @@ import {Outlet, useLocation, useNavigate, useOutletContext} from "react-router-d
 import {useAppSelector} from "../hooks";
 import {RotatingSquare} from "react-loader-spinner";
 import image from '../Images/no-image.png'
+import {Loader} from "../Common/Components/Loader";
 
 
 type ContextType = { sendImage: (image: string) => void };
@@ -32,16 +33,7 @@ export const Content = () => {
         } : {}
         }>
             <div hidden={!isAppLoading}>
-                <div className={s.loader}>
-                    <RotatingSquare
-                        visible={true}
-                        height="200"
-                        width="200"
-                        color="#fff"
-                        ariaLabel="rotating-square-loading"
-                        wrapperStyle={{marginTop: '110px'}}
-                    />
-                </div>
+                <Loader/>
             </div>
             <div hidden={isAppLoading}>
                 <Outlet context={{sendImage}}/>
