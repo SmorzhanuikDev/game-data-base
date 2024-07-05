@@ -48,10 +48,10 @@ export const CommonPage = () => {
                             key={dev.name} games={dev.games}
                             gameCount={dev.games_count} title={dev.name} bgImage={dev.image_background}
                         />)
-                        : <div className={s.loader}><Loader/></div>
+                        : <div className={s.searchLoader}><Loader/></div>
                 }
                 {
-                    isFetching && content.results ? <div className={s.loader}><Loader/></div> : null
+                    isFetching && content.results ? <div className={s.searchLoader}><Loader/></div> : null
                 }
             </div>
         </div>

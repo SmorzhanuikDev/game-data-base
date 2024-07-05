@@ -10,6 +10,7 @@ import {setGamesList} from "./gamesSlice";
 import {RotatingSquare} from "react-loader-spinner";
 import {Pagination} from "./Components/Pagination";
 import gameDetails from "../GameDetails/GameDetails";
+import {Loader} from "../../Common/Components/Loader";
 
 export interface changeGamesListProp {
     order: ordering | undefined,
@@ -73,18 +74,7 @@ export const Games = () => {
             <div>
                 <Filters changeGamesList={changeGamesList}/>
                 {isGameLoading
-                    ? <div hidden={!isGameLoading}>
-                        <div className={s.loader}>
-                            <RotatingSquare
-                                visible={true}
-                                height="200"
-                                width="200"
-                                color="#fff"
-                                ariaLabel="rotating-square-loading"
-                                wrapperStyle={{marginTop: '110px'}}
-                            />
-                        </div>
-                    </div>
+                    ? <Loader/>
                     : gamesList.results && gamesList.results.map(game => <GameItem key={game.id} game={game}/>)
                 }
             </div>
