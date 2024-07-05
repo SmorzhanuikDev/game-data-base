@@ -4,13 +4,11 @@ import App from './App';
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
 import {Games} from "./Pages/Games/Games";
 import {Home} from "./Pages/Home";
-import {Developers} from "./Pages/Developers/Developers";
-import {Genres} from "./Pages/Genres/Genres";
-import {Platforms} from "./Pages/Platforms/Platforms";
 import {Profile} from "./Pages/Profile";
 import {Provider} from "react-redux";
 import store from './redux-store'
 import GameDetails from "./Pages/GameDetails/GameDetails";
+import {CommonPage} from "./Pages/CommonPage/CommonPage";
 
 const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement
@@ -35,23 +33,23 @@ const router = createBrowserRouter([
             },
             {
                 path: '/developers',
-                element: <Developers/>
+                element: <CommonPage/>
             },
             {
                 path: '/genre/:genreId',
-                element: <Genres/>
-            },
-            {
-                path: '/genres',
-                element: <Genres/>
+                element: <CommonPage/>
             },
             {
                 path: '/platforms',
-                element: <Platforms/>
+                element: <CommonPage/>
             },
             {
                 path: '/profile',
                 element: <Profile/>
+            },
+            {
+                path: '/genres',
+                element: <CommonPage/>
             },
 
         ]

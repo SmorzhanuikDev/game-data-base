@@ -1,7 +1,7 @@
 import React from 'react';
 import s from './commonCard.module.scss'
-import {gameSmallData} from "../../../Pages/Genres/genresTypes";
 import {FaRegUser} from "react-icons/fa";
+import {gameSmallData} from "../../../Pages/CommonPage/commonPageTypes";
 
 
 interface props {

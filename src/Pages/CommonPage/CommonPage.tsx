@@ -1,30 +1,30 @@
 import React, {useEffect} from 'react';
 import {useAppDispatch, useAppSelector} from "../../hooks";
 import mainS from "../../main.module.scss";
-import s from "./Developers.module.scss";
+import s from "./commonPage.module.scss";
 import {CommonCard} from "../../Common/Components/CommonCard/CommonCard";
-import {fetchDevelopersAction} from "./developersSaga";
-import {setIsFetching} from "./developersSlice";
+import {fetchContentAction} from "./commonPageSaga";
+import {setIsFetching} from "./commonPageSlise";
 import {Loader} from "../../Common/Components/Loader";
+import {useLocation} from "react-router-dom";
 
-export const Developers = () => {
+export const CommonPage = () => {
 
     const dispatch = useAppDispatch()
-
-    const developers = useAppSelector(state => state.developersData.developers)
-    const isFetching = useAppSelector(state => state.developersData.isFetching)
-    const page = useAppSelector(state => state.developersData.page)
-
+    const {pathname} = useLocation()
+    const content = useAppSelector(state => state.commonPageData.content)
+    const isFetching = useAppSelector(state => state.commonPageData.isFetching)
+    const page = useAppSelector(state => state.commonPageData.page)
 
     useEffect(() => {
         if (isFetching) {
-            dispatch(fetchDevelopersAction(page))
+            dispatch(fetchContentAction(page, pathname))
         }
-
-    }, [dispatch, isFetching, page]);
+    }, [dispatch, isFetching, page, pathname, content.next]);
 
     const scrollHandler = (e: any) => {
-        if (e.target.documentElement.scrollHeight - (e.target.documentElement.scrollTop + window.innerHeight) < 100) {
+        if ((e.target.documentElement.scrollHeight - (e.target.documentElement.scrollTop + window.innerHeight) < 100)
+            && content.next) {
             dispatch(setIsFetching(true))
         }
 
@@ -44,15 +44,15 @@ export const Developers = () => {
             <h3 className={mainS.pageTitle}>Platforms</h3>
             <div className={s.container}>
 
-                {developers.results ?
-                    developers.results?.map(dev => <CommonCard
+                {content.results ?
+                    content.results?.map(dev => <CommonCard
                         key={dev.name} games={dev.games}
                         gameCount={dev.games_count} title={dev.name} bgImage={dev.image_background}
                     />)
                     : <div className={s.loader}><Loader/></div>
                 }
                 {
-                    isFetching && developers.results ? <div className={s.loader}><Loader/></div> : null
+                    isFetching && content.results ? <div className={s.loader}><Loader/></div> : null
                 }
             </div>
         </div>

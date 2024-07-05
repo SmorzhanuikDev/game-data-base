@@ -6,23 +6,17 @@ import gameDetailsSlice from "./Pages/GameDetails/gameDetailsSlice";
 import gameDetailsSaga from "./Pages/GameDetails/gameDetailsSaga";
 import {all} from 'redux-saga/effects'
 import appSlice from "./appSlice";
-import genresSlice from "./Pages/Genres/genresSlice";
-import genresSaga from "./Pages/Genres/genresSaga";
-import developersSaga from "./Pages/Developers/developersSaga";
-import developersSlice from "./Pages/Developers/developersSlice";
-import platformsSaga from "./Pages/Platforms/platformsSaga";
-import platformsSlice from "./Pages/Platforms/platformsSlice";
+import commonPageSlice from "./Pages/CommonPage/commonPageSlise";
+import commonPageSaga from "./Pages/CommonPage/commonPageSaga";
 
 const sagaMiddleware = createSagaMiddleware()
 
 const store = configureStore({
     reducer: {
         games: gamesSlice,
-        genresData: genresSlice,
         gameDetails: gameDetailsSlice,
         appData: appSlice,
-        platformsData: platformsSlice,
-        developersData: developersSlice
+        commonPageData: commonPageSlice
     },
     middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(sagaMiddleware)
 })
@@ -32,9 +26,7 @@ function* rootSaga() {
     yield all([
         gamesSaga(),
         gameDetailsSaga(),
-        genresSaga(),
-        developersSaga(),
-        platformsSaga()
+        commonPageSaga()
     ])
 }
 
