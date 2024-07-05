@@ -2,8 +2,6 @@ import React, {useEffect, useState} from 'react';
 import s from './Surface.module.scss'
 import {Outlet, useLocation, useNavigate, useOutletContext} from "react-router-dom";
 import {useAppSelector} from "../hooks";
-import {RotatingSquare} from "react-loader-spinner";
-import image from '../Images/no-image.png'
 import {Loader} from "../Common/Components/Loader";
 
 

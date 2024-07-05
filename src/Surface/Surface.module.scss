@@ -124,10 +124,34 @@ header {
       background: white;
       text-align: left;
 
+      .searchItem {
+        cursor: pointer;
+        transition: 0.3s;
+        text-decoration: underline;
+        display: flex;
+        gap: 10px;
+        margin-bottom: 5px;
+
+        &:hover {
+          color: #4e4b4b;
+          transition: 0.3s;
+        }
+
+        .gameImage {
+          height: 40px;
+        }
+        .gameName {
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+      }
+
       .loaderWrapper {
         width: 100%;
         display: flex;
         justify-content: space-around;
+        flex-direction: column;
 
         .searchLoader {
           font-size: 20px;

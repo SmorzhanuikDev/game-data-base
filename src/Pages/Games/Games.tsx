@@ -7,9 +7,7 @@ import {GenresBlock} from "./Components/GenresBlock";
 import {Filters} from "./Components/Filters";
 import {gamesListType, ordering} from "./gamesTypes";
 import {setGamesList} from "./gamesSlice";
-import {RotatingSquare} from "react-loader-spinner";
 import {Pagination} from "./Components/Pagination";
-import gameDetails from "../GameDetails/GameDetails";
 import {Loader} from "../../Common/Components/Loader";
 
 export interface changeGamesListProp {
@@ -78,7 +76,7 @@ export const Games = () => {
                     : gamesList.results && gamesList.results.map(game => <GameItem key={game.id} game={game}/>)
                 }
             </div>
-            <Pagination page={page} setPage={setPage} lastPage={Math.ceil(gamesList.count/10)}/>
+            <Pagination page={page} setPage={setPage} lastPage={Math.ceil(gamesList.count / 10)}/>
         </div>
     );
 };
