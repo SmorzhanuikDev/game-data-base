@@ -1,6 +1,5 @@
 import React, {useEffect} from 'react';
 import {useAppDispatch, useAppSelector} from "../../hooks";
-import mainS from "../../main.module.scss";
 import s from "./commonPage.module.scss";
 import {CommonCard} from "../../Common/Components/CommonCard/CommonCard";
 import {fetchContentAction} from "./commonPageSaga";
@@ -41,15 +40,15 @@ export const CommonPage = () => {
 
     return (
         <div>
-            <h3 className={mainS.pageTitle}>Platforms</h3>
+            <h3 className={s.pageTitle}>{pathname.slice(1, pathname.length)}</h3>
             <div className={s.container}>
-
-                {content.results ?
-                    content.results?.map(dev => <CommonCard
-                        key={dev.name} games={dev.games}
-                        gameCount={dev.games_count} title={dev.name} bgImage={dev.image_background}
-                    />)
-                    : <div className={s.loader}><Loader/></div>
+                {
+                    content.results ?
+                        content.results?.map(dev => <CommonCard
+                            key={dev.name} games={dev.games}
+                            gameCount={dev.games_count} title={dev.name} bgImage={dev.image_background}
+                        />)
+                        : <div className={s.loader}><Loader/></div>
                 }
                 {
                     isFetching && content.results ? <div className={s.loader}><Loader/></div> : null

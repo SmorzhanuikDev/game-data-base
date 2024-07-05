@@ -91,23 +91,65 @@ header {
   }
 
   .searchBarContainer {
-    text-align: center;
-    display: flex;
-    height: 100%;
-    width: 20%;
+    position: relative;
+    width: 18%;
 
-    img {
-      height: 16px;
-      position: relative;
-      align-self: center;
-      left: 29px;
+    .searchInput {
+      img {
+        top: 14px;
+        height: 16px;
+        position: absolute;
+        left: 19px;
+      }
+
+      input {
+        outline: none;
+        width: 100%;
+        font-size: 17px;
+        border-radius: 15px;
+        padding: 12px 4% 12px 17%;
+        border: none;
+      }
     }
-    input {
-      outline: none;
-      width: 100%;
-      align-self: center;
-      border-radius: 10px;
-      padding: 10px 10px 10px 40px;
+
+    .searchResult {
+      border-radius: 15px;
+      padding: 10px 4% 10px 4%;
+      position: absolute;
+      top: 50px;
+      left: 0;
+      width: 113%;
+      color: #0b0800;
+      background: white;
+      text-align: left;
+
+      .loaderWrapper {
+        width: 100%;
+        display: flex;
+        justify-content: space-around;
+
+        .searchLoader {
+          font-size: 20px;
+          width: fit-content;
+          padding-bottom: 5px;
+          font-weight: bold;
+          font-family: monospace;
+          overflow: hidden;
+          color: #0000;
+          text-shadow: 0 0 0 #000,10ch 0 0 #000;
+          background: linear-gradient(#000 0 0) bottom left/0% 3px no-repeat;
+          animation: l14 1.5s infinite;
+        }
+
+        .searchLoader:before {
+          content: "Loading...";
+        }
+
+        @keyframes l14 {
+          80%  {text-shadow:    0  0 0 #000,10ch 0 0 #000;background-size:100% 3px}
+          100% {text-shadow: -10ch 0 0 #000,0    0 0 #000}
+        }
+      }
     }
   }
 

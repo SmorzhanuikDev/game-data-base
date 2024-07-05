@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import s from './Surface.module.scss'
 import {useNavigate} from "react-router-dom";
-import searchIcon from '../Images/search-icon.png'
 import blankProfile from '../Images/blank-profile.webp'
+import {SearchField} from "./SearchField";
 
 export const Navigation = () => {
 
@@ -47,10 +47,7 @@ export const Navigation = () => {
                     <p>Platforms</p>
                 </a>
             </div>
-            <div className={s.searchBarContainer}>
-                <img src={searchIcon} alt='searchIcon'/>
-                <input type="text" placeholder='Try to search'/>
-            </div>
+            <SearchField/>
             <div onClick={() => navigate('/profile')} className={s.avatarLink}>
                 <img src={blankProfile} alt="avatar"/>
             </div>

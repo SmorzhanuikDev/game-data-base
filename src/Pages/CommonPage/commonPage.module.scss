@@ -2,7 +2,14 @@
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
 }
-.loader {
+.searchLoader {
   grid-column-start: 1;
   grid-column-end: 5;
+}
+.pageTitle {
+  text-transform: capitalize;
+  font-size: 60px;
+  margin-top: 0;
+  text-align: center;
+  margin-bottom: 10px;
 }
