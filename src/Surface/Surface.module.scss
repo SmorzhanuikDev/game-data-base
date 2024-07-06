@@ -171,6 +171,19 @@ header {
         }
       }
 
+      .noResult {
+        text-align: center;
+        font-size: 24px;
+        padding: 10px 0;
+
+        .noResIcon {
+          position: relative;
+          top: 5px;
+          margin-right: 10px;
+          font-size: 29px;
+        }
+      }
+
       .loaderWrapper {
         width: 100%;
         display: flex;

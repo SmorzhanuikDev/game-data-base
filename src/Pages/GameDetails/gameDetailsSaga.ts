@@ -64,9 +64,9 @@ function* fetchGameStores({payload}: PayloadAction<number>) {
     }
 }
 
-function* fetchStoresList({payload}: PayloadAction<number>) {
+function* fetchStoresList() {
     try {
-        const storesList: storesListType = yield call(() => gameAPI.getStoresList(payload))
+        const storesList: storesListType = yield call(() => gameAPI.getStoresList())
         yield put(setStoreList(storesList))
     } catch (e: any) {
         yield put({type: 'ERROR', message: e.message})

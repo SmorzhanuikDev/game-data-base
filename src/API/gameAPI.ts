@@ -1,14 +1,17 @@
 import {instance} from "./index";
-import {gamesSearchParamsType, gamesListType} from "../Pages/Games/gamesTypes";
+import {gamesListType, gamesSearchParamsType} from "../Pages/Games/gamesTypes";
 import {
-    gameListType,
     gameDetailsType,
-    gameScreenshotsType, storesListType,
+    gameListType,
+    gameScreenshotsType,
+    storesListType,
 } from "../Pages/GameDetails/gameDetailsTypes";
 
 export const gameAPI = {
     getGames: async (params: gamesSearchParamsType): Promise<gamesListType> => {
-        const response = await instance.get<gamesListType>('games', {params})
+        const response = await instance.get<gamesListType>('games', {
+            params: {...params, search_exact: true}
+        })
         return response.data
     },
     getGameDetails: async (gameId: number): Promise<gameDetailsType> => {
@@ -47,7 +50,7 @@ export const gameAPI = {
         })
         return response.data
     },
-    getStoresList: async (gameId: number): Promise<storesListType> => {
+    getStoresList: async (): Promise<storesListType> => {
         const response = await instance.get<storesListType>(`stores`, {
             params: {
                 page_size: 30

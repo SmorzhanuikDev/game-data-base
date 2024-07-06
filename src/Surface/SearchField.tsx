@@ -8,6 +8,7 @@ import {setSearchGameList} from "../Pages/Games/gamesSlice";
 import {gameType} from "../Pages/Games/gamesTypes";
 import {IoMdClose} from "react-icons/io";
 import {useNavigate, useSearchParams} from "react-router-dom";
+import {VscSearchFuzzy} from "react-icons/vsc";
 
 
 export const SearchField = () => {
@@ -15,6 +16,7 @@ export const SearchField = () => {
     const [search, setSearch] = useState<string>('')
     const dispatch = useAppDispatch()
     const searchGames = useAppSelector(state => state.games.searchGameList)
+    const noResult = useAppSelector(state => state.games.isEmptySearch)
     const navigate = useNavigate()
     let [, setSearchParams] = useSearchParams();
 
@@ -51,15 +53,22 @@ export const SearchField = () => {
             <div className={s.searchInput}>
                 <img src={searchIcon} alt='searchIcon'/>
                 {search ? <IoMdClose onClick={() => setSearch('')} className={s.cleanButton}/> : null}
-                <input type="text" placeholder='Try to search' onKeyDown={handleSubmit} value={search}
+                <input spellCheck={false} type="text" placeholder='Try to search' onKeyDown={handleSubmit}
+                       value={search}
                        onChange={changeSearch}/>
             </div>
             <div className={s.searchResult} hidden={search === ''}>
                 {
                     search && !searchGames.length
-                        ? <div className={s.loaderWrapper}>
-                            <div className={s.searchLoader}/>
-                        </div>
+                        ? (noResult
+                                ? <div className={s.noResult}>
+                                    <VscSearchFuzzy className={s.noResIcon}/>
+                                    No result
+                                </div>
+                                : <div className={s.loaderWrapper}>
+                                    <div className={s.searchLoader}/>
+                                </div>
+                        )
                         : <div>
                             {
                                 searchGames.length
