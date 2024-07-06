@@ -1,29 +1,71 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import s from "./Surface.module.scss";
 import searchIcon from "../Images/search-icon.png";
-import image from '../Images/blank-profile.webp'
+import {useAppDispatch, useAppSelector} from "../hooks";
+import {searchGamesAction} from "../Pages/Games/gamesSaga";
+import noImage from '../Images/no-image.png'
+import {setSearchGameList} from "../Pages/Games/gamesSlice";
+import {gameType} from "../Pages/Games/gamesTypes";
+import {IoMdClose} from "react-icons/io";
+import {useNavigate} from "react-router-dom";
+
 
 export const SearchField = () => {
+
+    const [search, setSearch] = useState<string>('')
+    const dispatch = useAppDispatch()
+    const searchGames = useAppSelector(state => state.games.searchGameList)
+    const navigate = useNavigate()
+
+    const changeSearch = (e: React.FormEvent<HTMLInputElement>) => {
+        setSearch(e.currentTarget.value)
+    }
+
+    const goToGame = (gameId: number) => {
+        navigate(`game/${gameId}`)
+        setSearch('')
+    }
+    const goToGamesSearch = () => {
+        navigate('games')
+        setSearch('')
+    }
+
+    useEffect(() => {
+        dispatch(setSearchGameList({} as gameType[]))
+        if (search) {
+            dispatch(searchGamesAction({search, page_size: 5}))
+        }
+    }, [search, dispatch]);
+
     return (
         <div className={s.searchBarContainer}>
             <div className={s.searchInput}>
                 <img src={searchIcon} alt='searchIcon'/>
-                <input type="text" placeholder='Try to search'/>
+                {search ? <IoMdClose onClick={() => setSearch('')} className={s.cleanButton}/> : null}
+                <input type="text" placeholder='Try to search' value={search} onChange={changeSearch}/>
             </div>
-            <div className={s.searchResult}>
-                <div className={s.loaderWrapper}>
-                    <div className={s.searchLoader}/>
-                </div>
-                <div>
-                    <div className={s.searchItem}>
-                        <img className={s.gameImage} src={image} alt="gameimage"/>
-                        <div className={s.gameName}>mage nameggsd dfsf d fdsfs ddf d</div>
-                    </div>
-                    <div className={s.searchItem}>
-                        <img className={s.gameImage} src={image} alt="gameimage"/>
-                        <div className={s.gameName}>mage nameggsd dfsf d fdsfs ddf d</div>
-                    </div>
-                </div>
+            <div className={s.searchResult} hidden={search === ''}>
+                {
+                    search && !searchGames.length
+                        ? <div className={s.loaderWrapper}>
+                            <div className={s.searchLoader}/>
+                        </div>
+                        : <div>
+                            {
+                                searchGames.length
+                                    ? <>{searchGames.map(game =>
+                                        <div onClick={() => goToGame(game.id)}
+                                             className={s.searchItem} key={game.id}>
+                                            <img className={s.gameImage} src={game.background_image || noImage}
+                                                 alt={game.name}/>
+                                            <div className={s.gameName}>{game.name}</div>
+                                        </div>)}
+                                        <div className={s.seeAllButton} onClick={goToGamesSearch}>Show all</div>
+                                    </>
+                                    : null
+                            }
+                        </div>
+                }
             </div>
         </div>
     );

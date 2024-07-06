@@ -96,6 +96,16 @@ header {
     width: 18%;
 
     .searchInput {
+
+      .cleanButton {
+        position: absolute;
+        top: 10px;
+        right: -16%;
+        color: #0b0800;
+        font-size: 23px;
+        cursor: pointer;
+      }
+
       img {
         top: 14px;
         height: 16px;
@@ -124,6 +134,19 @@ header {
       background: white;
       text-align: left;
 
+      .seeAllButton {
+        text-align: center;
+        cursor: pointer;
+        border-radius: 5px;
+        padding: 5px;
+        transition: 0.3s;
+
+        &:hover {
+          background: #e6dbdb;
+          transition: 0.3s;
+        }
+      }
+
       .searchItem {
         cursor: pointer;
         transition: 0.3s;
@@ -139,6 +162,7 @@ header {
 
         .gameImage {
           height: 40px;
+          width: 60px;
         }
         .gameName {
           white-space: nowrap;

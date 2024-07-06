@@ -1,11 +1,13 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit'
-import {gamesListType} from "./gamesTypes";
+import {gamesListType, gameType} from "./gamesTypes";
 
 type initialStateType = {
-    gamesList: gamesListType
+    gamesList: gamesListType,
+    searchGameList: gameType[]
 }
 const initialState: initialStateType = {
-    gamesList: {} as gamesListType
+    gamesList: {} as gamesListType,
+    searchGameList: {} as gameType[]
 }
 const gamesSlice = createSlice({
     name: 'games',
@@ -13,10 +15,13 @@ const gamesSlice = createSlice({
     reducers: {
         setGamesList: (state, action:PayloadAction<gamesListType>) => {
             state.gamesList = action.payload
-        }
+        },
+        setSearchGameList: (state, action:PayloadAction<gameType[]>) => {
+            state.searchGameList = action.payload
+        },
     }
 })
 
-export const {setGamesList} = gamesSlice.actions
+export const {setGamesList, setSearchGameList} = gamesSlice.actions
 
 export default gamesSlice.reducer

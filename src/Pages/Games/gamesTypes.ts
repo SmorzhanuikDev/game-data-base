@@ -1,6 +1,7 @@
 import {defaultResponse} from "../../Common/commonTypes";
 
 export const FETCH_GAME_LIST = 'FETCH_GAME_LIST'
+export const SEARCH_GAME_LIST = 'SEARCH_GAME_LIST'
 
 export interface gamesSearchParamsType {
     page?: number
