@@ -6,7 +6,7 @@ export const SEARCH_GAME_LIST = 'SEARCH_GAME_LIST'
 export interface gamesSearchParamsType {
     page?: number
     page_size?: number
-    search?: string
+    search?: string | null
     parent_platforms?: string
     platforms?: string
     stores?: string

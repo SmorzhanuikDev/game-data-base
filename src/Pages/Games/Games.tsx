@@ -32,8 +32,8 @@ export const Games = () => {
         setIsGameLoading(true)
         dispatch(setGamesList({} as gamesListType))
         const ordering = isReversed ? '-' + order : order
-        dispatch(fetchGamesAction({page, page_size: 10, ordering, platforms, dates}))
-    }, [dates, dispatch, isReversed, order, page, platforms]);
+        dispatch(fetchGamesAction({page, page_size: 10, ordering, platforms, dates, search}))
+    }, [dates, dispatch, isReversed, order, page, platforms, search]);
 
     useEffect(() => {
         if (gamesList.results)
@@ -56,8 +56,8 @@ export const Games = () => {
                 <GenresBlock/>
             </div>
             <div>
-                <Filters setOrder={setOrder} order={order} platforms={platforms} dates={dates} isReversed={isReversed} setIsReversed={setIsReversed}
-                         setPlatforms={setPlatforms} setDates={setDates}/>
+                <Filters setOrder={setOrder} order={order} platforms={platforms} dates={dates} isReversed={isReversed}
+                         setIsReversed={setIsReversed} setPlatforms={setPlatforms} setDates={setDates} search={search}/>
                 {isGameLoading
                     ? <Loader/>
                     : gamesList.results && gamesList.results.map(game => <GameItem key={game.id} game={game}/>)

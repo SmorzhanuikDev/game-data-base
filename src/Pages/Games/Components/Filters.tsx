@@ -3,12 +3,15 @@ import s from "../Games.module.scss";
 import {Select} from "../../../Common/Components/Select/Select";
 import {BiSortAlt2} from "react-icons/bi";
 import {orderOptions, platformsOptions, releasedOptions} from "../selectData";
+import {useSearchParams} from "react-router-dom";
+import {IoIosCloseCircle} from "react-icons/io";
 
 interface props {
     platforms: string | undefined
     dates: string | undefined
     order: string | undefined
     isReversed: boolean
+    search: string | null
     setIsReversed: (value: boolean) => void
     setPlatforms: (value: string | undefined) => void
     setDates: (value: string | undefined) => void
@@ -16,7 +19,13 @@ interface props {
 }
 
 export const Filters: React.FC<props> = (props) => {
-    const {setDates, setIsReversed, isReversed, setPlatforms, setOrder, order, dates, platforms} = props
+    const {setDates, setIsReversed, isReversed, setPlatforms, setOrder, order, dates, platforms, search} = props
+    const [searchParams, setSearchParams] = useSearchParams()
+
+    const cleanSearch = () => {
+        searchParams.delete('search')
+        setSearchParams(searchParams)
+    }
 
     return (
         <div className={s.filterBlock}>
@@ -35,6 +44,18 @@ export const Filters: React.FC<props> = (props) => {
             <Select title={'platform'} options={platformsOptions} onChangeSelect={setPlatforms} value={platforms}/>
             <Select title={'Released'} options={releasedOptions()} value={dates}
                     onChangeSelect={setDates}/>
+            {
+                search
+                    ? <div className={s.deleteSearch} onClick={cleanSearch}>
+                        <div>
+                            <span>{'Search: '}</span>
+                            <span className={s.searchContent}>{search}</span>
+                        </div>
+
+                        <IoIosCloseCircle className={s.icon}/>
+                    </div>
+                    : null
+            }
         </div>
     );
 };
