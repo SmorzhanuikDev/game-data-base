@@ -1,45 +1,26 @@
-import React, {useState} from 'react';
+import React from 'react';
 import s from "../Games.module.scss";
 import {Select} from "../../../Common/Components/Select/Select";
 import {BiSortAlt2} from "react-icons/bi";
 import {orderOptions, platformsOptions, releasedOptions} from "../selectData";
-import {changeGamesListProp} from "../Games";
 
 interface props {
-    changeGamesList: (prop: changeGamesListProp) => void
+    setOrder: (value: string | undefined) => void
+    order: string | undefined
+    isReversed: boolean
+    setIsReversed: (value: boolean) => void
+    setPlatforms: (value: string | undefined) => void
+    setDates: (value: string | undefined) => void
 }
 
-export const Filters: React.FC<props> = ({changeGamesList}) => {
-
-    const [isReversed, setIsReversed] = useState(false)
-    const [order, setOrder] = useState<string | undefined>()
-    const [platforms, setPlatforms] = useState<string | undefined>()
-    const [dates, setDates] = useState<string | undefined>()
-
-    const onChangeOrdering = (value: string | undefined) => {
-        setOrder(value)
-        changeGamesList({order: value, isReversed, platforms, dates})
-    }
-
-    const sortOrder = (sortBy: boolean) => {
-        changeGamesList({order, isReversed: sortBy, platforms, dates})
-        setIsReversed(sortBy)
-    }
-
-    const onChangePlatform = (value: string | undefined) => {
-        changeGamesList({order, isReversed, platforms: value, dates})
-        setPlatforms(value)
-    }
-    const onChangeReleased = (value: string | undefined) => {
-        changeGamesList({order, isReversed, platforms, dates: value})
-        setDates(value)
-    }
+export const Filters: React.FC<props> = (props) => {
+    const {setDates, setIsReversed, isReversed, setPlatforms, setOrder, order} = props
 
     return (
         <div className={s.filterBlock}>
             <div className={s.orderingSection}>
-                <Select options={orderOptions} title={'Order by'} onChangeSelect={onChangeOrdering}/>
-                <BiSortAlt2 className={s.sortButton} onClick={order ? () => sortOrder(!isReversed) : () => {
+                <Select options={orderOptions} title={'Order by'} onChangeSelect={setOrder}/>
+                <BiSortAlt2 className={s.sortButton} onClick={order ? () => setIsReversed(!isReversed) : () => {
                 }}
                             style={order
                                 ? {
@@ -49,9 +30,9 @@ export const Filters: React.FC<props> = ({changeGamesList}) => {
                                 : {background: '#706f6f', color: '#fff', cursor: 'auto'}
                             }/>
             </div>
-            <Select title={'platform'} options={platformsOptions} onChangeSelect={onChangePlatform}/>
+            <Select title={'platform'} options={platformsOptions} onChangeSelect={setPlatforms}/>
             <Select title={'Released'} options={releasedOptions()}
-                    onChangeSelect={onChangeReleased}/>
+                    onChangeSelect={setDates}/>
         </div>
     );
 };

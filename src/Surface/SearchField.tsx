@@ -7,7 +7,7 @@ import noImage from '../Images/no-image.png'
 import {setSearchGameList} from "../Pages/Games/gamesSlice";
 import {gameType} from "../Pages/Games/gamesTypes";
 import {IoMdClose} from "react-icons/io";
-import {useNavigate} from "react-router-dom";
+import {useNavigate, useSearchParams} from "react-router-dom";
 
 
 export const SearchField = () => {
@@ -16,6 +16,7 @@ export const SearchField = () => {
     const dispatch = useAppDispatch()
     const searchGames = useAppSelector(state => state.games.searchGameList)
     const navigate = useNavigate()
+    let [, setSearchParams] = useSearchParams();
 
     const changeSearch = (e: React.FormEvent<HTMLInputElement>) => {
         setSearch(e.currentTarget.value)
@@ -25,8 +26,16 @@ export const SearchField = () => {
         navigate(`game/${gameId}`)
         setSearch('')
     }
-    const goToGamesSearch = () => {
+
+    const handleSubmit = (e: React.KeyboardEvent<HTMLInputElement>) => {
+        if (e.code === 'Enter') {
+            goToSearch()
+        }
+    }
+
+    const goToSearch = () => {
         navigate('games')
+        setSearchParams({search})
         setSearch('')
     }
 
@@ -42,7 +51,8 @@ export const SearchField = () => {
             <div className={s.searchInput}>
                 <img src={searchIcon} alt='searchIcon'/>
                 {search ? <IoMdClose onClick={() => setSearch('')} className={s.cleanButton}/> : null}
-                <input type="text" placeholder='Try to search' value={search} onChange={changeSearch}/>
+                <input type="text" placeholder='Try to search' onKeyDown={handleSubmit} value={search}
+                       onChange={changeSearch}/>
             </div>
             <div className={s.searchResult} hidden={search === ''}>
                 {
@@ -60,7 +70,7 @@ export const SearchField = () => {
                                                  alt={game.name}/>
                                             <div className={s.gameName}>{game.name}</div>
                                         </div>)}
-                                        <div className={s.seeAllButton} onClick={goToGamesSearch}>Show all</div>
+                                        <div className={s.seeAllButton} onClick={goToSearch}>Show all</div>
                                     </>
                                     : null
                             }
