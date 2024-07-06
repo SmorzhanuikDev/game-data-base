@@ -5,21 +5,23 @@ import {BiSortAlt2} from "react-icons/bi";
 import {orderOptions, platformsOptions, releasedOptions} from "../selectData";
 
 interface props {
-    setOrder: (value: string | undefined) => void
+    platforms: string | undefined
+    dates: string | undefined
     order: string | undefined
     isReversed: boolean
     setIsReversed: (value: boolean) => void
     setPlatforms: (value: string | undefined) => void
     setDates: (value: string | undefined) => void
+    setOrder: (value: string | undefined) => void
 }
 
 export const Filters: React.FC<props> = (props) => {
-    const {setDates, setIsReversed, isReversed, setPlatforms, setOrder, order} = props
+    const {setDates, setIsReversed, isReversed, setPlatforms, setOrder, order, dates, platforms} = props
 
     return (
         <div className={s.filterBlock}>
             <div className={s.orderingSection}>
-                <Select options={orderOptions} title={'Order by'} onChangeSelect={setOrder}/>
+                <Select options={orderOptions} title={'Order by'} onChangeSelect={setOrder} value={order}/>
                 <BiSortAlt2 className={s.sortButton} onClick={order ? () => setIsReversed(!isReversed) : () => {
                 }}
                             style={order
@@ -30,8 +32,8 @@ export const Filters: React.FC<props> = (props) => {
                                 : {background: '#706f6f', color: '#fff', cursor: 'auto'}
                             }/>
             </div>
-            <Select title={'platform'} options={platformsOptions} onChangeSelect={setPlatforms}/>
-            <Select title={'Released'} options={releasedOptions()}
+            <Select title={'platform'} options={platformsOptions} onChangeSelect={setPlatforms} value={platforms}/>
+            <Select title={'Released'} options={releasedOptions()} value={dates}
                     onChangeSelect={setDates}/>
         </div>
     );

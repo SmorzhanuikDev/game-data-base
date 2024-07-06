@@ -56,7 +56,7 @@ export const Games = () => {
                 <GenresBlock/>
             </div>
             <div>
-                <Filters setOrder={setOrder} order={order} isReversed={isReversed} setIsReversed={setIsReversed}
+                <Filters setOrder={setOrder} order={order} platforms={platforms} dates={dates} isReversed={isReversed} setIsReversed={setIsReversed}
                          setPlatforms={setPlatforms} setDates={setDates}/>
                 {isGameLoading
                     ? <Loader/>

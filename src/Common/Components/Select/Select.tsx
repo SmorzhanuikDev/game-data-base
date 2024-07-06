@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import s from "./select.module.scss";
 import {IoIosArrowDown} from "react-icons/io";
 import {SelectList} from "./SelectList";
@@ -7,6 +7,7 @@ interface props {
     title: string
     options: option[],
     onChangeSelect: (value: string | undefined) => void
+    value: string | undefined
 }
 
 export type option = {
@@ -24,7 +25,7 @@ const whiteBG = {
     color: 'black'
 }
 
-export const Select: React.FC<props> = ({options, onChangeSelect, title}) => {
+export const Select: React.FC<props> = ({options, onChangeSelect, title, value}) => {
 
     const [isSelectOpen, setIsSelectOpen] = useState(false)
     const [currentTitle, setCurrentTitle] = useState<string | undefined>(undefined)
@@ -37,6 +38,12 @@ export const Select: React.FC<props> = ({options, onChangeSelect, title}) => {
         setIsSelectOpen(false)
         setCurrentTitle(title)
     }
+
+    useEffect(() => {
+        if (!value) {
+            setCurrentTitle(undefined)
+        }
+    }, [value]);
 
     return (
         <div className={s.selectContainer}>
