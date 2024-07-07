@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect, useMemo, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {GameItem} from "./Components/GameItem";
 import {fetchGamesAction, fetchGenresDetailsAction} from "./gamesSaga";
 import {useAppDispatch, useAppSelector} from "../../hooks";
@@ -10,7 +10,7 @@ import {setGamesList} from "./gamesSlice";
 import {Pagination} from "./Components/Pagination";
 import {Loader} from "../../Common/Components/Loader";
 import {useLocation, useParams} from "react-router-dom";
-import {commonAPI} from "../../API/commonAPI";
+import {GenreDetails} from "./Components/GenreDetails";
 
 function useSearch() {
     const {search} = useLocation();
@@ -31,7 +31,6 @@ export const Games = () => {
     const {genreId} = useParams()
     const [genre, setGenre] = useState<string | undefined>(undefined)
 
-
     useEffect(() => {
         setIsGameLoading(true)
         dispatch(setGamesList({} as gamesListType))
@@ -51,6 +50,7 @@ export const Games = () => {
             setOrder(undefined)
             setPlatforms(undefined)
             setDates(undefined)
+            setGenre(undefined)
         }
     }, [dispatch, search]);
 
@@ -58,6 +58,7 @@ export const Games = () => {
         if (genreId) {
             dispatch(fetchGenresDetailsAction(genreId))
             setGenre(genreId)
+            setPage(1)
         }
     }, [dispatch, genreId]);
 
@@ -65,9 +66,10 @@ export const Games = () => {
     return (
         <div className={s.gamePageContainer}>
             <div className={s.sideBar}>
-                <GenresBlock/>
+                <GenresBlock activeGenre={genre}/>
             </div>
             <div>
+                <GenreDetails/>
                 <Filters setOrder={setOrder} order={order} platforms={platforms} dates={dates} isReversed={isReversed}
                          setIsReversed={setIsReversed} setPlatforms={setPlatforms} setDates={setDates} search={search}/>
                 {isGameLoading
