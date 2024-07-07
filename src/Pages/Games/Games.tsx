@@ -1,6 +1,6 @@
-import React, {useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useMemo, useState} from 'react';
 import {GameItem} from "./Components/GameItem";
-import {fetchGamesAction} from "./gamesSaga";
+import {fetchGamesAction, fetchGenresDetailsAction} from "./gamesSaga";
 import {useAppDispatch, useAppSelector} from "../../hooks";
 import s from './Games.module.scss'
 import {GenresBlock} from "./Components/GenresBlock";
@@ -9,7 +9,8 @@ import {gamesListType} from "./gamesTypes";
 import {setGamesList} from "./gamesSlice";
 import {Pagination} from "./Components/Pagination";
 import {Loader} from "../../Common/Components/Loader";
-import {useLocation} from "react-router-dom";
+import {useLocation, useParams} from "react-router-dom";
+import {commonAPI} from "../../API/commonAPI";
 
 function useSearch() {
     const {search} = useLocation();
@@ -27,13 +28,16 @@ export const Games = () => {
     const [order, setOrder] = useState<string | undefined>()
     const [platforms, setPlatforms] = useState<string | undefined>()
     const [dates, setDates] = useState<string | undefined>()
+    const {genreId} = useParams()
+    const [genre, setGenre] = useState<string | undefined>(undefined)
+
 
     useEffect(() => {
         setIsGameLoading(true)
         dispatch(setGamesList({} as gamesListType))
         const ordering = isReversed ? '-' + order : order
-        dispatch(fetchGamesAction({page, page_size: 10, ordering, platforms, dates, search}))
-    }, [dates, dispatch, isReversed, order, page, platforms, search]);
+        dispatch(fetchGamesAction({page, page_size: 10, ordering, platforms, dates, search, genres: genre}))
+    }, [dates, dispatch, isReversed, order, page, platforms, search, genre]);
 
     useEffect(() => {
         if (gamesList.results)
@@ -49,6 +53,14 @@ export const Games = () => {
             setDates(undefined)
         }
     }, [dispatch, search]);
+
+    useEffect(() => {
+        if (genreId) {
+            dispatch(fetchGenresDetailsAction(genreId))
+            setGenre(genreId)
+        }
+    }, [dispatch, genreId]);
+
 
     return (
         <div className={s.gamePageContainer}>

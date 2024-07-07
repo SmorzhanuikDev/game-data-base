@@ -33,7 +33,6 @@ export const CommonCard: React.FC<props> = ({title, gameCount, games, bgImage}) 
                         <span>Popular item</span>
                         <div className={s.gameCount}>
                             <span>{gameCount}</span>
-                            <FaRegUser/>
                         </div>
                     </div>
                     {

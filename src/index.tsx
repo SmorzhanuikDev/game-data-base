@@ -37,7 +37,7 @@ const router = createBrowserRouter([
             },
             {
                 path: '/genre/:genreId',
-                element: <CommonPage/>
+                element: <Games/>
             },
             {
                 path: '/platforms',
