@@ -6,6 +6,7 @@ import {fetchContentAction} from "./commonPageSaga";
 import {setIsFetching} from "./commonPageSlise";
 import {Loader} from "../../Common/Components/Loader";
 import {useLocation} from "react-router-dom";
+import {Title} from "../../Common/Components/Title";
 
 export const CommonPage = () => {
 
@@ -40,7 +41,7 @@ export const CommonPage = () => {
 
     return (
         <div>
-            <h3 className={s.pageTitle}>{pathname.slice(1, pathname.length)}</h3>
+            <Title title={pathname.slice(1, pathname.length)} />
             <div className={s.container}>
                 {
                     content.results ?

@@ -7,9 +7,10 @@ import {fetchContentAction} from "../../CommonPage/commonPageSaga";
 
 interface props {
     activeGenre: string | undefined
+    setGenre: (id: string | undefined) => void
 }
 
-export const GenresBlock: React.FC<props> = React.memo(({activeGenre}) => {
+export const GenresBlock: React.FC<props> = React.memo(({activeGenre, setGenre}) => {
 
     const dispatch = useAppDispatch()
     const genres = useAppSelector(state => state.commonPageData.content)
@@ -26,7 +27,12 @@ export const GenresBlock: React.FC<props> = React.memo(({activeGenre}) => {
     }, [dispatch, genres.results]);
 
     const handleClick = (id: number) => {
-        navigate(`/genre/${id}`)
+        if (id === Number(activeGenre)) {
+            navigate('/games')
+            setGenre(undefined)
+        } else {
+            navigate(`/genre/${id}`)
+        }
     }
 
     return (

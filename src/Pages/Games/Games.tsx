@@ -5,8 +5,8 @@ import {useAppDispatch, useAppSelector} from "../../hooks";
 import s from './Games.module.scss'
 import {GenresBlock} from "./Components/GenresBlock";
 import {Filters} from "./Components/Filters";
-import {gamesListType} from "./gamesTypes";
-import {setGamesList} from "./gamesSlice";
+import {gamesListType, genresDetailType} from "./gamesTypes";
+import {setGamesList, setGenreDetails} from "./gamesSlice";
 import {Pagination} from "./Components/Pagination";
 import {Loader} from "../../Common/Components/Loader";
 import {useLocation, useParams} from "react-router-dom";
@@ -60,16 +60,21 @@ export const Games = () => {
             setGenre(genreId)
             setPage(1)
         }
+        return () => {
+            dispatch(setGenreDetails({} as genresDetailType))
+        }
     }, [dispatch, genreId]);
 
 
     return (
         <div className={s.gamePageContainer}>
             <div className={s.sideBar}>
-                <GenresBlock activeGenre={genre}/>
+                <GenresBlock activeGenre={genre} setGenre={setGenre}/>
             </div>
             <div>
-                <GenreDetails/>
+                <div hidden={!genre}>
+                    <GenreDetails/>
+                </div>
                 <Filters setOrder={setOrder} order={order} platforms={platforms} dates={dates} isReversed={isReversed}
                          setIsReversed={setIsReversed} setPlatforms={setPlatforms} setDates={setDates} search={search}/>
                 {isGameLoading
