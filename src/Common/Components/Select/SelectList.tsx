@@ -3,6 +3,7 @@ import s from "./select.module.scss";
 import {IoMdClose} from "react-icons/io";
 import {SelectOption} from "./SelectOption";
 import {option} from "./Select";
+import {useSearchParams} from "react-router-dom";
 
 interface props {
     currentValue: string | undefined
@@ -13,6 +14,14 @@ interface props {
 }
 
 export const SelectList: React.FC<props> = ({currentValue, setIsSelectOpen, closeSelect, options, title}) => {
+    const [searchParams, setSearchParams] = useSearchParams()
+
+
+    const clearSelect = () => {
+        closeSelect(undefined, undefined)
+        searchParams.delete('platform')
+        setSearchParams(searchParams)
+    }
 
     return (
         <div className={s.selectList}>
@@ -22,7 +31,7 @@ export const SelectList: React.FC<props> = ({currentValue, setIsSelectOpen, clos
                     {
                         currentValue
                             ? <div className={s.selectClearButton}
-                                   onClick={() => closeSelect(undefined, undefined)}>clear</div>
+                                   onClick={clearSelect}>clear</div>
                             : null
                     }
                 </div>

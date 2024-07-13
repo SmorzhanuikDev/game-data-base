@@ -39,7 +39,7 @@
     width: 50px;
     aspect-ratio: 1;
     border-radius: 50%;
-    border: 8px solid #ffffff;
+    border: 8px solid #050505;
     animation: l20-1 0.8s infinite linear alternate,
     l20-2 1.6s infinite linear;
   }
@@ -275,14 +275,17 @@
     .gamePlatforms {
       display: flex;
 
-      a {
+      span {
         margin-right: 10px;
         font-size: 16px;
         color: #9b9696;
         text-decoration: underline;
+        cursor: pointer;
+        transition: .3s;
 
         &:hover {
           color: base.$text-color;
+          transition: .3s;
         }
       }
     }

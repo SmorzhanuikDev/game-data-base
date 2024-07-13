@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import s from "./select.module.scss";
 import {IoIosArrowDown} from "react-icons/io";
 import {SelectList} from "./SelectList";
@@ -36,14 +36,30 @@ export const Select: React.FC<props> = ({options, onChangeSelect, title, value})
     const closeSelect = (value: string | undefined, title: string | undefined) => {
         onChangeSelect(value)
         setIsSelectOpen(false)
+        console.log(title)
         setCurrentTitle(title)
     }
+
+    const findOption = useCallback( (options:option[], value: string):string | undefined => {
+        if (options.length === 1 && options[0].value !== value) {
+            return undefined
+        } else if (options[0].value === value) {
+            return options[0].title
+        } else if (options[0].subOptions) {
+            return findOption([...options.slice(1), ...options[0].subOptions], value)
+        }else {
+            return findOption( options.slice(1), value)
+        }
+    }, [])
 
     useEffect(() => {
         if (!value) {
             setCurrentTitle(undefined)
+        } else {
+            setCurrentTitle(findOption(options, value))
         }
-    }, [value]);
+
+    }, [findOption, options, value]);
 
     return (
         <div className={s.selectContainer}>

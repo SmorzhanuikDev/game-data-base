@@ -12,11 +12,10 @@ import {Loader} from "../../Common/Components/Loader";
 import {useLocation, useParams} from "react-router-dom";
 import {GenreDetails} from "./Components/GenreDetails";
 
-function useSearch() {
+export function useSearch() {
     const {search} = useLocation();
     return React.useMemo(() => new URLSearchParams(search), [search]);
 }
-
 export const Games = () => {
 
     const dispatch = useAppDispatch()
@@ -24,12 +23,15 @@ export const Games = () => {
     const [isGameLoading, setIsGameLoading] = useState(false)
     const [page, setPage] = useState<number>(1)
     const search = useSearch().get('search')
+    const platform = useSearch().get('platform')
     const [isReversed, setIsReversed] = useState(false)
     const [order, setOrder] = useState<string | undefined>()
     const [platforms, setPlatforms] = useState<string | undefined>()
     const [dates, setDates] = useState<string | undefined>()
     const {genreId} = useParams()
     const [genre, setGenre] = useState<string | undefined>(undefined)
+
+    console.log(platforms)
 
     useEffect(() => {
         setIsGameLoading(true)
@@ -53,6 +55,10 @@ export const Games = () => {
             setGenre(undefined)
         }
     }, [dispatch, search]);
+
+    useEffect(() => {
+        setPlatforms(platform || undefined)
+    }, [platform]);
 
     useEffect(() => {
         if (genreId) {
