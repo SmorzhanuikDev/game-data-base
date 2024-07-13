@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import s from '../Games.module.scss'
 import {useNavigate} from "react-router-dom";
 import {setIsAppLoading} from "../../../appSlice";
@@ -7,10 +7,9 @@ import {fetchContentAction} from "../../CommonPage/commonPageSaga";
 
 interface props {
     activeGenre: string | undefined
-    setGenre: (id: string | undefined) => void
 }
 
-export const GenresBlock: React.FC<props> = React.memo(({activeGenre, setGenre}) => {
+export const GenresBlock: React.FC<props> = React.memo(({activeGenre}) => {
 
     const dispatch = useAppDispatch()
     const genres = useAppSelector(state => state.commonPageData.content)
@@ -29,7 +28,6 @@ export const GenresBlock: React.FC<props> = React.memo(({activeGenre, setGenre})
     const handleClick = (id: number) => {
         if (id === Number(activeGenre)) {
             navigate('/games')
-            setGenre(undefined)
         } else {
             navigate(`/genre/${id}`)
         }
@@ -41,7 +39,7 @@ export const GenresBlock: React.FC<props> = React.memo(({activeGenre, setGenre})
             {
                 genres.results?.map(genre =>
                     <div key={genre.id} onClick={() => handleClick(genre.id)}
-                         className={ Number(activeGenre) !== genre.id ? s.genresItem : s.test}>
+                         className={Number(activeGenre) !== genre.id ? s.genresItem : s.activeGenre}>
                         <img src={genre.image_background || ''} alt="genreImg"/>
                         <span>{genre.name}</span>
                     </div>)

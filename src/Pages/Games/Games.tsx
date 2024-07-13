@@ -29,16 +29,13 @@ export const Games = () => {
     const [platforms, setPlatforms] = useState<string | undefined>()
     const [dates, setDates] = useState<string | undefined>()
     const {genreId} = useParams()
-    const [genre, setGenre] = useState<string | undefined>(undefined)
-
-    console.log(platforms)
 
     useEffect(() => {
         setIsGameLoading(true)
         dispatch(setGamesList({} as gamesListType))
         const ordering = isReversed ? '-' + order : order
-        dispatch(fetchGamesAction({page, page_size: 10, ordering, platforms, dates, search, genres: genre}))
-    }, [dates, dispatch, isReversed, order, page, platforms, search, genre]);
+        dispatch(fetchGamesAction({page, page_size: 10, ordering, platforms, dates, search, genres: genreId}))
+    }, [dates, dispatch, isReversed, order, page, platforms, search, genreId]);
 
     useEffect(() => {
         if (gamesList.results)
@@ -52,7 +49,6 @@ export const Games = () => {
             setOrder(undefined)
             setPlatforms(undefined)
             setDates(undefined)
-            setGenre(undefined)
         }
     }, [dispatch, search]);
 
@@ -63,8 +59,6 @@ export const Games = () => {
     useEffect(() => {
         if (genreId) {
             dispatch(fetchGenresDetailsAction(genreId))
-            setGenre(genreId)
-            setPage(1)
         }
         return () => {
             dispatch(setGenreDetails({} as genresDetailType))
@@ -75,10 +69,10 @@ export const Games = () => {
     return (
         <div className={s.gamePageContainer}>
             <div className={s.sideBar}>
-                <GenresBlock activeGenre={genre} setGenre={setGenre}/>
+                <GenresBlock activeGenre={genreId}/>
             </div>
             <div>
-                <div hidden={!genre}>
+                <div hidden={!genreId}>
                     <GenreDetails/>
                 </div>
                 <Filters setOrder={setOrder} order={order} platforms={platforms} dates={dates} isReversed={isReversed}

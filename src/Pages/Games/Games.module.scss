@@ -113,11 +113,11 @@
         margin: 0;
       }
 
-      .test {
+      .activeGenre {
         @include navBarButton;
         background: #d6d4d4;
         color: #0b0800;
-        cursor: default;
+        cursor: pointer;
 
         &:hover {
           color: #0b0800;
