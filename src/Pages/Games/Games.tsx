@@ -16,6 +16,7 @@ export function useSearch() {
     const {search} = useLocation();
     return React.useMemo(() => new URLSearchParams(search), [search]);
 }
+
 export const Games = () => {
 
     const dispatch = useAppDispatch()
@@ -23,10 +24,9 @@ export const Games = () => {
     const [isGameLoading, setIsGameLoading] = useState(false)
     const [page, setPage] = useState<number>(1)
     const search = useSearch().get('search')
-    const platform = useSearch().get('platform')
+    const platforms = useSearch().get('platform')
     const [isReversed, setIsReversed] = useState(false)
     const [order, setOrder] = useState<string | undefined>()
-    const [platforms, setPlatforms] = useState<string | undefined>()
     const [dates, setDates] = useState<string | undefined>()
     const {genreId} = useParams()
 
@@ -47,14 +47,9 @@ export const Games = () => {
             dispatch(fetchGamesAction({page: 1, page_size: 10, search}))
             setIsReversed(false)
             setOrder(undefined)
-            setPlatforms(undefined)
             setDates(undefined)
         }
     }, [dispatch, search]);
-
-    useEffect(() => {
-        setPlatforms(platform || undefined)
-    }, [platform]);
 
     useEffect(() => {
         if (genreId) {
@@ -75,8 +70,8 @@ export const Games = () => {
                 <div hidden={!genreId}>
                     <GenreDetails/>
                 </div>
-                <Filters setOrder={setOrder} order={order} platforms={platforms} dates={dates} isReversed={isReversed}
-                         setIsReversed={setIsReversed} setPlatforms={setPlatforms} setDates={setDates} search={search}/>
+                <Filters setOrder={setOrder} order={order} platforms={platforms || undefined} dates={dates} isReversed={isReversed}
+                         setIsReversed={setIsReversed} setDates={setDates} search={search}/>
                 {isGameLoading
                     ? <Loader/>
                     : gamesList.results && gamesList.results.map(game => <GameItem key={game.id} game={game}/>)

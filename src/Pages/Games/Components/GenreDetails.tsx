@@ -11,7 +11,7 @@ export const GenreDetails = () => {
 
     const cutDesc = (desc: string | null) => {
         if (desc) {
-            let wordArr = desc.slice(400).split(' ')
+            let wordArr = desc.slice(300).split(' ')
             const deletedPart = wordArr.slice(1, wordArr.length).join(' ')
             return desc.replace(deletedPart, '')
         }
@@ -30,13 +30,13 @@ export const GenreDetails = () => {
             <Title title={genreDetails.name}/>
             <div className={s.description}>
                 {
-                    description && description.length > 400
+                    description && description.length > 300
                         ? <>
-                            <div hidden={isDescExpand}>
+                            <div hidden={!isDescExpand}>
                                 {description}
                                 <span className={s.showMoreButton} onClick={changeDesc}>hide</span>
                             </div>
-                            <div hidden={!isDescExpand}>
+                            <div hidden={isDescExpand}>
                                 {cutDesc(description) + '...'}
                                 <span className={s.showMoreButton} onClick={changeDesc}>show more</span>
                             </div>

@@ -82,13 +82,16 @@
   .commonInfo {
     display: grid;
     grid-template-columns: 1fr 1fr;
+    grid-column-gap: 20px;
     grid-template-rows: auto auto auto;
 
+    .link,
     a {
       font-size: 16px;
       text-decoration: underline;
       margin-right: 5px;
       transition: 0.2s;
+      cursor: pointer;
 
       &:hover {
         color: #8a8080;

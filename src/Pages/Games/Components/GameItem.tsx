@@ -23,10 +23,10 @@ export const GameItem: React.FC<props> = ({game}) => {
             </a>
             <div className={s.descBlock}>
                 <div>
-                    <a href={`game/${game.id}`} className={s.gameName}>{game.name}</a>
+                    <a href={`/game/${game.id}`} className={s.gameName}>{game.name}</a>
                 </div>
                 <div className={s.gameGenre}>
-                    {game.genres?.map(genre => <a href={`genre/${genre.id}`} key={genre.id}>{genre.name}</a>)}
+                    {game.genres?.map(genre => <a href={`/genre/${genre.id}`} key={genre.id}>{genre.name}</a>)}
                 </div>
                 <div className={s.gamePlatforms}>
                     {

@@ -9,7 +9,7 @@ export interface gamesSearchParamsType {
     page_size?: number
     search?: string | null
     parent_platforms?: string
-    platforms?: string
+    platforms?: string | null
     stores?: string
     developers?: string
     publishers?: string

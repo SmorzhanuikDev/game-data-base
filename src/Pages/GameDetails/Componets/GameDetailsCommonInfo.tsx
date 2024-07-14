@@ -2,21 +2,29 @@ import React from 'react';
 import s from "../GameDetails.module.scss";
 import {formatDate, formatESRBRating} from "../../../Common/commonFunctions";
 import {gameDetailsType} from "../gameDetailsTypes";
+import {useNavigate} from "react-router-dom";
 
 interface props {
     currentGame: gameDetailsType
 }
 
 export const GameDetailsCommonInfo: React.FC<props> = ({currentGame}) => {
+
+    const navigate = useNavigate()
+
+    const handleClick = (platformId: number) => {
+        navigate(`/games?platform=${platformId}`)
+    }
+
     return (
         <div>
             <div className={s.commonInfo}>
                 <div>
                     <h5>Platforms</h5>
                     <div> {currentGame?.platforms?.map(platform =>
-                        <a href={`/platform/${platform.platform.id}`} key={platform.platform.id}>
+                        <span className={s.link} onClick={() => handleClick(platform.platform.id)} key={platform.platform.id}>
                             {platform.platform.name}
-                        </a>
+                        </span>
                     )}</div>
                 </div>
                 <div>

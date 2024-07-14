@@ -13,18 +13,27 @@ interface props {
     isReversed: boolean
     search: string | null
     setIsReversed: (value: boolean) => void
-    setPlatforms: (value: string | undefined) => void
     setDates: (value: string | undefined) => void
     setOrder: (value: string | undefined) => void
 }
 
 export const Filters: React.FC<props> = (props) => {
-    const {setDates, setIsReversed, isReversed, setPlatforms, setOrder, order, dates, platforms, search} = props
+    const {setDates, setIsReversed, isReversed, setOrder, order, dates, platforms, search} = props
     const [searchParams, setSearchParams] = useSearchParams()
 
     const cleanSearch = () => {
         searchParams.delete('search')
         setSearchParams(searchParams)
+    }
+
+    const setPlatforms = (value: string | undefined) => {
+        if (value) {
+            setSearchParams({platform: value})
+        } else {
+            searchParams.delete('platform')
+            setSearchParams(searchParams)
+        }
+
     }
 
     return (
