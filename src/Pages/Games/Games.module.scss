@@ -8,6 +8,14 @@
   object-position: 50% 50%;
 }
 
+@mixin filterButtonBase {
+  background: base.$cardBGColor;
+  padding: 13px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 20px;
+}
+
 @mixin navBarButton {
   display: flex;
   align-items: center;
@@ -186,6 +194,53 @@
   justify-content: space-around;
 }
 
+.tagsBlock {
+  @include filterButtonBase;
+  margin-bottom: 20px;
+  font-size: 17px;
+
+  .tagsList {
+    display: inline;
+    margin-left: 8px;
+  }
+
+  .tag {
+    text-decoration: underline;
+    margin: 0 3px;
+    color: #0e0d0d;
+    background: white;
+    padding: 2px 7px;
+    border-radius: 10px;
+  }
+
+  .tagsModal {
+    position: fixed;
+    top: 200px;
+    background: #0b0800;
+    padding: 30px;
+    width: 50%;
+    border-radius: 10px;
+    left: 25%;
+    box-shadow: 0 0 2px #938a8a;
+    cursor: auto;
+
+    .tagModalHead {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 15px;
+
+      span {
+        font-size: 22px;
+      }
+
+      .closeIcon {
+        font-size: 25px;
+        cursor: pointer;
+      }
+    }
+  }
+}
+
 .filterBlock {
   margin: 10px 0 20px 0;
   display: flex;
@@ -222,12 +277,8 @@
     display: flex;
 
     .sortButton {
-      background: base.$cardBGColor;
-      padding: 13px;
-      border-radius: 5px;
       margin-left: 10px;
-      cursor: pointer;
-      font-size: 20px;
+      @include filterButtonBase
     }
   }
 }
