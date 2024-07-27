@@ -198,8 +198,24 @@
   @include filterButtonBase;
   margin-bottom: 20px;
   font-size: 17px;
+  position: relative;
+  padding: 0;
+
+  &:hover {
+    background: #424040;
+  }
+
+  .tagSelect {
+    width: 100%;
+    height: 100%;
+    padding: 13px;
+  }
+
 
   .tagsList {
+    position: absolute;
+    bottom: 12px;
+    left: 50px;
     display: inline;
     margin-left: 8px;
   }
@@ -211,6 +227,11 @@
     background: white;
     padding: 2px 7px;
     border-radius: 10px;
+    cursor: pointer;
+
+    &:hover {
+      background: #d5cdcd;
+    }
   }
 
   .tagsModal {
