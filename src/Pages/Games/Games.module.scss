@@ -38,6 +38,16 @@
   font-size: 18px;
 }
 
+@mixin tag {
+  text-decoration: underline;
+  color: #0e0d0d;
+  background: white;
+  padding: 2px 7px;
+  border-radius: 10px;
+  cursor: pointer;
+  display: inline-block;
+}
+
 .gamePageContainer {
   display: grid;
   grid-template-columns: 1fr 5fr;
@@ -216,18 +226,13 @@
     position: absolute;
     bottom: 12px;
     left: 50px;
-    display: inline;
     margin-left: 8px;
   }
 
   .tag {
-    text-decoration: underline;
+    @include tag;
     margin: 0 3px;
-    color: #0e0d0d;
-    background: white;
-    padding: 2px 7px;
-    border-radius: 10px;
-    cursor: pointer;
+
 
     &:hover {
       background: #d5cdcd;
@@ -252,11 +257,23 @@
 
       span {
         font-size: 22px;
+        margin-left: 5px;
       }
 
       .closeIcon {
         font-size: 25px;
         cursor: pointer;
+      }
+    }
+
+    .tagModalList {
+      div {
+        @include tag;
+        margin: 5px 5px;
+
+        &:hover {
+          background: #d5cdcd;
+        }
       }
     }
   }

@@ -3,6 +3,7 @@ import {defaultResponse} from "../../Common/commonTypes";
 export const FETCH_GAME_LIST = 'FETCH_GAME_LIST'
 export const SEARCH_GAME_LIST = 'SEARCH_GAME_LIST'
 export const FETCH_GENRE_DETAILS = 'FETCH_GENRE_DETAILS'
+export const FETCH_TAGS = 'FETCH_TAGS'
 
 export interface gamesSearchParamsType {
     page?: number
@@ -159,4 +160,16 @@ export interface genresDetailType {
     image_background: string
     name: string
     slug: string
+}
+
+export interface tagsType extends defaultResponse{
+    results: tagType[]
+}
+export interface tagType {
+    id: number
+    name: string
+    slug: string
+    games_count: number
+    image_background: string
+    language: string
 }

@@ -1,11 +1,11 @@
-import React, {useState} from 'react';
+import React from 'react';
 import s from "../Games.module.scss";
 import {Select} from "../../../Common/Components/Select/Select";
 import {BiSortAlt2} from "react-icons/bi";
 import {orderOptions, platformsOptions, releasedOptions} from "../selectData";
 import {useSearchParams} from "react-router-dom";
-import {IoCloseOutline} from "react-icons/io5";
 import {IoIosCloseCircle} from "react-icons/io";
+import {Tags} from "./Tags";
 
 interface props {
     platforms: string | undefined
@@ -22,7 +22,6 @@ export const Filters: React.FC<props> = (props) => {
 
     const {setDates, setIsReversed, isReversed, setOrder, order, dates, platforms, search} = props
     const [searchParams, setSearchParams] = useSearchParams()
-    const [isTagOpen, setIsTagOpen] = useState(false)
 
     const cleanSearch = () => {
         searchParams.delete('search')
@@ -69,25 +68,7 @@ export const Filters: React.FC<props> = (props) => {
                         : null
                 }
             </div>
-            <div className={s.tagsBlock}>
-                <div className={s.tagSelect} onClick={() => setIsTagOpen(true)}>
-                    Tags:
-                </div>
-                <div className={s.tagsList}>
-                    <span className={s.tag}>tag</span>
-                    <span className={s.tag}>tag</span>
-                    <span className={s.tag}>tag</span>
-                </div>
-                <div className={s.tagsModal} hidden={!isTagOpen}>
-                    <div className={s.tagModalHead}>
-                        <span>Select tags</span>
-                        <IoCloseOutline className={s.closeIcon} onClick={() => setIsTagOpen(false)}/>
-                    </div>
-                    <span className={s.tag}>tag</span>
-                    <span className={s.tag}>tag</span>
-                    <span className={s.tag}>tag</span>
-                </div>
-            </div>
+            <Tags/>
         </div>
     );
 };

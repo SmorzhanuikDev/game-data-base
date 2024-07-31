@@ -1,6 +1,6 @@
 import {instance} from "./index";
 import {content} from "../Pages/CommonPage/commonPageTypes";
-import {genresDetailType} from "../Pages/Games/gamesTypes";
+import {genresDetailType, tagsType} from "../Pages/Games/gamesTypes";
 
 export const commonAPI = {
     getContent: async (endpoint: string, page: number): Promise<content> => {
@@ -14,6 +14,12 @@ export const commonAPI = {
     },
     getGenreDetails: async (id: string): Promise<genresDetailType> => {
         const response = await instance.get<genresDetailType>(`genres/${id}`)
+        return response.data
+    },
+    getTags: async (): Promise<tagsType> => {
+        const response = await instance.get<tagsType>(`tags`, {params: {
+            page_size: 40
+            }})
         return response.data
     },
 }
