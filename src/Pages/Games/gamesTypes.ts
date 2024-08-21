@@ -15,7 +15,7 @@ export interface gamesSearchParamsType {
     developers?: string
     publishers?: string
     genres?: string
-    tags?: string
+    tags?: string | null
     creators?: string
     dates?: string
     metacritic?: string

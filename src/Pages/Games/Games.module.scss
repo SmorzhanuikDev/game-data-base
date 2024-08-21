@@ -239,6 +239,8 @@
     }
   }
 
+
+
   .tagsModal {
     position: fixed;
     top: 200px;
@@ -268,12 +270,13 @@
 
     .tagModalList {
       div {
-        @include tag;
-        margin: 5px 5px;
+        margin: 5px;
+      }
 
-        &:hover {
-          background: #d5cdcd;
-        }
+      .selectedTag {
+        @include tag;
+        background: #373937;
+        color: #d3c8c8;
       }
     }
   }

@@ -5,6 +5,8 @@ import {useSearchParams} from "react-router-dom";
 import {fetchTagsAction} from "../gamesSaga";
 import {useDispatch} from "react-redux";
 import {useAppSelector} from "../../../hooks";
+import {useSearch} from "../Games";
+import {tagType} from "../gamesTypes";
 
 export const Tags = () => {
 
@@ -12,10 +14,27 @@ export const Tags = () => {
     const [isTagOpen, setIsTagOpen] = useState(false)
     const dispatch = useDispatch();
     const tags = useAppSelector(state => state.games.tags)
+    const [selectedTags, setSelectedTags] = useState<tagType[]>([])
+    const prevTags = useSearch().get('tags')
 
-    const setTag = () => {
-        searchParams.set('tag', 'test')
+    const setTags = () => {
+        const tagsId = selectedTags.map(tag => tag.id)
+        searchParams.set('tag', tagsId.join())
         setSearchParams(searchParams)
+    }
+
+    const deleteTag = (tagId: number) => {
+        setSelectedTags(selectedTags.filter(
+            tag => tag.id !== tagId
+        ))
+    }
+
+    const checkIsSelected = (tagId: number) => {
+        return selectedTags.find(tag => tag.id === tagId) || false
+    }
+
+    const selectTags = (tag: tagType) => {
+        setSelectedTags([...selectedTags, tag])
     }
 
     useEffect(() => {
@@ -28,9 +47,9 @@ export const Tags = () => {
                 Tags:
             </div>
             <div className={s.tagsList}>
-                <span onClick={setTag} className={s.tag}>test</span>
-                <span className={s.tag}>tag</span>
-                <span className={s.tag}>tag</span>
+                {selectedTags?.map(tag =>
+                    <span onClick={() => deleteTag(tag.id)} className={s.tag}>{tag.name}</span>
+                )}
             </div>
             <div className={s.tagsModal} hidden={!isTagOpen}>
                 <div className={s.tagModalHead}>
@@ -38,7 +57,8 @@ export const Tags = () => {
                     <IoCloseOutline className={s.closeIcon} onClick={() => setIsTagOpen(false)}/>
                 </div>
                 <div className={s.tagModalList}>
-                    {tags.results?.map(tag => <div className={s.tag}>{tag.name}</div>)}
+                    {tags.results?.map(tag => <div className={checkIsSelected(tag.id) ? s.selectedTag : s.tag}
+                                                   onClick={() => selectTags(tag)}>{tag.name}</div>)}
                 </div>
             </div>
         </div>

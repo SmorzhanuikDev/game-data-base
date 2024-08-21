@@ -25,6 +25,7 @@ export const Games = () => {
     const [page, setPage] = useState<number>(1)
     const search = useSearch().get('search')
     const platforms = useSearch().get('platform')
+    const tags = useSearch().get('tags')
     const [isReversed, setIsReversed] = useState(false)
     const [order, setOrder] = useState<string | undefined>()
     const [dates, setDates] = useState<string | undefined>()
@@ -34,8 +35,8 @@ export const Games = () => {
         setIsGameLoading(true)
         dispatch(setGamesList({} as gamesListType))
         const ordering = isReversed ? '-' + order : order
-        dispatch(fetchGamesAction({page, page_size: 10, ordering, platforms, dates, search, genres: genreId}))
-    }, [dates, dispatch, isReversed, order, page, platforms, search, genreId]);
+        dispatch(fetchGamesAction({page, page_size: 10, ordering, platforms, dates, search, genres: genreId, tags}))
+    }, [dates, dispatch, isReversed, order, page, platforms, search, genreId, tags]);
 
     useEffect(() => {
         if (gamesList.results)
