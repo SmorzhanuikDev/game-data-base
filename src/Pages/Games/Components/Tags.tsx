@@ -34,7 +34,11 @@ export const Tags = () => {
     }
 
     const selectTags = (tag: tagType) => {
-        setSelectedTags([...selectedTags, tag])
+        if (checkIsSelected(tag.id)) {
+            setSelectedTags(selectedTags.filter(selectedTag => selectedTag.id !== tag.id))
+        } else {
+            setSelectedTags([...selectedTags, tag])
+        }
     }
 
     useEffect(() => {
