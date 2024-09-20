@@ -269,6 +269,8 @@
     }
 
     .tagModalList {
+      margin-bottom: 20px;
+
       div {
         margin: 5px;
       }
@@ -277,6 +279,24 @@
         @include tag;
         background: #373937;
         color: #d3c8c8;
+      }
+    }
+
+    .searchTagsBtn {
+      color: #0b0800;
+      background: #e1dcdc;
+      width: 160px;
+      text-align: center;
+      margin: 0 auto;
+      padding: 6px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: 0.3s;
+
+
+      &:hover {
+        opacity: 0.8;
+        transition: 0.1s;
       }
     }
   }

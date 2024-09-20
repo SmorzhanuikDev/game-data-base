@@ -7,6 +7,8 @@ import {useDispatch} from "react-redux";
 import {useAppSelector} from "../../../hooks";
 import {useSearch} from "../Games";
 import {tagType} from "../gamesTypes";
+import {TagsModal} from "./TagsModal";
+import {TagsInput} from "./TagsInput";
 
 export const Tags = () => {
 
@@ -17,9 +19,12 @@ export const Tags = () => {
     const [selectedTags, setSelectedTags] = useState<tagType[]>([])
     const prevTags = useSearch().get('tags')
 
+    const [currentTags, setCurrentTags] = useState<tagType[]>()
+
+
     const setTags = () => {
-        const tagsId = selectedTags.map(tag => tag.id)
-        searchParams.set('tag', tagsId.join())
+        const tagsIds = selectedTags.map(tag => tag.id)
+        searchParams.set('tag', tagsIds.join())
         setSearchParams(searchParams)
     }
 
@@ -30,7 +35,7 @@ export const Tags = () => {
     }
 
     const checkIsSelected = (tagId: number) => {
-        return selectedTags.find(tag => tag.id === tagId) || false
+        return !!selectedTags.find(tag => tag.id === tagId) || false
     }
 
     const selectTags = (tag: tagType) => {
@@ -47,24 +52,9 @@ export const Tags = () => {
 
     return (
         <div className={s.tagsBlock}>
-            <div className={s.tagSelect} onClick={() => setIsTagOpen(true)}>
-                Tags:
-            </div>
-            <div className={s.tagsList}>
-                {selectedTags?.map(tag =>
-                    <span onClick={() => deleteTag(tag.id)} className={s.tag}>{tag.name}</span>
-                )}
-            </div>
-            <div className={s.tagsModal} hidden={!isTagOpen}>
-                <div className={s.tagModalHead}>
-                    <span>Popular tags</span>
-                    <IoCloseOutline className={s.closeIcon} onClick={() => setIsTagOpen(false)}/>
-                </div>
-                <div className={s.tagModalList}>
-                    {tags.results?.map(tag => <div className={checkIsSelected(tag.id) ? s.selectedTag : s.tag}
-                                                   onClick={() => selectTags(tag)}>{tag.name}</div>)}
-                </div>
-            </div>
+            <TagsInput currentTags={currentTags} setIsModalOpen={setIsTagOpen} deleteTag={deleteTag}/>
+            <TagsModal tags={tags.results} selectTags={selectTags} checkIsSelected={checkIsSelected}
+                       isModalOpen={isTagOpen} setIsModalOpen={setIsTagOpen}/>
         </div>
     );
 };
