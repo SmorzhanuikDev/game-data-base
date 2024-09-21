@@ -35,7 +35,10 @@ export const Games = () => {
         setIsGameLoading(true)
         dispatch(setGamesList({} as gamesListType))
         const ordering = isReversed ? '-' + order : order
-        dispatch(fetchGamesAction({page, page_size: 10, ordering, platforms, dates, search, genres: genreId, tags}))
+        const parsedTags = tags?.split(' ').join()
+        dispatch(fetchGamesAction({
+            page, page_size: 10, ordering, platforms, dates, search, genres: genreId, tags: parsedTags
+        }))
     }, [dates, dispatch, isReversed, order, page, platforms, search, genreId, tags]);
 
     useEffect(() => {

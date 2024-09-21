@@ -13,7 +13,7 @@ import {TagsInput} from "./TagsInput";
 export const Tags = () => {
 
     const [searchParams, setSearchParams] = useSearchParams()
-    const [isTagOpen, setIsTagOpen] = useState(false)
+    const [isModalOpen, setIsModalOpen] = useState(false)
     const dispatch = useDispatch();
     const tags = useAppSelector(state => state.games.tags)
     const [selectedTags, setSelectedTags] = useState<tagType[]>([])
@@ -21,11 +21,12 @@ export const Tags = () => {
 
     const [currentTags, setCurrentTags] = useState<tagType[]>()
 
-
-    const setTags = () => {
+    const submitModal = () => {
+        setIsModalOpen(false);
         const tagsIds = selectedTags.map(tag => tag.id)
-        searchParams.set('tag', tagsIds.join())
-        setSearchParams(searchParams)
+        searchParams.set('tags', tagsIds.join(' '))
+        setSearchParams( searchParams)
+
     }
 
     const deleteTag = (tagId: number) => {
@@ -52,9 +53,9 @@ export const Tags = () => {
 
     return (
         <div className={s.tagsBlock}>
-            <TagsInput currentTags={currentTags} setIsModalOpen={setIsTagOpen} deleteTag={deleteTag}/>
+            <TagsInput currentTags={currentTags} setIsModalOpen={setIsModalOpen} deleteTag={deleteTag}/>
             <TagsModal tags={tags.results} selectTags={selectTags} checkIsSelected={checkIsSelected}
-                       isModalOpen={isTagOpen} setIsModalOpen={setIsTagOpen}/>
+                       isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} submitModal={submitModal}/>
         </div>
     );
 };

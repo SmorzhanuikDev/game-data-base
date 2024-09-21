@@ -9,13 +9,12 @@ interface props {
     setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>
     checkIsSelected: (id: number) => boolean
     selectTags: (tag: tagType) => void
+    submitModal: () => void
 }
 
-export const TagsModal: React.FC<props> = ({tags, isModalOpen, setIsModalOpen, selectTags, checkIsSelected}) => {
-
-    const submitModal = () => {
-        setIsModalOpen(false);
-    }
+export const TagsModal: React.FC<props> = (
+    {tags, isModalOpen, setIsModalOpen, selectTags, checkIsSelected, submitModal}
+) => {
 
     return (
         <div className={s.tagsModal} hidden={!isModalOpen}>
