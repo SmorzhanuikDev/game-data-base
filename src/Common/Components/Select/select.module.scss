@@ -30,6 +30,17 @@
     }
   }
 
+  .shadow {
+    position: absolute;
+    background: #0b0800;
+    top: -1000px;
+    left: -500px;
+    opacity: 0.3;
+    width: 2000px;
+    height: 2000px;
+    z-index: 2;
+  }
+
   .selectList {
     position: absolute;
     top: 0;
