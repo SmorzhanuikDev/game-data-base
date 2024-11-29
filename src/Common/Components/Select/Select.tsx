@@ -61,6 +61,12 @@ export const Select: React.FC<props> = ({options, onChangeSelect, title, value})
 
     }, [findOption, options, value]);
 
+    useEffect(() => {
+        if (isSelectOpen) {
+            document.body.style.overflow = 'hidden'
+        } else document.body.style.overflow = 'auto'
+    }, [isSelectOpen]);
+
     return (
         <div className={s.selectContainer}>
             <div className={s.select} style={currentTitle ? whiteBG : blackBG} onClick={openSelect}>

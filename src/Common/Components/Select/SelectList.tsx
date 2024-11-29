@@ -1,4 +1,4 @@
-import React, {useEffect, useRef} from 'react';
+import React, {useCallback, useEffect, useRef} from 'react';
 import s from "./select.module.scss";
 import {IoMdClose} from "react-icons/io";
 import {SelectOption} from "./SelectOption";
@@ -16,6 +16,7 @@ interface props {
 export const SelectList: React.FC<props> = ({currentValue, setIsSelectOpen, closeSelect, options, title}) => {
     const [searchParams, setSearchParams] = useSearchParams()
     const selectRef = useRef<HTMLDivElement>(null)
+    // document.body.style.overflowY = 'hidden'
 
     const clearSelect = () => {
         closeSelect(undefined, undefined)
@@ -23,17 +24,17 @@ export const SelectList: React.FC<props> = ({currentValue, setIsSelectOpen, clos
         setSearchParams(searchParams)
     }
 
-    const handleClick = (event: any) => {
+    const handleClick = useCallback( (event: any) => {
         if (selectRef.current && !selectRef.current.contains(event.target))
-        console.log('click')
-    }
+        closeSelect(undefined, undefined)
+    }, [selectRef, closeSelect])
 
     useEffect(() => {
         document.addEventListener('mousedown', handleClick)
         return () => {
             document.removeEventListener('mousedown', handleClick)
         }
-    }, []);
+    }, [handleClick]);
 
     return (
         <>

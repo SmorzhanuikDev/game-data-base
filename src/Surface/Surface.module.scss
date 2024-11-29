@@ -1,5 +1,19 @@
 @use 'src/base';
 
+html,
+body {
+  scrollbar-gutter: stable;
+}
+
+body::-webkit-scrollbar {
+  width: 6px;
+}
+
+body::-webkit-scrollbar-thumb {
+  background: #717070;
+  border-radius: 5px;
+}
+
 .content {
   width: 94%;
   padding: 20px 3%;
