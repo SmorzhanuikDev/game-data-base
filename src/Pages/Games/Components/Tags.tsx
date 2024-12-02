@@ -48,12 +48,20 @@ export const Tags = () => {
     }
 
     useEffect(() => {
+        if (isModalOpen) {
+            document.body.style.overflow = 'hidden'
+        } else document.body.style.overflow = 'auto'
+    }, [isModalOpen]);
+
+
+    useEffect(() => {
         dispatch(fetchTagsAction())
     }, [dispatch])
 
     return (
         <div className={s.tagsBlock}>
             <TagsInput currentTags={currentTags} setIsModalOpen={setIsModalOpen} deleteTag={deleteTag}/>
+            <div hidden={!isModalOpen} className={s.modalShadow}/>
             <TagsModal tags={tags.results} selectTags={selectTags} checkIsSelected={checkIsSelected}
                        isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} submitModal={submitModal}/>
         </div>

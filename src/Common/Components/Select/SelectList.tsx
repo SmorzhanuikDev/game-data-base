@@ -16,7 +16,6 @@ interface props {
 export const SelectList: React.FC<props> = ({currentValue, setIsSelectOpen, closeSelect, options, title}) => {
     const [searchParams, setSearchParams] = useSearchParams()
     const selectRef = useRef<HTMLDivElement>(null)
-    // document.body.style.overflowY = 'hidden'
 
     const clearSelect = () => {
         closeSelect(undefined, undefined)
@@ -38,7 +37,7 @@ export const SelectList: React.FC<props> = ({currentValue, setIsSelectOpen, clos
 
     return (
         <>
-            <div className={s.shadow}><div>test</div></div>
+            <div className={s.shadow}/>
             <div className={s.selectList} ref={selectRef}>
                 <div className={s.selectListTitleContainer}>
                     <div>
