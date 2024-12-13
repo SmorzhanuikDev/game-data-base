@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {GameItem} from "./Components/GameItem";
+import {GameItem} from "./Components/GameItem/GameItem";
 import {fetchGamesAction, fetchGenresDetailsAction} from "./gamesSaga";
 import {useAppDispatch, useAppSelector} from "../../hooks";
 import s from './Games.module.scss'

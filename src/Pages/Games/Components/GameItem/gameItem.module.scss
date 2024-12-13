@@ -1,0 +1,72 @@
+@use 'src/base';
+
+.gameItem {
+  height: 180px;
+  width: 100%;
+  display: flex;
+  margin: 10px 0;
+  background: base.$cardBGColor;
+  border-radius: 20px;
+
+  img {
+    height: 180px;
+    width: 320px;
+    cursor: pointer;
+    border-bottom-left-radius: 20px;
+    border-top-left-radius: 20px;
+  }
+
+  .descBlock {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 10px;
+
+    .gameName {
+      font-weight: bold;
+      font-size: 25px;
+    }
+
+    .gameGenre {
+      display: flex;
+
+      a {
+        margin-right: 10px;
+        font-size: 18px;
+
+        &:hover {
+          color: #d9d1d1;
+        }
+      }
+    }
+
+    .gamePlatforms {
+      display: flex;
+
+      span {
+        margin-right: 10px;
+        font-size: 16px;
+        color: #9b9696;
+        text-decoration: underline;
+        cursor: pointer;
+        transition: .3s;
+
+        &:hover {
+          color: base.$text-color;
+          transition: .3s;
+        }
+      }
+    }
+
+    .gameRelease {
+      margin: 0;
+      font-size: 16px;
+      color: #d9d1d1;
+    }
+
+    .gameRating {
+      margin: 0;
+      font-size: 16px;
+    }
+  }
+}
