@@ -205,7 +205,7 @@
 }
 
 .tagsBlock {
-  @include filterButtonBase;
+  @include base.filterButtonBase;
   margin-bottom: 20px;
   font-size: 17px;
   position: relative;
@@ -313,47 +313,7 @@
   }
 }
 
-.filterBlock {
-  margin: 10px 0 20px 0;
-  display: flex;
-  gap: 30px;
 
-  .deleteSearch {
-    margin: 6px;
-    padding: 7px 20px;
-    font-size: 16px;
-    border-radius: 6px;
-    background: #fbfbfb;
-    display: flex;
-    gap: 10px;
-    color: #0b0800;
-    cursor: pointer;
-    transition: 0.3s;
-
-    .searchContent {
-      text-decoration: underline;
-    }
-
-    .icon {
-      font-size: 20px;
-
-    }
-
-    &:hover {
-      color: #ff3535;
-      transition: 0.3s;
-    }
-  }
-
-  .orderingSection {
-    display: flex;
-
-    .sortButton {
-      margin-left: 10px;
-      @include filterButtonBase
-    }
-  }
-}
 
 .gameItem {
   height: 180px;

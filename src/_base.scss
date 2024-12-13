@@ -2,3 +2,11 @@ $text-color: #faf8f8;
 $cardBGColor: #292927;
 $headerHeight: 12vh;
 $BGColor: #0b0800;
+
+@mixin filterButtonBase {
+  background: $cardBGColor;
+  padding: 13px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 20px;
+}

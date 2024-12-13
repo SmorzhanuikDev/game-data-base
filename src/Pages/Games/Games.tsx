@@ -4,13 +4,14 @@ import {fetchGamesAction, fetchGenresDetailsAction} from "./gamesSaga";
 import {useAppDispatch, useAppSelector} from "../../hooks";
 import s from './Games.module.scss'
 import {GenresBlock} from "./Components/GenresBlock";
-import {Filters} from "./Components/Filters";
+import {Filters} from "./Components/Filters/Filters";
 import {gamesListType, genresDetailType} from "./gamesTypes";
 import {setGamesList, setGenreDetails} from "./gamesSlice";
 import {Pagination} from "./Components/Pagination";
 import {Loader} from "../../Common/Components/Loader";
 import {useLocation, useParams} from "react-router-dom";
 import {GenreDetails} from "./Components/GenreDetails";
+import {Tags} from "./Components/Tags";
 
 export function useSearch() {
     const {search} = useLocation();
@@ -74,8 +75,10 @@ export const Games = () => {
                 <div hidden={!genreId}>
                     <GenreDetails/>
                 </div>
-                <Filters setOrder={setOrder} order={order} platforms={platforms || undefined} dates={dates} isReversed={isReversed}
+                <Filters setOrder={setOrder} order={order} platforms={platforms || undefined} dates={dates}
+                         isReversed={isReversed}
                          setIsReversed={setIsReversed} setDates={setDates} search={search}/>
+                <Tags/>
                 {isGameLoading
                     ? <Loader/>
                     : gamesList.results && gamesList.results.map(game => <GameItem key={game.id} game={game}/>)
