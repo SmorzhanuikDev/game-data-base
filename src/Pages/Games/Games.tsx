@@ -3,15 +3,15 @@ import {GameItem} from "./Components/GameItem/GameItem";
 import {fetchGamesAction, fetchGenresDetailsAction} from "./gamesSaga";
 import {useAppDispatch, useAppSelector} from "../../hooks";
 import s from './Games.module.scss'
-import {GenresBlock} from "./Components/GenresBlock";
+import {GenresBlock} from "./Components/GenresBlock/GenresBlock";
 import {Filters} from "./Components/Filters/Filters";
 import {gamesListType, genresDetailType} from "./gamesTypes";
 import {setGamesList, setGenreDetails} from "./gamesSlice";
-import {Pagination} from "./Components/Pagination";
+import {Pagination} from "./Components/Pagination/Pagination";
 import {Loader} from "../../Common/Components/Loader";
 import {useLocation, useParams} from "react-router-dom";
-import {GenreDetails} from "./Components/GenreDetails";
-import {Tags} from "./Components/Tags";
+import {GenreDetails} from "./Components/GenreDetails/GenreDetails";
+import {Tags} from "./Components/Tags/Tags";
 
 export function useSearch() {
     const {search} = useLocation();
@@ -68,9 +68,7 @@ export const Games = () => {
 
     return (
         <div className={s.gamePageContainer}>
-            <div className={s.sideBar}>
-                <GenresBlock activeGenre={genreId}/>
-            </div>
+            <GenresBlock activeGenre={genreId}/>
             <div>
                 <div hidden={!genreId}>
                     <GenreDetails/>

@@ -1,12 +1,11 @@
 import React, {useEffect, useState} from 'react';
-import s from "../Games.module.scss";
-import {IoCloseOutline} from "react-icons/io5";
+import s from "./tags.module.scss";
 import {useSearchParams} from "react-router-dom";
-import {fetchTagsAction} from "../gamesSaga";
+import {fetchTagsAction} from "../../gamesSaga";
 import {useDispatch} from "react-redux";
-import {useAppSelector} from "../../../hooks";
-import {useSearch} from "../Games";
-import {tagType} from "../gamesTypes";
+import {useAppSelector} from "../../../../hooks";
+import {useSearch} from "../../Games";
+import {tagType} from "../../gamesTypes";
 import {TagsModal} from "./TagsModal";
 import {TagsInput} from "./TagsInput";
 

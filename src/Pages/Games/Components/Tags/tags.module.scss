@@ -1,0 +1,122 @@
+@use 'src/base';
+
+@mixin tag {
+  text-decoration: underline;
+  color: #0e0d0d;
+  background: white;
+  padding: 2px 7px;
+  border-radius: 10px;
+  cursor: pointer;
+  display: inline-block;
+}
+
+
+.tagsBlock {
+  @include base.filterButtonBase;
+  margin-bottom: 20px;
+  font-size: 17px;
+  position: relative;
+  padding: 0;
+
+  &:hover {
+    background: #424040;
+  }
+
+  .modalShadow {
+    position: absolute;
+    background-color: #0b0800;
+    opacity: 0.7;
+    width: 200vw;
+    height: 200vh;
+    cursor: default;
+    top: -50vh;
+    left: -50vw;
+  }
+
+  .tagSelect {
+    width: 100%;
+    height: 100%;
+    padding: 13px;
+  }
+
+
+  .tagsList {
+    position: absolute;
+    bottom: 12px;
+    left: 50px;
+    margin-left: 8px;
+  }
+
+  .tag {
+    @include tag;
+    margin: 0 3px;
+
+
+    &:hover {
+      background: #d5cdcd;
+    }
+  }
+
+
+
+  .tagsModal {
+    position: fixed;
+    top: 200px;
+    background: #0b0800;
+    padding: 30px;
+    width: 50%;
+    border-radius: 10px;
+    left: 25%;
+    box-shadow: 0 0 2px #938a8a;
+    cursor: auto;
+
+    .tagModalHead {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 15px;
+
+      span {
+        font-size: 22px;
+        margin-left: 5px;
+      }
+
+      .closeIcon {
+        font-size: 25px;
+        cursor: pointer;
+      }
+    }
+
+    .tagModalList {
+      margin-bottom: 20px;
+
+      div {
+        margin: 5px;
+      }
+
+      .selectedTag {
+        @include tag;
+        background: #373937;
+        color: #d3c8c8;
+      }
+    }
+
+    .searchTagsBtn {
+      color: #0b0800;
+      background: #e1dcdc;
+      width: 160px;
+      text-align: center;
+      margin: 0 auto;
+      padding: 6px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: 0.3s;
+
+
+      &:hover {
+        opacity: 0.8;
+        transition: 0.1s;
+      }
+    }
+  }
+}
+

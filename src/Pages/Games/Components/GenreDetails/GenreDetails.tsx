@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
-import {useAppSelector} from "../../../hooks";
-import {Title} from "../../../Common/Components/Title";
-import s from '../Games.module.scss'
+import {useAppSelector} from "../../../../hooks";
+import {Title} from "../../../../Common/Components/Title";
+import s from './genreDetails.module.scss'
 
 export const GenreDetails = () => {
 

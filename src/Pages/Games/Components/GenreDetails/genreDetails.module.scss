@@ -1,0 +1,19 @@
+.description {
+  font-size: 17px;
+  margin-bottom: 20px;
+
+  .showMoreButton {
+    border-radius: 4px;
+    background: white;
+    color: #0b0800;
+    padding: 0 3px;
+    cursor: pointer;
+    transition: .3s;
+    margin-left: 5px;
+
+    &:hover {
+      opacity: 0.8;
+      transition: .3s;
+    }
+  }
+}

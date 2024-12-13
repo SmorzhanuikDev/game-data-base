@@ -1,9 +1,9 @@
 import React, {useEffect} from 'react';
-import s from '../Games.module.scss'
+import s from './genresBlock.module.scss'
 import {useNavigate} from "react-router-dom";
-import {setIsAppLoading} from "../../../appSlice";
-import {useAppDispatch, useAppSelector} from "../../../hooks";
-import {fetchContentAction} from "../../CommonPage/commonPageSaga";
+import {setIsAppLoading} from "../../../../appSlice";
+import {useAppDispatch, useAppSelector} from "../../../../hooks";
+import {fetchContentAction} from "../../../CommonPage/commonPageSaga";
 
 interface props {
     activeGenre: string | undefined

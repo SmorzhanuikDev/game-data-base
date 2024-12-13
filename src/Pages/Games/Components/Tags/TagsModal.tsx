@@ -1,7 +1,7 @@
 import React, {useCallback, useEffect, useRef} from 'react';
-import s from "../Games.module.scss";
+import s from "../../Games.module.scss";
 import {IoCloseOutline} from "react-icons/io5";
-import {tagType} from "../gamesTypes";
+import {tagType} from "../../gamesTypes";
 
 interface props {
     tags: tagType[]

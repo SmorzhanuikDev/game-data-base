@@ -1,0 +1,63 @@
+@mixin navBarIcon {
+  border-radius: 7px;
+  width: 35px;
+  height: 35px;
+  object-fit: cover;
+  object-position: 50% 50%;
+}
+
+@mixin navBarButton {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  margin-right: 20px;
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: underline;
+    color: #cdc1c1;
+  }
+}
+
+.genresBlock {
+
+      .blockName {
+        font-size: 22px;
+        padding-bottom: 20px;
+        margin: 0;
+      }
+
+      .activeGenre {
+        @include navBarButton;
+        background: #d6d4d4;
+        color: #0b0800;
+        cursor: pointer;
+
+        &:hover {
+          color: #0b0800;
+          text-decoration: none;
+        }
+
+        img {
+          @include navBarIcon
+        }
+
+        span {
+          font-size: 16px;
+        }
+      }
+
+      .genresItem {
+        @include navBarButton;
+
+        img {
+          @include navBarIcon
+        }
+
+        span {
+          font-size: 16px;
+        }
+      }
+    }
