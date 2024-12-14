@@ -1,5 +1,5 @@
 import React from 'react';
-import s from "../../Games.module.scss";
+import s from "./tags.module.scss";
 import {tagType} from "../../gamesTypes";
 
 interface props {

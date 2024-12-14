@@ -108,18 +108,20 @@ export interface gameType {
             image_background: string
         }
     }>
-    tags: Array<{
-        id: number
-        name: string
-        slug: string
-        language: string
-        games_count: number
-        image_background: string
-    }>
+    tags: Array<tagType>
     short_screenshots: Array<{
         id: number
         image: string
     }>
+}
+
+export interface tagType {
+    id: number
+    name: string
+    slug: string
+    language: string
+    games_count: number
+    image_background: string
 }
 
 export interface usersRatings {

@@ -1,0 +1,47 @@
+.baseInfo {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+
+  .gameReleasedHead {
+    text-transform: uppercase;
+    border-radius: 5px;
+    background: #fff;
+    color: #0b0800;
+    padding: 3px 6px;
+    margin: 0;
+    font-size: 14px;
+  }
+
+  .averagePlaytime {
+    text-transform: uppercase;
+    font-size: 14px;
+    border-radius: 5px;
+    background: #fff;
+    color: #0b0800;
+    padding: 3px 6px;
+  }
+}
+
+.gameName {
+  font-size: 35px;
+  padding: 15px 0;
+}
+
+.ratingsPercentsBlock {
+  display: flex;
+  margin-top: 20px;
+
+  .ratingPercentsItem {
+    height: 20px;
+    border-radius: 3px;
+  }
+}
+
+.ratingDetails {
+  display: flex;
+  justify-content: space-between;
+  text-transform: capitalize;
+  font-size: 17px;
+  margin-top: 15px;
+}

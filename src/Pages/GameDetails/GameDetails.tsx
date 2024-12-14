@@ -12,9 +12,9 @@ import s from './GameDetails.module.scss'
 import {useBgImage} from "../../Surface/Content";
 import "react-image-gallery/styles/scss/image-gallery.scss";
 import {setIsAppLoading} from "../../appSlice";
-import {GameDetailsBaseInfo} from "./Componets/GameDetailsBaseInfo";
+import {BaseInfo} from "./Componets/BaseInfo/BaseInfo";
 import {GameDetailsCommonInfo} from "./Componets/GameDetailsCommonInfo";
-import {GameDetailsBottomInfo} from "./Componets/GameDetailsBottomInfo";
+import {AdditionalInfo} from "./Componets/AdditionalInfo/AdditionalInfo";
 import {GameDetailsDesc} from "./Componets/GameDetailsDesc";
 import {SideBarSliderAndRequirements} from "./Componets/SideBarSliderAndRequirements";
 import {GameStores} from "./Componets/GameStores";
@@ -57,11 +57,12 @@ const GameDetails = () => {
     return (
         <div className={s.pageWrapper} style={{backgroundImage: `url:(${currentGame.background_image})`}}>
             <div>
-                <GameDetailsBaseInfo currentGame={currentGame}/>
+                <BaseInfo currentGame={currentGame}/>
                 <GameDetailsDesc desc={currentGame.description_raw}/>
                 <GameDetailsCommonInfo currentGame={currentGame}/>
-                <GameDetailsBottomInfo currentGame={currentGame} currentGameAdditions={currentGameAdditions}
-                                       currentGameSeries={currentGameSeries}/>
+                <AdditionalInfo additionsData={currentGame.tags} title={'Tags'}/>
+                <AdditionalInfo additionsData={currentGameAdditions.results} title={'DLC\'s and editions'}/>
+                <AdditionalInfo additionsData={currentGameSeries.results} title={'Other game in the series'}/>
             </div>
             <div>
                 <SideBarSliderAndRequirements platforms={currentGame.platforms} screenshots={gameScreenshots.results}/>

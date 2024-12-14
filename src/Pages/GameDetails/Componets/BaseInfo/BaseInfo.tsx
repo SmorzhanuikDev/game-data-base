@@ -1,14 +1,14 @@
 import React from 'react';
-import s from "../GameDetails.module.scss";
-import {formatDate} from "../../../Common/commonFunctions";
-import {gameDetailsType} from "../gameDetailsTypes";
-import {usersRatings} from "../../Games/gamesTypes";
+import s from "./baseInfo.module.scss";
+import {formatDate} from "../../../../Common/commonFunctions";
+import {gameDetailsType} from "../../gameDetailsTypes";
+import {usersRatings} from "../../../Games/gamesTypes";
 
 interface props {
     currentGame: gameDetailsType
 }
 
-export const GameDetailsBaseInfo:React.FC<props> = ({currentGame}) => {
+export const BaseInfo:React.FC<props> = ({currentGame}) => {
 
     const ratingsColors = ['#6cb76c', '#465d94', '#f8ec5d', '#e84545']
 
