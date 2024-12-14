@@ -1,13 +1,13 @@
 import React from 'react';
 import s from "../../GameDetails.module.scss";
-import {gameType, tagType} from "../../../Games/gamesTypes";
 
 interface props {
-    additionsData: tagType[] | gameType[]
+    additionsData: any[]
     title: string
+    route: string
 }
 
-export const AdditionalInfo: React.FC<props> = ({additionsData, title}) => {
+export const AdditionalInfo: React.FC<props> = ({additionsData, title, route}) => {
     return (
         <div>
             {
@@ -15,7 +15,7 @@ export const AdditionalInfo: React.FC<props> = ({additionsData, title}) => {
                     ? <div className={s.fullWidthElement}>
                         <h5>{title}</h5>
                         {additionsData?.map(additions =>
-                            <a className={s.link} href={'/game/' + additions.id} key={additions.id}>
+                            <a className={s.link} href={route + additions.id} key={additions.id}>
                                 {additions.name}
                             </a>)}
                     </div>

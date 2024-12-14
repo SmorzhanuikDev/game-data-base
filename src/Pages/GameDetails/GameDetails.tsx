@@ -13,7 +13,7 @@ import {useBgImage} from "../../Surface/Content";
 import "react-image-gallery/styles/scss/image-gallery.scss";
 import {setIsAppLoading} from "../../appSlice";
 import {BaseInfo} from "./Componets/BaseInfo/BaseInfo";
-import {GameDetailsCommonInfo} from "./Componets/GameDetailsCommonInfo";
+import {CommonInfo} from "./Componets/CommonInfo/CommonInfo";
 import {AdditionalInfo} from "./Componets/AdditionalInfo/AdditionalInfo";
 import {GameDetailsDesc} from "./Componets/GameDetailsDesc";
 import {SideBarSliderAndRequirements} from "./Componets/SideBarSliderAndRequirements";
@@ -29,9 +29,9 @@ const GameDetails = () => {
     const currentGameSeries = useAppSelector(state => state.gameDetails.gameSeries)
     const gameScreenshots = useAppSelector(state => state.gameDetails.gameScreenshots)
 
-    useEffect( () => {
+    useEffect(() => {
         if (gameId) {
-             dispatch(setIsAppLoading(true))
+            dispatch(setIsAppLoading(true))
             dispatch(fetchGameDetailsAction(Number(gameId)))
             dispatch(fetchGameAdditionsAction(Number(gameId)))
             dispatch(fetchGameSeriesAction(Number(gameId)))
@@ -59,10 +59,12 @@ const GameDetails = () => {
             <div>
                 <BaseInfo currentGame={currentGame}/>
                 <GameDetailsDesc desc={currentGame.description_raw}/>
-                <GameDetailsCommonInfo currentGame={currentGame}/>
-                <AdditionalInfo additionsData={currentGame.tags} title={'Tags'}/>
-                <AdditionalInfo additionsData={currentGameAdditions.results} title={'DLC\'s and editions'}/>
-                <AdditionalInfo additionsData={currentGameSeries.results} title={'Other game in the series'}/>
+                <CommonInfo currentGame={currentGame}/>
+                <AdditionalInfo additionsData={currentGame.tags} title={'Tags'} route={'/games?tags='}/>
+                <AdditionalInfo additionsData={currentGameAdditions.results} title={'DLC\'s and editions'}
+                                route={'/game/'}/>
+                <AdditionalInfo additionsData={currentGameSeries.results} title={'Other game in the series'}
+                                route={'/game/'}/>
             </div>
             <div>
                 <SideBarSliderAndRequirements platforms={currentGame.platforms} screenshots={gameScreenshots.results}/>
@@ -71,5 +73,4 @@ const GameDetails = () => {
         </div>
     );
 };
-
 export default GameDetails;
