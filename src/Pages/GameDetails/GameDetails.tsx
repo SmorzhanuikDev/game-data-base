@@ -15,9 +15,10 @@ import {setIsAppLoading} from "../../appSlice";
 import {BaseInfo} from "./Componets/BaseInfo/BaseInfo";
 import {CommonInfo} from "./Componets/CommonInfo/CommonInfo";
 import {AdditionalInfo} from "./Componets/AdditionalInfo/AdditionalInfo";
-import {GameDetailsDesc} from "./Componets/GameDetailsDesc";
-import {SideBarSliderAndRequirements} from "./Componets/SideBarSliderAndRequirements";
+import {Description} from "./Componets/Description";
+import {Requirements} from "./Componets/Requirements/Requirements";
 import {GameStores} from "./Componets/GameStores";
+import {Slider} from "./Componets/Slider";
 
 const GameDetails = () => {
 
@@ -58,7 +59,7 @@ const GameDetails = () => {
         <div className={s.pageWrapper} style={{backgroundImage: `url:(${currentGame.background_image})`}}>
             <div>
                 <BaseInfo currentGame={currentGame}/>
-                <GameDetailsDesc desc={currentGame.description_raw}/>
+                <Description desc={currentGame.description_raw}/>
                 <CommonInfo currentGame={currentGame}/>
                 <AdditionalInfo additionsData={currentGame.tags} title={'Tags'} route={'/games?tags='}/>
                 <AdditionalInfo additionsData={currentGameAdditions.results} title={'DLC\'s and editions'}
@@ -67,7 +68,8 @@ const GameDetails = () => {
                                 route={'/game/'}/>
             </div>
             <div>
-                <SideBarSliderAndRequirements platforms={currentGame.platforms} screenshots={gameScreenshots.results}/>
+                <Slider screenshots={gameScreenshots.results} />
+                <Requirements platforms={currentGame.platforms}/>
                 <GameStores/>
             </div>
         </div>

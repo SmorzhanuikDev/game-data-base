@@ -18,7 +18,7 @@ export const GameItem: React.FC<props> = ({game}) => {
 
     return (
         <div className={s.gameItem}>
-            <a href={`game/${game.id}`}>
+            <a href={`/game/${game.id}`}>
                 <img src={game.background_image || noImage} alt='gameImage'/>
             </a>
             <div className={s.descBlock}>
