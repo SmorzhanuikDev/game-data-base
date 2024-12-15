@@ -1,5 +1,5 @@
 import React from 'react';
-import s from "../GameDetails.module.scss";
+import s from "./description.module.scss";
 
 interface props {
     desc: string

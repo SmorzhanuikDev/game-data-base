@@ -1,0 +1,36 @@
+.storeList {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 15px;
+  text-align: center;
+
+  h4 {
+    grid-column: 1/4;
+    text-align: left;
+    margin-bottom: 0;
+  }
+
+  a {
+    padding: 10px 0 15px 0;
+    border: 1px solid white;
+    border-radius: 10px;
+    color: white;
+    font-size: 16px;
+    transition: .3s;
+
+    .storeIcon {
+      position: relative;
+      top: 5px;
+      font-size: 24px;
+      padding-left: 8px;
+    }
+
+    &:hover {
+      transition: .3s;
+      color: #0b0800;
+      background: white;
+    }
+  }
+
+}

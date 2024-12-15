@@ -15,9 +15,9 @@ import {setIsAppLoading} from "../../appSlice";
 import {BaseInfo} from "./Componets/BaseInfo/BaseInfo";
 import {CommonInfo} from "./Componets/CommonInfo/CommonInfo";
 import {AdditionalInfo} from "./Componets/AdditionalInfo/AdditionalInfo";
-import {Description} from "./Componets/Description";
+import {Description} from "./Componets/Description/Description";
 import {Requirements} from "./Componets/Requirements/Requirements";
-import {GameStores} from "./Componets/GameStores";
+import {GameStores} from "./Componets/GameStores/GameStores";
 import {Slider} from "./Componets/Slider";
 
 const GameDetails = () => {

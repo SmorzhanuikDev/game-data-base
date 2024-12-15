@@ -1,0 +1,18 @@
+.link {
+  font-size: 16px;
+  text-decoration: underline;
+  margin-right: 5px;
+  transition: 0.2s;
+
+  &:hover {
+    color: #8a8080;
+    transition: 0.2s;
+
+  }
+
+  &:not(&:last-child) {
+    &:after {
+      content: ',';
+    }
+  }
+}

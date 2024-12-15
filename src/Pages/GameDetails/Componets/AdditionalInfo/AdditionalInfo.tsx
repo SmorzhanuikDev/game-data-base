@@ -1,5 +1,5 @@
 import React from 'react';
-import s from "../../GameDetails.module.scss";
+import s from "./AdditionalInfo.module.scss";
 
 interface props {
     additionsData: any[]
@@ -12,7 +12,7 @@ export const AdditionalInfo: React.FC<props> = ({additionsData, title, route}) =
         <div>
             {
                 additionsData?.length
-                    ? <div className={s.fullWidthElement}>
+                    ? <div>
                         <h5>{title}</h5>
                         {additionsData?.map(additions =>
                             <a className={s.link} href={route + additions.id} key={additions.id}>
