@@ -10,7 +10,7 @@ import {
 export const gameAPI = {
     getGames: async (params: gamesSearchParamsType): Promise<gamesListType> => {
         const response = await instance.get<gamesListType>('games', {
-            params: {...params, search_exact: true, search_precise: true}
+            params: {...params}
         })
         return response.data
     },

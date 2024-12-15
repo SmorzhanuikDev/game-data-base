@@ -4,6 +4,7 @@ export const FETCH_GAME_LIST = 'FETCH_GAME_LIST'
 export const SEARCH_GAME_LIST = 'SEARCH_GAME_LIST'
 export const FETCH_GENRE_DETAILS = 'FETCH_GENRE_DETAILS'
 export const FETCH_TAGS = 'FETCH_TAGS'
+export const FETCH_CURRENT_TAG = 'FETCH_CURRENT_TAG'
 
 export interface gamesSearchParamsType {
     page?: number
@@ -122,6 +123,15 @@ export interface tagType {
     language: string
     games_count: number
     image_background: string
+}
+
+export interface tagBySearchType {
+    id: number
+    name: string
+    slug: string
+    games_count: number
+    image_background: string
+    description: string
 }
 
 export interface usersRatings {

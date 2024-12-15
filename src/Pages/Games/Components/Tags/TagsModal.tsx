@@ -1,27 +1,28 @@
-import React, {useCallback, useEffect, useRef} from 'react';
+import React, {useCallback, useEffect, useRef, useState} from 'react';
 import s from "./tags.module.scss";
-import {IoCloseOutline} from "react-icons/io5";
-import {tagType} from "../../gamesTypes";
+import {tagBySearchType, tagType} from "../../gamesTypes";
 
 interface props {
     tags: tagType[]
     isModalOpen: boolean
     setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>
-    checkIsSelected: (id: number) => boolean
-    selectTags: (tag: tagType) => void
-    submitModal: () => void
+    submitModal: (ids: number[]) => void
+    currentTags: tagBySearchType[]
 }
 
-export const TagsModal: React.FC<props> = (
-    {tags, isModalOpen, setIsModalOpen, selectTags, checkIsSelected, submitModal}
-) => {
-
+export const TagsModal: React.FC<props> = (props) => {
+    
+    const {tags, isModalOpen, setIsModalOpen, submitModal, currentTags} = props
     const tagRef = useRef<HTMLDivElement>(null);
+    const [activeTags, setActiveTags] = useState<number[]>([])
+
+
 
     const handleClick = useCallback( (event: any) => {
-        if (tagRef.current && !tagRef.current.contains(event.target))
+        if (tagRef.current && !tagRef.current.contains(event.target)) {
             setIsModalOpen(false)
-    }, [tagRef, setIsModalOpen])
+        }
+    }, [setIsModalOpen])
 
     useEffect(() => {
         document.addEventListener('mousedown', handleClick)
@@ -30,18 +31,31 @@ export const TagsModal: React.FC<props> = (
         }
     }, [handleClick]);
 
+    const selectTag = (tagId:number) => {
+        if (activeTags.find(tag => tag === tagId)) {
+            setActiveTags(activeTags.filter(tag => tag !== tagId))
+        } else {
+            setActiveTags(prevState => prevState.concat(tagId))
+        }
+    }
+    const checkIsSelected = (tagId: number) => {
+        return !!activeTags.find(tag => tag === tagId)
+    }
+
+    useEffect(() => {
+        setActiveTags(currentTags.map(tag => tag.id))
+    }, [currentTags]);
 
     return (
         <div ref={tagRef} className={s.tagsModal} hidden={!isModalOpen}>
             <div className={s.tagModalHead}>
                 <span>Popular tags</span>
-                <IoCloseOutline className={s.closeIcon} onClick={() => setIsModalOpen(false)}/>
             </div>
             <div className={s.tagModalList}>
-                {tags?.map(tag => <div className={checkIsSelected(tag.id) ? s.selectedTag : s.tag}
-                                       onClick={() => selectTags(tag)}>{tag.name}</div>)}
+                {tags?.map(tag => <div key={tag.id} className={checkIsSelected(tag.id) ? s.selectedTag : s.tag}
+                                       onClick={() => selectTag(tag.id)}>{tag.name}</div>)}
             </div>
-            <div className={s.searchTagsBtn} onClick={submitModal}>
+            <div className={s.searchTagsBtn} onClick={() => submitModal(activeTags)}>
                Search
             </div>
         </div>

@@ -1,14 +1,36 @@
 import React from 'react';
 import s from "./tags.module.scss";
-import {tagType} from "../../gamesTypes";
+import {tagBySearchType} from "../../gamesTypes";
+import {useSearchParams} from "react-router-dom";
+import {fetchTagsAction} from "../../gamesSaga";
+import {deleteTag} from "../../gamesSlice";
+import {useDispatch} from "react-redux";
+import {useAppDispatch} from "../../../../hooks";
 
 interface props {
     setIsModalOpen: (isOpen: boolean) => void;
-    currentTags: tagType[] | undefined
-    deleteTag: (id: number) => void;
+    currentTags: tagBySearchType[] | undefined
 }
 
-export const TagsInput: React.FC<props> = ({setIsModalOpen, currentTags, deleteTag}) => {
+export const TagsInput: React.FC<props> = ({setIsModalOpen, currentTags}) => {
+
+    const [searchParams, setSearchParams] = useSearchParams()
+    const dispatch = useAppDispatch();
+
+    const removeTag = (tagId: number) => {
+        const tags = searchParams.get('tags')
+        if (tags) {
+            const otherTags = tags.split(' ').filter(tag => tag !== String(tagId))
+            if (otherTags.length) {
+                searchParams.set('tags', otherTags.join(' '))
+                setSearchParams(searchParams)
+                dispatch(deleteTag(tagId))
+            } else {
+                searchParams.delete('tags')
+                setSearchParams(searchParams)
+            }
+        }
+    }
 
     return (
         <>
@@ -17,7 +39,7 @@ export const TagsInput: React.FC<props> = ({setIsModalOpen, currentTags, deleteT
             </div>
             <div className={s.tagsList}>
                 {currentTags?.map(tag =>
-                    <span onClick={() => deleteTag(tag.id)} className={s.tag}>{tag.name}</span>
+                    <span onClick={() => removeTag(tag.id)} className={s.tag}>{tag.name}</span>
                 )}
             </div>
         </>

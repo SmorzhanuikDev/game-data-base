@@ -1,14 +1,15 @@
 import {call, put, takeEvery} from 'redux-saga/effects'
 import {gameAPI} from "../../API/gameAPI";
 import {
+    FETCH_CURRENT_TAG,
     FETCH_GAME_LIST,
     FETCH_GENRE_DETAILS, FETCH_TAGS,
     gamesListType,
     gamesSearchParamsType,
     genresDetailType,
-    SEARCH_GAME_LIST, tagsType
+    SEARCH_GAME_LIST, tagBySearchType, tagsType
 } from "./gamesTypes";
-import {setGamesList, setGenreDetails, setSearchGameList, setTags} from "./gamesSlice";
+import {setCurrentTags, setGamesList, setGenreDetails, setSearchGameList, setTags} from "./gamesSlice";
 import {createAction, PayloadAction} from "@reduxjs/toolkit";
 import {commonAPI} from "../../API/commonAPI";
 
@@ -39,10 +40,20 @@ function* fetchGenreDetails({payload}: PayloadAction<string>) {
         yield put({type: 'ERROR', message: e.message})
     }
 }
+
 function* fetchTags() {
     try {
         const tags: tagsType = yield call(commonAPI.getTags)
         yield put(setTags(tags))
+    } catch (e: any) {
+        yield put({type: 'ERROR', message: e.message})
+    }
+}
+
+function* fetchCurrentTag({payload}: PayloadAction<number>) {
+    try {
+        const tags: tagBySearchType = yield call(commonAPI.getCurrentTag, payload)
+        yield put(setCurrentTags(tags))
     } catch (e: any) {
         yield put({type: 'ERROR', message: e.message})
     }
@@ -58,12 +69,14 @@ export const fetchGenresDetailsAction = createAction(FETCH_GENRE_DETAILS,
     (id: string) => ({payload: id})
 )
 export const fetchTagsAction = createAction(FETCH_TAGS)
+export const fetchCurrentTagAction = createAction(FETCH_CURRENT_TAG, (id: number) => ({payload: id}))
 
 function* gamesSaga() {
     yield takeEvery(FETCH_GAME_LIST, fetchGames)
     yield takeEvery(SEARCH_GAME_LIST, searchGames)
     yield takeEvery(FETCH_GENRE_DETAILS, fetchGenreDetails)
     yield takeEvery(FETCH_TAGS, fetchTags)
+    yield takeEvery(FETCH_CURRENT_TAG, fetchCurrentTag)
 }
 
 export default gamesSaga
