@@ -2,9 +2,7 @@ import React from 'react';
 import s from "./tags.module.scss";
 import {tagBySearchType} from "../../gamesTypes";
 import {useSearchParams} from "react-router-dom";
-import {fetchTagsAction} from "../../gamesSaga";
 import {deleteTag} from "../../gamesSlice";
-import {useDispatch} from "react-redux";
 import {useAppDispatch} from "../../../../hooks";
 
 interface props {

@@ -1,6 +1,9 @@
 import React, {useCallback, useEffect, useRef, useState} from 'react';
 import s from "./tags.module.scss";
 import {tagBySearchType, tagType} from "../../gamesTypes";
+import {FaCheckSquare} from "react-icons/fa";
+import {FaSquare} from "react-icons/fa";
+
 
 interface props {
     tags: tagType[]
@@ -11,14 +14,13 @@ interface props {
 }
 
 export const TagsModal: React.FC<props> = (props) => {
-    
+
     const {tags, isModalOpen, setIsModalOpen, submitModal, currentTags} = props
     const tagRef = useRef<HTMLDivElement>(null);
     const [activeTags, setActiveTags] = useState<number[]>([])
+    const [isExact, setIsExact] = useState<boolean>(false)
 
-
-
-    const handleClick = useCallback( (event: any) => {
+    const handleClick = useCallback((event: any) => {
         if (tagRef.current && !tagRef.current.contains(event.target)) {
             setIsModalOpen(false)
         }
@@ -31,13 +33,14 @@ export const TagsModal: React.FC<props> = (props) => {
         }
     }, [handleClick]);
 
-    const selectTag = (tagId:number) => {
+    const selectTag = (tagId: number) => {
         if (activeTags.find(tag => tag === tagId)) {
             setActiveTags(activeTags.filter(tag => tag !== tagId))
         } else {
             setActiveTags(prevState => prevState.concat(tagId))
         }
     }
+
     const checkIsSelected = (tagId: number) => {
         return !!activeTags.find(tag => tag === tagId)
     }
@@ -55,8 +58,22 @@ export const TagsModal: React.FC<props> = (props) => {
                 {tags?.map(tag => <div key={tag.id} className={checkIsSelected(tag.id) ? s.selectedTag : s.tag}
                                        onClick={() => selectTag(tag.id)}>{tag.name}</div>)}
             </div>
-            <div className={s.searchTagsBtn} onClick={() => submitModal(activeTags)}>
-               Search
+            <div className={s.submitPanel}>
+                <div className={s.tagModalBtn} onClick={() => {setIsExact(!isExact)}}>
+                    {isExact
+                        ? <FaCheckSquare className={s.checkBox}/>
+                        : <FaSquare className={s.checkBox}/>
+                    }
+                    <span>
+                        Exact search
+                    </span>
+                </div>
+                <div className={s.tagModalBtn} onClick={() => submitModal(activeTags)}>
+                    Clear all tags
+                </div>
+                <div className={s.tagModalBtn} onClick={() => submitModal(activeTags)}>
+                    Search
+                </div>
             </div>
         </div>
     );
