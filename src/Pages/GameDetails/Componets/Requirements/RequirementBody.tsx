@@ -7,18 +7,7 @@ interface props {
     platformItem: platform
 }
 
-const formatRequirements = (requirements: string) => {
-    if (requirements) {
-        console.log(requirements)
-        return requirements.split('\n')
-    }
-    return undefined
-}
-
 export const RequirementBody:FC<props> = ({platformItem}) => {
-
-    console.log(platformItem.requirements)
-
 
     return (
         <AccordionItemPanel>

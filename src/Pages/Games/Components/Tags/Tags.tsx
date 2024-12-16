@@ -14,10 +14,8 @@ export const Tags = () => {
     const [searchParams, setSearchParams] = useSearchParams()
     const [isModalOpen, setIsModalOpen] = useState(false)
     const dispatch = useDispatch();
-    const tags = useAppSelector(state => state.games.tags)
     const currentTags = useAppSelector(state => state.games.currentTags)
     const prevTags = useSearch().get('tags')
-
 
     const submitModal = (tagIds: number[]) => {
         setIsModalOpen(false);
@@ -26,7 +24,6 @@ export const Tags = () => {
     }
 
     useEffect(() => {
-        dispatch(fetchTagsAction())
         if (isModalOpen) {
             document.body.style.overflow = 'hidden'
         } else document.body.style.overflow = 'auto'
@@ -50,7 +47,7 @@ export const Tags = () => {
         <div className={s.tagsBlock}>
             <TagsInput currentTags={currentTags} setIsModalOpen={setIsModalOpen}/>
             <div hidden={!isModalOpen} className={s.modalShadow}/>
-            <TagsModal tags={tags.results} currentTags={currentTags}
+            <TagsModal currentTags={currentTags}
                        isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} submitModal={submitModal}/>
         </div>
     );

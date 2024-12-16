@@ -41,9 +41,9 @@ function* fetchGenreDetails({payload}: PayloadAction<string>) {
     }
 }
 
-function* fetchTags() {
+function* fetchTags({payload}: PayloadAction<number>) {
     try {
-        const tags: tagsType = yield call(commonAPI.getTags)
+        const tags: tagsType = yield call(commonAPI.getTags, payload)
         yield put(setTags(tags))
     } catch (e: any) {
         yield put({type: 'ERROR', message: e.message})
@@ -68,7 +68,7 @@ export const searchGamesAction = createAction(SEARCH_GAME_LIST,
 export const fetchGenresDetailsAction = createAction(FETCH_GENRE_DETAILS,
     (id: string) => ({payload: id})
 )
-export const fetchTagsAction = createAction(FETCH_TAGS)
+export const fetchTagsAction = createAction(FETCH_TAGS, (page:number) => ({payload: page}))
 export const fetchCurrentTagAction = createAction(FETCH_CURRENT_TAG, (id: number) => ({payload: id}))
 
 function* gamesSaga() {

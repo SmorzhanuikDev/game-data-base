@@ -16,8 +16,9 @@ export const commonAPI = {
         const response = await instance.get<genresDetailType>(`genres/${id}`)
         return response.data
     },
-    getTags: async (): Promise<tagsType> => {
+    getTags: async (page: number): Promise<tagsType> => {
         const response = await instance.get<tagsType>(`tags`, {params: {
+            page,
             page_size: 40
             }})
         return response.data

@@ -34,7 +34,11 @@ const gamesSlice = createSlice({
             state.genreDetails = action.payload
         },
         setTags: (state, action: PayloadAction<tagsType>) => {
-            state.tags = action.payload
+            if (state.tags.results) {
+                state.tags.results = state.tags.results.concat(action.payload.results)
+            } else {
+                state.tags = action.payload
+            }
         },
         setCurrentTags: (state, action: PayloadAction<tagBySearchType>) => {
             if (!state.currentTags.find(tag => tag.id === action.payload.id)) {
