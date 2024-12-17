@@ -5,32 +5,36 @@ import {useAppDispatch, useAppSelector} from "../../../../hooks";
 import useOnScreen from "../../../../Common/Hook/useOnScreen";
 import {fetchTagsAction} from "../../gamesSaga";
 
-interface props  {
+interface props {
     activeTags: number[]
     setActiveTags: React.Dispatch<React.SetStateAction<number[]>>
 }
 
-export const TagList:FC<props> = ({activeTags, setActiveTags}) => {
+export const TagList: FC<props> = ({activeTags, setActiveTags}) => {
 
     const tags = useAppSelector(state => state.games.tags.results)
     const ref = useRef<HTMLDivElement>(null)
     const isVisible = useOnScreen(ref)
     const dispatch = useAppDispatch()
     const [tagPage, setTagPage] = useState(1)
+    console.log(tagPage)
 
     useEffect(() => {
         if (isVisible) {
             dispatch(fetchTagsAction(tagPage))
+            if (tagPage === 1) {
+                dispatch(fetchTagsAction(tagPage + 1))
+                setTagPage(tagPage + 1)
+            }
             setTagPage(prevState => prevState + 1)
         }
     }, [dispatch, isVisible]);
 
 
-
     const selectTag = (tagId: number) => {
         if (activeTags.find(tag => tag === tagId)) {
             setActiveTags(activeTags.filter(tag => tag !== tagId))
-        } else {
+        } else if (activeTags.length < 5) {
             setActiveTags(prevState => prevState.concat(tagId))
         }
     }
