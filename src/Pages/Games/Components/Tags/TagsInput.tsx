@@ -37,7 +37,7 @@ export const TagsInput: React.FC<props> = ({setIsModalOpen, currentTags}) => {
             </div>
             <div className={s.tagsList}>
                 {currentTags?.map(tag =>
-                    <span onClick={() => removeTag(tag.id)} className={s.tag}>{tag.name}</span>
+                    <span key={tag.id} onClick={() => removeTag(tag.id)} className={s.tag}>{tag.name}</span>
                 )}
             </div>
         </>
