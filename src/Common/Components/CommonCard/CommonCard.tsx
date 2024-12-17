@@ -9,10 +9,12 @@ interface props {
     gameCount: number
     games: gameSmallData[]
     bgImage: string | null
+    pathname: string
+    id: number
 }
 
 
-export const CommonCard: React.FC<props> = ({title, gameCount, games, bgImage}) => {
+export const CommonCard: React.FC<props> = ({title, gameCount, games, bgImage, pathname, id}) => {
 
     const style = {
         background: `linear-gradient(180deg, rgba(39, 37, 37, 0.7411415249693627) 0%,
@@ -22,10 +24,19 @@ export const CommonCard: React.FC<props> = ({title, gameCount, games, bgImage}) 
 
     }
 
+    const formatPath = (pathname:string, id: number) => {
+        console.log(pathname)
+        switch (pathname) {
+            case '/genres':
+                return `/genre/${id}`
+            default: return 'error'
+        }
+    }
+
     return (
         <div className={s.card} style={style}>
             <div className={s.cardInner}>
-                <a href="/public">
+                <a href={formatPath(pathname, id)}>
                     {title}
                 </a>
                 <div className={s.popularGameContainer}>

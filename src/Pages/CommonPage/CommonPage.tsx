@@ -46,7 +46,7 @@ export const CommonPage = () => {
                 {
                     content.results ?
                         content.results?.map(item => <CommonCard
-                            key={item.name} games={item.games}
+                            key={item.name} games={item.games} pathname={pathname} id={item.id}
                             gameCount={item.games_count} title={item.name} bgImage={item.image_background}
                         />)
                         : <div className={s.searchLoader}><Loader/></div>

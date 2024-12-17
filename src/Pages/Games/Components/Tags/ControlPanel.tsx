@@ -1,6 +1,5 @@
-import React, {FC, useState} from 'react';
+import React, {FC} from 'react';
 import s from "./tags.module.scss";
-import {FaCheckSquare, FaSquare} from "react-icons/fa";
 
 interface props {
     submitModal: (ids: number[]) => void
@@ -15,7 +14,7 @@ export const ControlPanel: FC<props> = ({submitModal, activeTags}) => {
                 Clear all tags
             </div>
             <div className={s.tagModalBtn} onClick={() => submitModal(activeTags)}>
-            Search
+                Search
             </div>
         </div>
     );

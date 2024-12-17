@@ -17,7 +17,6 @@ export const TagList: FC<props> = ({activeTags, setActiveTags}) => {
     const isVisible = useOnScreen(ref)
     const dispatch = useAppDispatch()
     const [tagPage, setTagPage] = useState(1)
-    console.log(tagPage)
 
     useEffect(() => {
         if (isVisible) {
