@@ -13,18 +13,23 @@ export const ControlPanel: FC<props> = ({submitModal, activeTags}) => {
 
     return (
         <div className={s.controlPanel}>
-            <div className={s.tagModalBtn} onClick={() => setIsExact(!isExact)}>
-                {isExact
-                    ? <FaCheckSquare className={s.checkBox}/>
-                    : <FaSquare className={s.checkBox}/>
-                }
-                <span>Exact search</span>
+            <div>
+                <div className={s.tagModalBtn} onClick={() => setIsExact(!isExact)}>
+                    {isExact
+                        ? <FaCheckSquare className={s.checkBox}/>
+                        : <FaSquare className={s.checkBox}/>
+                    }
+                    <span>Exact search</span>
+                </div>
+                <div id='move' className={s.hint}>
+                    Display only those games that contain all tags
+                </div>
             </div>
             <div className={s.tagModalBtn} onClick={() => submitModal(activeTags)}>
                 Clear all tags
             </div>
             <div className={s.tagModalBtn} onClick={() => submitModal(activeTags)}>
-                Search
+            Search
             </div>
         </div>
     );
