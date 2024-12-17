@@ -9,23 +9,9 @@ interface props {
 
 export const ControlPanel: FC<props> = ({submitModal, activeTags}) => {
 
-    const [isExact, setIsExact] = useState<boolean>(false)
-
     return (
         <div className={s.controlPanel}>
-            <div>
-                <div className={s.tagModalBtn} onClick={() => setIsExact(!isExact)}>
-                    {isExact
-                        ? <FaCheckSquare className={s.checkBox}/>
-                        : <FaSquare className={s.checkBox}/>
-                    }
-                    <span>Exact search</span>
-                </div>
-                <div id='move' className={s.hint}>
-                    Display only those games that contain all tags
-                </div>
-            </div>
-            <div className={s.tagModalBtn} onClick={() => submitModal(activeTags)}>
+            <div className={s.tagModalBtn} onClick={() => submitModal([])}>
                 Clear all tags
             </div>
             <div className={s.tagModalBtn} onClick={() => submitModal(activeTags)}>

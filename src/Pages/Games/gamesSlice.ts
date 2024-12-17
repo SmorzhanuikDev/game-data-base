@@ -8,6 +8,7 @@ type initialStateType = {
     genreDetails: genresDetailType
     tags: tagsType
     currentTags: tagBySearchType[]
+    isExactSearch: boolean
 }
 const initialState: initialStateType = {
     gamesList: {} as gamesListType,
@@ -15,7 +16,8 @@ const initialState: initialStateType = {
     isEmptySearch: false,
     genreDetails: {} as genresDetailType,
     tags: {} as tagsType,
-    currentTags: [] as tagBySearchType[]
+    currentTags: [] as tagBySearchType[],
+    isExactSearch: true
 }
 const gamesSlice = createSlice({
     name: 'games',
