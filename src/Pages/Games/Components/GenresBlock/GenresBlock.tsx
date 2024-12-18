@@ -13,7 +13,6 @@ export const GenresBlock: React.FC<props> = React.memo(({activeGenre}) => {
 
     const dispatch = useAppDispatch()
     const genres = useAppSelector(state => state.commonPageData.content)
-    const navigate = useNavigate()
     const [searchParams, setSearchParams] = useSearchParams()
 
     useEffect(() => {
@@ -27,11 +26,17 @@ export const GenresBlock: React.FC<props> = React.memo(({activeGenre}) => {
     }, [dispatch, genres.results]);
 
     const handleClick = (id: number) => {
+        window.scrollTo({top: 0, left: 0, behavior: 'smooth'})
         if (id === Number(activeGenre)) {
-            navigate('/games')
+            searchParams.delete('genre')
         } else {
-            searchParams.append('genre', String(id))
-            setSearchParams(searchParams)
+            if (searchParams.has('genre')) {
+                searchParams.set('genre', String(id))
+                setSearchParams(searchParams)
+            } else {
+                searchParams.append('genre', String(id))
+                setSearchParams(searchParams)
+            }
         }
     }
 

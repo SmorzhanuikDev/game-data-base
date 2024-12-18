@@ -10,10 +10,15 @@ interface props {
 
 export const GameItem: React.FC<props> = ({game}) => {
 
-    const [, setParams] = useSearchParams()
+    const [searchParams, setSearchParams] = useSearchParams()
 
     const handleClick = (platform: string) => {
-        setParams({platform})
+        if (searchParams.has('platform')) {
+            searchParams.set('platform', platform)
+            setSearchParams(searchParams)
+        }
+        searchParams.append('platform', platform)
+        setSearchParams(searchParams)
     }
 
     return (

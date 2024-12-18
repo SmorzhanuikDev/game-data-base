@@ -29,6 +29,9 @@ export const Filters: React.FC<props> = (props) => {
 
     const setPlatforms = (value: string | undefined) => {
         if (value) {
+            if (searchParams.has('platform')) {
+                searchParams.set('platform', value)
+            }
             searchParams.append('platform', value)
             setSearchParams(searchParams)
         } else {

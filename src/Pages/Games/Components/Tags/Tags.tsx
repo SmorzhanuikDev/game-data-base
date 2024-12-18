@@ -1,10 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import s from "./tags.module.scss";
 import {useSearchParams} from "react-router-dom";
-import {fetchCurrentTagAction, fetchTagsAction} from "../../gamesSaga";
+import {fetchCurrentTagAction} from "../../gamesSaga";
 import {useDispatch} from "react-redux";
 import {useAppSelector} from "../../../../hooks";
-import {useSearch} from "../../Games";
 import {TagsModal} from "./TagsModal";
 import {TagsInput} from "./TagsInput";
 import {deleteAllTags} from "../../gamesSlice";
@@ -15,11 +14,16 @@ export const Tags = () => {
     const [isModalOpen, setIsModalOpen] = useState(false)
     const dispatch = useDispatch();
     const currentTags = useAppSelector(state => state.games.currentTags)
-    const prevTags = useSearch().get('tags')
+    const prevTags = searchParams.get('tags')
 
     const submitModal = (tagIds: number[]) => {
         setIsModalOpen(false);
-        searchParams.append('tags', tagIds?.join(' '));
+        if (searchParams.has('tags')) {
+            searchParams.set('tags', tagIds?.join(' '))
+        } else {
+            searchParams.append('tags', tagIds?.join(' '));
+
+        }
         setSearchParams(searchParams)
     }
 

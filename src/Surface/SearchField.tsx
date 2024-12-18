@@ -37,7 +37,12 @@ export const SearchField = () => {
 
     const goToSearch = () => {
         navigate('games')
-        searchParams.append('search', search)
+        if (searchParams.has('search')) {
+            searchParams.set('search', search)
+            setSearchParams(searchParams)
+        } else {
+            searchParams.append('search', search)
+        }
         setSearchParams(searchParams)
         setSearch('')
     }

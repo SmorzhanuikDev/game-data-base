@@ -9,29 +9,25 @@ import {gamesListType, genresDetailType} from "./gamesTypes";
 import {setGamesList, setGenreDetails} from "./gamesSlice";
 import {Pagination} from "./Components/Pagination/Pagination";
 import {Loader} from "../../Common/Components/Loader";
-import {useLocation, useParams, useSearchParams} from "react-router-dom";
+import {useSearchParams} from "react-router-dom";
 import {GenreDetails} from "./Components/GenreDetails/GenreDetails";
 import {Tags} from "./Components/Tags/Tags";
 import {DevBlock} from "./Components/DevBlock/DevBlock";
 
-export function useSearch() {
-    const {search} = useLocation();
-    return React.useMemo(() => new URLSearchParams(search), [search]);
-}
 
 export const Games = () => {
 
+    const [searchParams] = useSearchParams()
     const dispatch = useAppDispatch()
     const gamesList = useAppSelector(state => state.games.gamesList)
     const [isGameLoading, setIsGameLoading] = useState(false)
     const [page, setPage] = useState<number>(1)
-    const search = useSearch().get('search')
-    const platforms = useSearch().get('platform')
-    const tags = useSearch().get('tags')
+    const search = searchParams.get('search')
+    const platforms = searchParams.get('platform')
+    const tags = searchParams.get('tags')
     const [isReversed, setIsReversed] = useState(false)
     const [order, setOrder] = useState<string | undefined>()
     const [dates, setDates] = useState<string | undefined>()
-    const [searchParams, setSearchParams] = useSearchParams()
     const genreId = searchParams.get('genre')
     const devId = searchParams.get('dev') || undefined
 
@@ -57,15 +53,6 @@ export const Games = () => {
         if (gamesList.results)
             setIsGameLoading(false)
     }, [dispatch, gamesList.results, isGameLoading]);
-
-    useEffect(() => {
-        if (search) {
-            dispatch(fetchGamesAction({page: 1, page_size: 10, search}))
-            setIsReversed(false)
-            setOrder(undefined)
-            setDates(undefined)
-        }
-    }, [dispatch, search]);
 
     useEffect(() => {
         if (genreId) {
