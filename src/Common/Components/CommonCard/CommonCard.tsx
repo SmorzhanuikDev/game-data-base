@@ -25,10 +25,13 @@ export const CommonCard: React.FC<props> = ({title, gameCount, games, bgImage, p
     }
 
     const formatPath = (pathname:string, id: number) => {
-        console.log(pathname)
+
+
         switch (pathname) {
             case '/genres':
-                return `/genre/${id}`
+                return `/games?genre=${id}`
+            case '/developers':
+                return `/games?dev=${id}`
             default: return 'error'
         }
     }

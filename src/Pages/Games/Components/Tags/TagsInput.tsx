@@ -1,13 +1,13 @@
 import React from 'react';
 import s from "./tags.module.scss";
-import {tagBySearchType} from "../../gamesTypes";
+import {commonItemDataType} from "../../gamesTypes";
 import {useSearchParams} from "react-router-dom";
 import {deleteTag} from "../../gamesSlice";
 import {useAppDispatch} from "../../../../hooks";
 
 interface props {
     setIsModalOpen: (isOpen: boolean) => void;
-    currentTags: tagBySearchType[] | undefined
+    currentTags: commonItemDataType[] | undefined
 }
 
 export const TagsInput: React.FC<props> = ({setIsModalOpen, currentTags}) => {

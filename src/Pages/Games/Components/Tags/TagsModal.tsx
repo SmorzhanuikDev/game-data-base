@@ -1,6 +1,6 @@
 import React, {useCallback, useEffect, useRef, useState} from 'react';
 import s from "./tags.module.scss";
-import {tagBySearchType} from "../../gamesTypes";
+import {commonItemDataType} from "../../gamesTypes";
 import {TagList} from "./TagList";
 import {ControlPanel} from "./ControlPanel";
 
@@ -8,7 +8,7 @@ interface props {
     isModalOpen: boolean
     setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>
     submitModal: (ids: number[]) => void
-    currentTags: tagBySearchType[]
+    currentTags: commonItemDataType[]
 }
 
 export const TagsModal: React.FC<props> = (props) => {

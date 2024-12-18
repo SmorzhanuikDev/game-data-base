@@ -5,6 +5,7 @@ export const SEARCH_GAME_LIST = 'SEARCH_GAME_LIST'
 export const FETCH_GENRE_DETAILS = 'FETCH_GENRE_DETAILS'
 export const FETCH_TAGS = 'FETCH_TAGS'
 export const FETCH_CURRENT_TAG = 'FETCH_CURRENT_TAG'
+export const FETCH_DEVELOPER = 'FETCH_DEVELOPER'
 
 export interface gamesSearchParamsType {
     page?: number
@@ -125,7 +126,7 @@ export interface tagType {
     image_background: string
 }
 
-export interface tagBySearchType {
+export interface commonItemDataType {
     id: number
     name: string
     slug: string

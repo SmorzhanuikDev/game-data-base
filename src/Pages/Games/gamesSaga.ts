@@ -7,9 +7,9 @@ import {
     gamesListType,
     gamesSearchParamsType,
     genresDetailType,
-    SEARCH_GAME_LIST, tagBySearchType, tagsType
+    SEARCH_GAME_LIST, commonItemDataType, tagsType, FETCH_DEVELOPER
 } from "./gamesTypes";
-import {setCurrentTags, setGamesList, setGenreDetails, setSearchGameList, setTags} from "./gamesSlice";
+import {setCurrentTags, setDeveloper, setGamesList, setGenreDetails, setSearchGameList, setTags} from "./gamesSlice";
 import {createAction, PayloadAction} from "@reduxjs/toolkit";
 import {commonAPI} from "../../API/commonAPI";
 
@@ -52,8 +52,16 @@ function* fetchTags({payload}: PayloadAction<number>) {
 
 function* fetchCurrentTag({payload}: PayloadAction<number>) {
     try {
-        const tags: tagBySearchType = yield call(commonAPI.getCurrentTag, payload)
+        const tags: commonItemDataType = yield call(commonAPI.getCurrentTag, payload)
         yield put(setCurrentTags(tags))
+    } catch (e: any) {
+        yield put({type: 'ERROR', message: e.message})
+    }
+}
+function* fetchDeveloper({payload}: PayloadAction<number>) {
+    try {
+        const dev: commonItemDataType = yield call(commonAPI.getDevelopers, payload)
+        yield put(setDeveloper(dev))
     } catch (e: any) {
         yield put({type: 'ERROR', message: e.message})
     }
@@ -70,6 +78,7 @@ export const fetchGenresDetailsAction = createAction(FETCH_GENRE_DETAILS,
 )
 export const fetchTagsAction = createAction(FETCH_TAGS, (page:number) => ({payload: page}))
 export const fetchCurrentTagAction = createAction(FETCH_CURRENT_TAG, (id: number) => ({payload: id}))
+export const fetchDeveloperAction = createAction(FETCH_DEVELOPER, (id: number) => ({payload: id}))
 
 function* gamesSaga() {
     yield takeEvery(FETCH_GAME_LIST, fetchGames)
@@ -77,6 +86,7 @@ function* gamesSaga() {
     yield takeEvery(FETCH_GENRE_DETAILS, fetchGenreDetails)
     yield takeEvery(FETCH_TAGS, fetchTags)
     yield takeEvery(FETCH_CURRENT_TAG, fetchCurrentTag)
+    yield takeEvery(FETCH_DEVELOPER, fetchDeveloper)
 }
 
 export default gamesSaga

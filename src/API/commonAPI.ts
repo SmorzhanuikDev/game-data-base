@@ -1,6 +1,6 @@
 import {instance} from "./index";
 import {content} from "../Pages/CommonPage/commonPageTypes";
-import {genresDetailType, tagBySearchType, tagsType} from "../Pages/Games/gamesTypes";
+import {genresDetailType, commonItemDataType, tagsType} from "../Pages/Games/gamesTypes";
 
 export const commonAPI = {
     getContent: async (endpoint: string, page: number): Promise<content> => {
@@ -23,8 +23,13 @@ export const commonAPI = {
             }})
         return response.data
     },
-    getCurrentTag: async (id: number): Promise<tagBySearchType> => {
-        const response = await instance.get<tagBySearchType>(`tags/${id}`)
+    getCurrentTag: async (id: number): Promise<commonItemDataType> => {
+        const response = await instance.get<commonItemDataType>(`tags/${id}`)
         return response.data
-    }
+    },
+    getDevelopers: async (id: number): Promise<commonItemDataType> => {
+        const response = await instance.get<commonItemDataType>(`developers/${id}`)
+        return response.data
+    },
+
 }

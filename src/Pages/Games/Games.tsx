@@ -12,6 +12,7 @@ import {Loader} from "../../Common/Components/Loader";
 import {useLocation, useParams, useSearchParams} from "react-router-dom";
 import {GenreDetails} from "./Components/GenreDetails/GenreDetails";
 import {Tags} from "./Components/Tags/Tags";
+import {DevBlock} from "./Components/DevBlock/DevBlock";
 
 export function useSearch() {
     const {search} = useLocation();
@@ -32,6 +33,7 @@ export const Games = () => {
     const [dates, setDates] = useState<string | undefined>()
     const [searchParams, setSearchParams] = useSearchParams()
     const genreId = searchParams.get('genre')
+    const devId = searchParams.get('dev') || undefined
 
     useEffect(() => {
         setIsGameLoading(true)
@@ -39,9 +41,17 @@ export const Games = () => {
         const ordering = isReversed ? '-' + order : order
         const parsedTags = tags?.split(' ').join()
         dispatch(fetchGamesAction({
-            page, page_size: 10, ordering, platforms, dates, search, genres: genreId, tags: parsedTags
+            page,
+            page_size: 20,
+            ordering,
+            platforms,
+            dates,
+            search,
+            genres: genreId,
+            tags: parsedTags,
+            developers: devId
         }))
-    }, [dates, dispatch, isReversed, order, page, platforms, search, genreId, tags]);
+    }, [dates, dispatch, isReversed, order, page, platforms, search, genreId, tags, devId]);
 
     useEffect(() => {
         if (gamesList.results)
@@ -65,8 +75,6 @@ export const Games = () => {
             dispatch(setGenreDetails({} as genresDetailType))
         }
     }, [dispatch, genreId]);
-
-
     return (
         <div className={s.gamePageContainer}>
             <GenresBlock activeGenre={genreId}/>
@@ -78,6 +86,7 @@ export const Games = () => {
                          isReversed={isReversed}
                          setIsReversed={setIsReversed} setDates={setDates} search={search}/>
                 <Tags/>
+                <DevBlock devId={devId}/>
                 {isGameLoading
                     ? <Loader/>
                     : gamesList.results && gamesList.results.map(game => <GameItem key={game.id} game={game}/>)

@@ -1,5 +1,5 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit'
-import {gamesListType, gameType, genresDetailType, tagBySearchType, tagsType} from "./gamesTypes";
+import {gamesListType, gameType, genresDetailType, commonItemDataType, tagsType} from "./gamesTypes";
 
 type initialStateType = {
     gamesList: gamesListType,
@@ -7,8 +7,9 @@ type initialStateType = {
     isEmptySearch: boolean
     genreDetails: genresDetailType
     tags: tagsType
-    currentTags: tagBySearchType[]
+    currentTags: commonItemDataType[]
     isExactSearch: boolean
+    developer: commonItemDataType
 }
 const initialState: initialStateType = {
     gamesList: {} as gamesListType,
@@ -16,8 +17,9 @@ const initialState: initialStateType = {
     isEmptySearch: false,
     genreDetails: {} as genresDetailType,
     tags: {} as tagsType,
-    currentTags: [] as tagBySearchType[],
-    isExactSearch: true
+    currentTags: [] as commonItemDataType[],
+    isExactSearch: true,
+    developer: {} as commonItemDataType,
 }
 const gamesSlice = createSlice({
     name: 'games',
@@ -42,7 +44,7 @@ const gamesSlice = createSlice({
                 state.tags = action.payload
             }
         },
-        setCurrentTags: (state, action: PayloadAction<tagBySearchType>) => {
+        setCurrentTags: (state, action: PayloadAction<commonItemDataType>) => {
             if (!state.currentTags.find(tag => tag.id === action.payload.id)) {
                 state.currentTags = state.currentTags.concat(action.payload)
             }
@@ -55,6 +57,9 @@ const gamesSlice = createSlice({
         },
         deleteAllTags: (state) => {
             state.currentTags = []
+        },
+        setDeveloper: (state, {payload}: PayloadAction<commonItemDataType>) => {
+            state.developer = payload
         }
     }
 })
@@ -66,7 +71,8 @@ export const {
     setGenreDetails,
     setCurrentTags,
     deleteTag,
-    deleteAllTags
+    deleteAllTags,
+    setDeveloper
 } = gamesSlice.actions
 
 export default gamesSlice.reducer
