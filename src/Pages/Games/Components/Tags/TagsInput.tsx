@@ -20,7 +20,7 @@ export const TagsInput: React.FC<props> = ({setIsModalOpen, currentTags}) => {
         if (tags) {
             const otherTags = tags.split(' ').filter(tag => tag !== String(tagId))
             if (otherTags.length) {
-                searchParams.set('tags', otherTags.join(' '))
+                searchParams.append('tags', otherTags.join(' '))
                 setSearchParams(searchParams)
                 dispatch(deleteTag(tagId))
             } else {

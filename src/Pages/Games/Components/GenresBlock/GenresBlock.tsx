@@ -30,7 +30,7 @@ export const GenresBlock: React.FC<props> = React.memo(({activeGenre}) => {
         if (id === Number(activeGenre)) {
             navigate('/games')
         } else {
-            searchParams.set('genre', String(id))
+            searchParams.append('genre', String(id))
             setSearchParams(searchParams)
         }
     }

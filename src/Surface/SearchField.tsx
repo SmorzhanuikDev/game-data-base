@@ -18,7 +18,7 @@ export const SearchField = () => {
     const searchGames = useAppSelector(state => state.games.searchGameList)
     const noResult = useAppSelector(state => state.games.isEmptySearch)
     const navigate = useNavigate()
-    let [, setSearchParams] = useSearchParams();
+    let [searchParams, setSearchParams] = useSearchParams();
 
     const changeSearch = (e: React.FormEvent<HTMLInputElement>) => {
         setSearch(e.currentTarget.value)
@@ -37,7 +37,8 @@ export const SearchField = () => {
 
     const goToSearch = () => {
         navigate('games')
-        setSearchParams({search})
+        searchParams.append('search', search)
+        setSearchParams(searchParams)
         setSearch('')
     }
 

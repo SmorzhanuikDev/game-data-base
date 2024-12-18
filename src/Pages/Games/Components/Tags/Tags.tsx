@@ -19,7 +19,7 @@ export const Tags = () => {
 
     const submitModal = (tagIds: number[]) => {
         setIsModalOpen(false);
-        searchParams.set('tags', tagIds?.join(' '));
+        searchParams.append('tags', tagIds?.join(' '));
         setSearchParams(searchParams)
     }
 
