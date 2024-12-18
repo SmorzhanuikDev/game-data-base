@@ -1,0 +1,40 @@
+@use 'src/base';
+
+.devButton {
+  cursor: pointer;
+  transition: 0.3s;
+  display: flex;
+  justify-content: space-between;
+  border-radius: 5px;
+  padding: 8px;
+  margin-bottom: 10px;
+
+  .beforeTitle {
+    font-size: 20px;
+    margin-right: 10px;
+    color: #bab6b6;
+  }
+  .title {
+    font-size: 25px;
+  }
+  .closeButton {
+    position: relative;
+    top: -2px;
+
+    .closeText {
+      font-size: 16px;
+    }
+    .closeIcon {
+      font-size: 23px;
+      position: relative;
+      top: 6px;
+      margin-left: 7px;
+    }
+  }
+
+  &:hover {
+    transition: 0.3s;
+    background: base.$cardBGColor;
+    color: #c35959;
+  }
+}
