@@ -36,14 +36,6 @@ const router = createBrowserRouter([
                 element: <CommonPage/>
             },
             {
-                path: '/developer/:devId',
-                element: <Games/>
-            },
-            {
-                path: '/genre/:genreId',
-                element: <Games/>
-            },
-            {
                 path: '/platforms',
                 element: <CommonPage/>
             },

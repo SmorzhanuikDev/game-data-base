@@ -3,7 +3,7 @@ import {useAppSelector} from "../../../../hooks";
 import {Title} from "../../../../Common/Components/Title";
 import s from './genreDetails.module.scss'
 
-export const RequestDetails = () => {
+export const GenreDetails = () => {
 
     const genreDetails = useAppSelector(state => state.games.genreDetails)
     const [isDescExpand, setIsDescExpand] = useState(false)

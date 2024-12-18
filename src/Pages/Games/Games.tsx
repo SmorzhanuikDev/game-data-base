@@ -9,8 +9,8 @@ import {gamesListType, genresDetailType} from "./gamesTypes";
 import {setGamesList, setGenreDetails} from "./gamesSlice";
 import {Pagination} from "./Components/Pagination/Pagination";
 import {Loader} from "../../Common/Components/Loader";
-import {useLocation, useParams} from "react-router-dom";
-import {RequestDetails} from "./Components/GenreDetails/RequestDetails";
+import {useLocation, useParams, useSearchParams} from "react-router-dom";
+import {GenreDetails} from "./Components/GenreDetails/GenreDetails";
 import {Tags} from "./Components/Tags/Tags";
 
 export function useSearch() {
@@ -30,7 +30,8 @@ export const Games = () => {
     const [isReversed, setIsReversed] = useState(false)
     const [order, setOrder] = useState<string | undefined>()
     const [dates, setDates] = useState<string | undefined>()
-    const {genreId} = useParams()
+    const [searchParams, setSearchParams] = useSearchParams()
+    const genreId = searchParams.get('genre')
 
     useEffect(() => {
         setIsGameLoading(true)
@@ -71,7 +72,7 @@ export const Games = () => {
             <GenresBlock activeGenre={genreId}/>
             <div>
                 <div hidden={!genreId}>
-                    <RequestDetails/>
+                    <GenreDetails/>
                 </div>
                 <Filters setOrder={setOrder} order={order} platforms={platforms || undefined} dates={dates}
                          isReversed={isReversed}

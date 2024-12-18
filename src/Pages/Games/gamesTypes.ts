@@ -15,7 +15,7 @@ export interface gamesSearchParamsType {
     stores?: string
     developers?: string
     publishers?: string
-    genres?: string
+    genres?: string | null
     tags?: string | null
     creators?: string
     dates?: string

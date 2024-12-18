@@ -1,12 +1,12 @@
 import React, {useEffect} from 'react';
 import s from './genresBlock.module.scss'
-import {useNavigate} from "react-router-dom";
+import {useNavigate, useSearchParams} from "react-router-dom";
 import {setIsAppLoading} from "../../../../appSlice";
 import {useAppDispatch, useAppSelector} from "../../../../hooks";
 import {fetchContentAction} from "../../../CommonPage/commonPageSaga";
 
 interface props {
-    activeGenre: string | undefined
+    activeGenre: string | null
 }
 
 export const GenresBlock: React.FC<props> = React.memo(({activeGenre}) => {
@@ -14,6 +14,7 @@ export const GenresBlock: React.FC<props> = React.memo(({activeGenre}) => {
     const dispatch = useAppDispatch()
     const genres = useAppSelector(state => state.commonPageData.content)
     const navigate = useNavigate()
+    const [searchParams, setSearchParams] = useSearchParams()
 
     useEffect(() => {
         dispatch(setIsAppLoading(true))
@@ -29,7 +30,8 @@ export const GenresBlock: React.FC<props> = React.memo(({activeGenre}) => {
         if (id === Number(activeGenre)) {
             navigate('/games')
         } else {
-            navigate(`/genre/${id}`)
+            searchParams.set('genre', String(id))
+            setSearchParams(searchParams)
         }
     }
 
