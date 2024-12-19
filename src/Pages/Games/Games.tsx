@@ -74,7 +74,7 @@ export const Games = () => {
                          setIsReversed={setIsReversed} search={search}/>
                 <Tags/>
                 <DevBlock devId={devId}/>
-                <GameList isLoading={isLoading} gamesList={gamesList.results} setIsLoading={setIsLoading}/>
+                <GameList isLoading={isLoading} gamesList={gamesList} setIsLoading={setIsLoading}/>
             </div>
             {gamesList.results?.length
                 ? <Pagination page={page} lastPage={Math.ceil(gamesList.count / 20)}/>
