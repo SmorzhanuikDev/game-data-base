@@ -26,20 +26,20 @@ export const Games = () => {
     const platforms = searchParams.get('platform')
     const tags = searchParams.get('tags')
     const [isReversed, setIsReversed] = useState(false)
-    const [order, setOrder] = useState<string | undefined>()
-    const [dates, setDates] = useState<string | undefined>()
     const genreId = searchParams.get('genre')
     const devId = searchParams.get('dev') || undefined
+    const dates = searchParams.get('date') || undefined
+    const ordering = searchParams.get('ordering')
 
     useEffect(() => {
         setIsGameLoading(true)
         dispatch(setGamesList({} as gamesListType))
-        const ordering = isReversed ? '-' + order : order
+        const pathOrdering = isReversed ? '-' + ordering : ordering
         const parsedTags = tags?.split(' ').join()
         dispatch(fetchGamesAction({
             page,
             page_size: 20,
-            ordering,
+            ordering: pathOrdering || undefined,
             platforms,
             dates,
             search,
@@ -47,7 +47,7 @@ export const Games = () => {
             tags: parsedTags,
             developers: devId
         }))
-    }, [dates, dispatch, isReversed, order, page, platforms, search, genreId, tags, devId]);
+    }, [dates, dispatch, isReversed, page, platforms, search, genreId, tags, devId, ordering]);
 
     useEffect(() => {
         if (gamesList.results)
@@ -62,6 +62,7 @@ export const Games = () => {
             dispatch(setGenreDetails({} as genresDetailType))
         }
     }, [dispatch, genreId]);
+
     return (
         <div className={s.gamePageContainer}>
             <GenresBlock activeGenre={genreId}/>
@@ -69,9 +70,9 @@ export const Games = () => {
                 <div hidden={!genreId}>
                     <GenreDetails/>
                 </div>
-                <Filters setOrder={setOrder} order={order} platforms={platforms || undefined} dates={dates}
+                <Filters  order={ordering} platforms={platforms || undefined} dates={dates}
                          isReversed={isReversed}
-                         setIsReversed={setIsReversed} setDates={setDates} search={search}/>
+                         setIsReversed={setIsReversed} search={search}/>
                 <Tags/>
                 <DevBlock devId={devId}/>
                 {isGameLoading

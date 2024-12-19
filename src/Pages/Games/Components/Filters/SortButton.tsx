@@ -3,7 +3,7 @@ import s from "./filters.module.scss";
 import {BiSortAlt2} from "react-icons/bi";
 
 interface props {
-    order: string | undefined
+    order: string | null
     isReversed: boolean
     setIsReversed: (isReversed: boolean) => void
 }

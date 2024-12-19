@@ -7,8 +7,7 @@ import {useSearchParams} from "react-router-dom";
 interface props {
     title: string
     options: option[],
-    onChangeSelect: (value: string | undefined) => void
-    value: string | undefined
+    value: string | null | undefined
     pathParam: string
 }
 
@@ -27,7 +26,7 @@ const whiteBG = {
     color: 'black'
 }
 
-export const Select: React.FC<props> = ({options, onChangeSelect, title, value, pathParam}) => {
+export const Select: React.FC<props> = ({options, title, value, pathParam}) => {
 
     const [isSelectOpen, setIsSelectOpen] = useState(false)
     const [currentTitle, setCurrentTitle] = useState<string | undefined>(undefined)
@@ -38,8 +37,6 @@ export const Select: React.FC<props> = ({options, onChangeSelect, title, value, 
         setIsSelectOpen(true)
     }
     const closeSelect = (value: string | undefined, title: string | undefined) => {
-        console.log(value, title)
-        onChangeSelect(value)
         setIsSelectOpen(false)
         if (value && searchParams.has(pathParam)) {
             searchParams.set(pathParam, value)

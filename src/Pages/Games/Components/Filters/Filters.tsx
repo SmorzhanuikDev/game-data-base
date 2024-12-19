@@ -9,17 +9,15 @@ import {SortButton} from "./SortButton";
 interface props {
     platforms: string | undefined
     dates: string | undefined
-    order: string | undefined
+    order: string | null
     isReversed: boolean
     search: string | null
     setIsReversed: (value: boolean) => void
-    setDates: (value: string | undefined) => void
-    setOrder: (value: string | undefined) => void
 }
 
 export const Filters: React.FC<props> = (props) => {
 
-    const {setDates, setIsReversed, isReversed, setOrder, order, dates, platforms, search} = props
+    const {setIsReversed, isReversed, order, dates, platforms, search} = props
     const [searchParams, setSearchParams] = useSearchParams()
 
     const cleanSearch = () => {
@@ -27,27 +25,14 @@ export const Filters: React.FC<props> = (props) => {
         setSearchParams(searchParams)
     }
 
-    const setPlatforms = (value: string | undefined) => {
-        if (value) {
-            if (searchParams.has('platform')) {
-                searchParams.set('platform', value)
-            }
-            searchParams.append('platform', value)
-            setSearchParams(searchParams)
-        } else {
-            searchParams.delete('platform')
-            setSearchParams(searchParams)
-        }
-    }
-
     return (
         <div className={s.filterBlock}>
             <div className={s.orderingSection}>
-                <Select options={orderOptions} title={'Order by'} onChangeSelect={setOrder} value={order} pathParam={'ordering'}/>
+                <Select options={orderOptions} title={'Order by'} value={order} pathParam={'ordering'}/>
                 <SortButton isReversed={isReversed} setIsReversed={setIsReversed} order={order}/>
             </div>
-            <Select title={'platform'} options={platformsOptions} onChangeSelect={setPlatforms} value={platforms} pathParam={'platform'}/>
-            <Select title={'Released'} options={releasedOptions()} value={dates} onChangeSelect={setDates} pathParam={'date'}/>
+            <Select title={'platform'} options={platformsOptions} value={platforms} pathParam={'platform'}/>
+            <Select title={'Released'} options={releasedOptions()} value={dates} pathParam={'date'}/>
             {search
                 ? <div className={s.deleteSearch} onClick={cleanSearch}>
                     <div>
