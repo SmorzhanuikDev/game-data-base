@@ -1,5 +1,22 @@
 @use 'src/base';
 
+
+.noResult {
+  text-align: center;
+  padding-top: 30px;
+
+  .noResIcon {
+    font-size: 60px;
+    position: relative;
+    top: 20px;
+    margin-right: 20px;
+  }
+
+  .noResText {
+    font-size: 30px;
+  }
+}
+
 .gameItem {
   height: 180px;
   width: 100%;
@@ -70,3 +87,4 @@
     }
   }
 }
+

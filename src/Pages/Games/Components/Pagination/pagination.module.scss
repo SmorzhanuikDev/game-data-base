@@ -1,7 +1,7 @@
 @use 'src/base';
 
 @mixin paginationItem {
-  padding: 12px 16px;
+  padding: 8px 12px 5px 12px;
   border-radius: 5px;
   transition: .3s;
   font-size: 18px;
@@ -29,6 +29,11 @@
     &:hover {
       background: #575757;
       transition: .3s;
+    }
+
+    .backArrow {
+      position: relative;
+      left: 3px;
     }
 
   }

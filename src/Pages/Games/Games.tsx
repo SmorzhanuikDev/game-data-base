@@ -11,7 +11,7 @@ import {useSearchParams} from "react-router-dom";
 import {GenreDetails} from "./Components/GenreDetails/GenreDetails";
 import {Tags} from "./Components/Tags/Tags";
 import {DevBlock} from "./Components/DevBlock/DevBlock";
-import {GameList} from "./GameList";
+import {GameList} from "./Components/GameList/GameList";
 
 
 export const Games = () => {
@@ -76,7 +76,10 @@ export const Games = () => {
                 <DevBlock devId={devId}/>
                 <GameList isLoading={isLoading} gamesList={gamesList.results} setIsLoading={setIsLoading}/>
             </div>
-            <Pagination page={page} setPage={setPage} lastPage={Math.ceil(gamesList.count / 10)}/>
+            {gamesList.results?.length
+                ? <Pagination page={page} setPage={setPage} lastPage={Math.ceil(gamesList.count / 20)}/>
+                : null
+            }
         </div>
     );
 };

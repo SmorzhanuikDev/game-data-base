@@ -1,5 +1,5 @@
 import React from 'react';
-import s from './gameItem.module.scss'
+import s from './gameList.module.scss'
 import {gameType} from "../../gamesTypes";
 import noImage from '../../../../Images/no-image.png'
 import {useSearchParams} from "react-router-dom";
@@ -40,7 +40,10 @@ export const GameItem: React.FC<props> = ({game}) => {
                         </span>)}
                 </div>
                 <p className={s.gameRelease}>Released: {game.released}</p>
-                <p className={s.gameRating}>5/{game.rating}</p>
+                {game.rating
+                    ? <p className={s.gameRating}>{game.rating}/5</p>
+                    : <p className={s.gameRating}>No rate</p>
+                }
             </div>
         </div>
     );
