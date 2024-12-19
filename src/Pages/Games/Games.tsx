@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from 'react';
-import {GameItem} from "./Components/GameItem/GameItem";
 import {fetchGamesAction, fetchGenresDetailsAction} from "./gamesSaga";
 import {useAppDispatch, useAppSelector} from "../../hooks";
 import s from './Games.module.scss'
@@ -8,11 +7,11 @@ import {Filters} from "./Components/Filters/Filters";
 import {gamesListType, genresDetailType} from "./gamesTypes";
 import {setGamesList, setGenreDetails} from "./gamesSlice";
 import {Pagination} from "./Components/Pagination/Pagination";
-import {Loader} from "../../Common/Components/Loader";
 import {useSearchParams} from "react-router-dom";
 import {GenreDetails} from "./Components/GenreDetails/GenreDetails";
 import {Tags} from "./Components/Tags/Tags";
 import {DevBlock} from "./Components/DevBlock/DevBlock";
+import {GameList} from "./GameList";
 
 
 export const Games = () => {
@@ -20,7 +19,7 @@ export const Games = () => {
     const [searchParams] = useSearchParams()
     const dispatch = useAppDispatch()
     const gamesList = useAppSelector(state => state.games.gamesList)
-    const [isGameLoading, setIsGameLoading] = useState(false)
+    const [isLoading, setIsLoading] = useState(false)
     const [page, setPage] = useState<number>(1)
     const search = searchParams.get('search')
     const platforms = searchParams.get('platform')
@@ -32,7 +31,7 @@ export const Games = () => {
     const ordering = searchParams.get('ordering')
 
     useEffect(() => {
-        setIsGameLoading(true)
+        setIsLoading(true)
         dispatch(setGamesList({} as gamesListType))
         const pathOrdering = isReversed ? '-' + ordering : ordering
         const parsedTags = tags?.split(' ').join()
@@ -51,8 +50,8 @@ export const Games = () => {
 
     useEffect(() => {
         if (gamesList.results)
-            setIsGameLoading(false)
-    }, [dispatch, gamesList.results, isGameLoading]);
+            setIsLoading(false)
+    }, [dispatch, gamesList.results, isLoading]);
 
     useEffect(() => {
         if (genreId) {
@@ -70,15 +69,12 @@ export const Games = () => {
                 <div hidden={!genreId}>
                     <GenreDetails/>
                 </div>
-                <Filters  order={ordering} platforms={platforms || undefined} dates={dates}
+                <Filters order={ordering} platforms={platforms || undefined} dates={dates}
                          isReversed={isReversed}
                          setIsReversed={setIsReversed} search={search}/>
                 <Tags/>
                 <DevBlock devId={devId}/>
-                {isGameLoading
-                    ? <Loader/>
-                    : gamesList.results && gamesList.results.map(game => <GameItem key={game.id} game={game}/>)
-                }
+                <GameList isLoading={isLoading} gamesList={gamesList.results} setIsLoading={setIsLoading}/>
             </div>
             <Pagination page={page} setPage={setPage} lastPage={Math.ceil(gamesList.count / 10)}/>
         </div>

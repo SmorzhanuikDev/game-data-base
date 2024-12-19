@@ -32,6 +32,8 @@ export const CommonCard: React.FC<props> = ({title, gameCount, games, bgImage, p
                 return `/games?genre=${id}`
             case '/developers':
                 return `/games?dev=${id}`
+            case '/platforms':
+                return `/games?platform=${id}`
             default: return 'error'
         }
     }
