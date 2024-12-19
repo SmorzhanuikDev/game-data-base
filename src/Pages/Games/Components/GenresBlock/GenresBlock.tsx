@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import s from './genresBlock.module.scss'
-import {useNavigate, useSearchParams} from "react-router-dom";
+import {useSearchParams} from "react-router-dom";
 import {setIsAppLoading} from "../../../../appSlice";
 import {useAppDispatch, useAppSelector} from "../../../../hooks";
 import {fetchContentAction} from "../../../CommonPage/commonPageSaga";
@@ -28,16 +28,17 @@ export const GenresBlock: React.FC<props> = React.memo(({activeGenre}) => {
     const handleClick = (id: number) => {
         window.scrollTo({top: 0, left: 0, behavior: 'smooth'})
         if (id === Number(activeGenre)) {
+            debugger
             searchParams.delete('genre')
         } else {
             if (searchParams.has('genre')) {
                 searchParams.set('genre', String(id))
-                setSearchParams(searchParams)
             } else {
                 searchParams.append('genre', String(id))
-                setSearchParams(searchParams)
+
             }
         }
+        setSearchParams(searchParams)
     }
 
     return (
