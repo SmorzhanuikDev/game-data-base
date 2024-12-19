@@ -43,11 +43,11 @@ export const Filters: React.FC<props> = (props) => {
     return (
         <div className={s.filterBlock}>
             <div className={s.orderingSection}>
-                <Select options={orderOptions} title={'Order by'} onChangeSelect={setOrder} value={order}/>
+                <Select options={orderOptions} title={'Order by'} onChangeSelect={setOrder} value={order} pathParam={'ordering'}/>
                 <SortButton isReversed={isReversed} setIsReversed={setIsReversed} order={order}/>
             </div>
-            <Select title={'platform'} options={platformsOptions} onChangeSelect={setPlatforms} value={platforms}/>
-            <Select title={'Released'} options={releasedOptions()} value={dates} onChangeSelect={setDates}/>
+            <Select title={'platform'} options={platformsOptions} onChangeSelect={setPlatforms} value={platforms} pathParam={'platform'}/>
+            <Select title={'Released'} options={releasedOptions()} value={dates} onChangeSelect={setDates} pathParam={'date'}/>
             {search
                 ? <div className={s.deleteSearch} onClick={cleanSearch}>
                     <div>

@@ -18,7 +18,7 @@ export const CommonInfo: React.FC<props> = ({currentGame}) => {
     return (
         <div>
             <div className={s.commonInfo}>
-                <AdditionalInfo title={'genres'} additionsData={formatPlatformsArray(currentGame.platforms)}
+                <AdditionalInfo title={'platforms'} additionsData={formatPlatformsArray(currentGame.platforms)}
                                 route={'/games?platform='}/>
                 <AdditionalInfo title={'genres'} additionsData={currentGame.genres} route={'/genre/'}/>
                 <InfoItem title={'metascore'} content={

@@ -2,12 +2,14 @@ import React, {useCallback, useEffect, useState} from 'react';
 import s from "./select.module.scss";
 import {IoIosArrowDown} from "react-icons/io";
 import {SelectList} from "./SelectList";
+import {useSearchParams} from "react-router-dom";
 
 interface props {
     title: string
     options: option[],
     onChangeSelect: (value: string | undefined) => void
     value: string | undefined
+    pathParam: string
 }
 
 export type option = {
@@ -25,18 +27,28 @@ const whiteBG = {
     color: 'black'
 }
 
-export const Select: React.FC<props> = ({options, onChangeSelect, title, value}) => {
+export const Select: React.FC<props> = ({options, onChangeSelect, title, value, pathParam}) => {
 
     const [isSelectOpen, setIsSelectOpen] = useState(false)
     const [currentTitle, setCurrentTitle] = useState<string | undefined>(undefined)
+    const [searchParams, setSearchParams] = useSearchParams()
+
 
     const openSelect = () => {
         setIsSelectOpen(true)
     }
     const closeSelect = (value: string | undefined, title: string | undefined) => {
+        console.log(value, title)
         onChangeSelect(value)
         setIsSelectOpen(false)
-        console.log(title)
+        if (value && searchParams.has(pathParam)) {
+            searchParams.set(pathParam, value)
+        } else if (!value) {
+            searchParams.delete(pathParam)
+        } else {
+            searchParams.append(pathParam, value)
+        }
+        setSearchParams(searchParams)
         setCurrentTitle(title)
     }
 

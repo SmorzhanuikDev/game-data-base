@@ -14,13 +14,12 @@ interface props {
 }
 
 export const SelectList: React.FC<props> = ({currentValue, setIsSelectOpen, closeSelect, options, title}) => {
-    const [searchParams, setSearchParams] = useSearchParams()
+
     const selectRef = useRef<HTMLDivElement>(null)
 
     const clearSelect = () => {
         closeSelect(undefined, undefined)
-        searchParams.delete('platform')
-        setSearchParams(searchParams)
+
     }
 
     const handleClick = useCallback( (event: any) => {
