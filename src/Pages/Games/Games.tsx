@@ -20,7 +20,6 @@ export const Games = () => {
     const dispatch = useAppDispatch()
     const gamesList = useAppSelector(state => state.games.gamesList)
     const [isLoading, setIsLoading] = useState(false)
-    const [page, setPage] = useState<number>(1)
     const search = searchParams.get('search')
     const platforms = searchParams.get('platform')
     const tags = searchParams.get('tags')
@@ -29,6 +28,7 @@ export const Games = () => {
     const devId = searchParams.get('dev') || undefined
     const dates = searchParams.get('date') || undefined
     const ordering = searchParams.get('ordering')
+    const page = Number(searchParams.get('page')) || 1
 
     useEffect(() => {
         setIsLoading(true)
@@ -77,7 +77,7 @@ export const Games = () => {
                 <GameList isLoading={isLoading} gamesList={gamesList.results} setIsLoading={setIsLoading}/>
             </div>
             {gamesList.results?.length
-                ? <Pagination page={page} setPage={setPage} lastPage={Math.ceil(gamesList.count / 20)}/>
+                ? <Pagination page={page} lastPage={Math.ceil(gamesList.count / 20)}/>
                 : null
             }
         </div>

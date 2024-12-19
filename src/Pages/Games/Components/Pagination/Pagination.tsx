@@ -1,21 +1,31 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import s from './pagination.module.scss'
 import {MdArrowForwardIos as NextArrow} from "react-icons/md";
 import {MdArrowBackIos as BackArrow} from "react-icons/md";
+import {useSearchParams} from "react-router-dom";
 
 
 interface props {
     page: number
-    setPage: (page: number) => void
     lastPage: number | undefined
 }
 
-export const Pagination: React.FC<props> = ({page, setPage, lastPage}) => {
+export const Pagination: React.FC<props> = ({page, lastPage}) => {
+
+    const [searchParams, setSearchParams] = useSearchParams()
 
     const changePage = (page: number) => {
-        setPage(page)
+        searchParams.set('page', String(page))
+        setSearchParams(searchParams)
         window.scrollTo({top: 0, behavior: 'smooth'});
     }
+
+    useEffect(() => {
+        if (!page) {
+            searchParams.set('page', '1')
+            setSearchParams(searchParams)
+        }
+    }, [page, searchParams, setSearchParams]);
 
     return (
         <div className={s.pagination}>
