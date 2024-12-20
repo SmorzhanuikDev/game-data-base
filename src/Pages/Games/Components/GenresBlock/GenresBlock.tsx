@@ -35,9 +35,9 @@ export const GenresBlock: React.FC<props> = React.memo(({activeGenre}) => {
                 searchParams.set('genre', String(id))
             } else {
                 searchParams.append('genre', String(id))
-
             }
         }
+        searchParams.delete('page')
         setSearchParams(searchParams)
     }
 

@@ -24,6 +24,7 @@ export const Tags = () => {
             searchParams.append('tags', tagIds?.join(' '));
 
         }
+        searchParams.delete('page')
         setSearchParams(searchParams)
     }
 

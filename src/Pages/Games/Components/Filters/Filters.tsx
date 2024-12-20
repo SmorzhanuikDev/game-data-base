@@ -22,6 +22,7 @@ export const Filters: React.FC<props> = (props) => {
 
     const cleanSearch = () => {
         searchParams.delete('search')
+        searchParams.delete('page')
         setSearchParams(searchParams)
     }
 

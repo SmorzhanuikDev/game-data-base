@@ -45,6 +45,7 @@ export const Select: React.FC<props> = ({options, title, value, pathParam}) => {
         } else {
             searchParams.append(pathParam, value)
         }
+        searchParams.delete('page')
         setSearchParams(searchParams)
         setCurrentTitle(title)
     }
