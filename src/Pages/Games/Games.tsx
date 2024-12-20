@@ -23,22 +23,22 @@ export const Games = () => {
     const search = searchParams.get('search')
     const platforms = searchParams.get('platform')
     const tags = searchParams.get('tags')
-    const [isReversed, setIsReversed] = useState(false)
     const genreId = searchParams.get('genre')
     const devId = searchParams.get('dev') || undefined
     const dates = searchParams.get('date') || undefined
-    const ordering = searchParams.get('ordering')
+    const ordering = searchParams.get('ordering') || undefined
     const page = Number(searchParams.get('page')) || 1
+    const reverse = searchParams.get('reverse')
 
     useEffect(() => {
         setIsLoading(true)
         dispatch(setGamesList({} as gamesListType))
-        const pathOrdering = isReversed ? '-' + ordering : ordering
+        const pathOrdering = reverse ? '-' + ordering : ordering
         const parsedTags = tags?.split(' ').join()
         dispatch(fetchGamesAction({
             page,
             page_size: 20,
-            ordering: pathOrdering || undefined,
+            ordering: pathOrdering,
             platforms,
             dates,
             search,
@@ -46,7 +46,7 @@ export const Games = () => {
             tags: parsedTags,
             developers: devId
         }))
-    }, [dates, dispatch, isReversed, page, platforms, search, genreId, tags, devId, ordering]);
+    }, [dates, dispatch, reverse, page, platforms, search, genreId, tags, devId, ordering]);
 
     useEffect(() => {
         if (gamesList.results)
@@ -69,9 +69,7 @@ export const Games = () => {
                 <div hidden={!genreId}>
                     <GenreDetails/>
                 </div>
-                <Filters order={ordering} platforms={platforms || undefined} dates={dates}
-                         isReversed={isReversed}
-                         setIsReversed={setIsReversed} search={search}/>
+                <Filters order={ordering} platforms={platforms || undefined} dates={dates} search={search}/>
                 <Tags/>
                 <DevBlock devId={devId}/>
                 <GameList isLoading={isLoading} gamesList={gamesList} setIsLoading={setIsLoading}/>

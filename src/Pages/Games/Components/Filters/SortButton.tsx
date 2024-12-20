@@ -1,27 +1,38 @@
 import React from 'react';
 import s from "./filters.module.scss";
 import {BiSortAlt2} from "react-icons/bi";
+import {useSearchParams} from "react-router-dom";
 
-interface props {
-    order: string | null
-    isReversed: boolean
-    setIsReversed: (isReversed: boolean) => void
-}
+export const SortButton = () => {
 
+    const [searchParams, setSearchParams] = useSearchParams()
+    const ordering = searchParams.get('ordering')
+    const reverse = searchParams.get('reverse')
 
-export const SortButton: React.FC<props> = ({setIsReversed, isReversed, order}) => {
-
-    const orderTrue = {
-        background: isReversed ? '#f4f4f4' : '#292927',
-        color: isReversed ? 'black' : 'white'
+    const direction = {
+        background: reverse ? '#f4f4f4' : '#292927',
+        color: reverse ? 'black' : 'white'
     }
-    const orderFalse = {
+    const directionDisable = {
         background: '#706f6f', color: '#fff', cursor: 'auto'
     }
 
+    const style = ordering ? direction : directionDisable
+
+    const setDirection = () => {
+        if (ordering) {
+            if (!reverse) {
+                searchParams.set('reverse', 'true')
+                setSearchParams(searchParams)
+            } else {
+                searchParams.delete('reverse')
+                setSearchParams(searchParams)
+            }
+        }
+    }
+
     return (
-        <BiSortAlt2 className={s.sortButton} onClick={order ? () => setIsReversed(!isReversed) : () => null}
-                    style={order ? orderTrue : orderFalse}/>
+        <BiSortAlt2 className={s.sortButton} onClick={setDirection} style={style}/>
     );
 };
 

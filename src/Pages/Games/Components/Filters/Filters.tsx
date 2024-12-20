@@ -9,15 +9,13 @@ import {SortButton} from "./SortButton";
 interface props {
     platforms: string | undefined
     dates: string | undefined
-    order: string | null
-    isReversed: boolean
+    order: string | undefined
     search: string | null
-    setIsReversed: (value: boolean) => void
 }
 
 export const Filters: React.FC<props> = (props) => {
 
-    const {setIsReversed, isReversed, order, dates, platforms, search} = props
+    const {order, dates, platforms, search} = props
     const [searchParams, setSearchParams] = useSearchParams()
 
     const cleanSearch = () => {
@@ -30,7 +28,7 @@ export const Filters: React.FC<props> = (props) => {
         <div className={s.filterBlock}>
             <div className={s.orderingSection}>
                 <Select options={orderOptions} title={'Order by'} value={order} pathParam={'ordering'}/>
-                <SortButton isReversed={isReversed} setIsReversed={setIsReversed} order={order}/>
+                <SortButton/>
             </div>
             <Select title={'platform'} options={platformsOptions} value={platforms} pathParam={'platform'}/>
             <Select title={'Released'} options={releasedOptions()} value={dates} pathParam={'date'}/>
