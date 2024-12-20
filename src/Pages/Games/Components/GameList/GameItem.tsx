@@ -2,7 +2,7 @@ import React from 'react';
 import s from './gameList.module.scss'
 import {gameType} from "../../gamesTypes";
 import noImage from '../../../../Images/no-image.png'
-import {useSearchParams} from "react-router-dom";
+import {useNavigate, useSearchParams} from "react-router-dom";
 
 interface props {
     game: gameType
@@ -11,6 +11,7 @@ interface props {
 export const GameItem: React.FC<props> = ({game}) => {
 
     const [searchParams, setSearchParams] = useSearchParams()
+    const navigate = useNavigate()
 
     const handleClick = (platform: string) => {
         if (searchParams.has('platform')) {
@@ -19,6 +20,10 @@ export const GameItem: React.FC<props> = ({game}) => {
         }
         searchParams.append('platform', platform)
         setSearchParams(searchParams)
+    }
+
+    const goToGame = () => {
+        navigate(`/game/${game.id}`)
     }
 
     return (
@@ -34,10 +39,15 @@ export const GameItem: React.FC<props> = ({game}) => {
                     {game.genres?.map(genre => <a href={`/genre/${genre.id}`} key={genre.id}>{genre.name}</a>)}
                 </div>
                 <div className={s.gamePlatforms}>
-                    {game.platforms?.map(({platform}) =>
+                    {game.platforms?.slice(0, 6).map(({platform}) =>
                         <span onClick={() => handleClick(String(platform.id))} key={platform.id}>
                             {platform.name}
                         </span>)}
+                    {game.platforms?.length > 7 &&
+                        <span onClick={goToGame}>
+                            ...see all platforms
+                        </span>
+                    }
                 </div>
                 <p className={s.gameRelease}>Released: {game.released}</p>
                 {game.rating
