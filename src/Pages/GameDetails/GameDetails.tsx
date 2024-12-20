@@ -52,6 +52,9 @@ const GameDetails = () => {
         if (currentGame.background_image || currentGame.background_image_additional) {
             sendImage(currentGame.background_image || currentGame.background_image_additional)
         }
+        return () => {
+            sendImage('')
+        }
     }, [currentGame.background_image, currentGame.background_image_additional, sendImage]);
 
 
