@@ -1,0 +1,53 @@
+@use 'src/base';
+
+.profile {
+  height: 100%;
+  margin: 50px 100px;
+
+  .authBlock {
+    max-width: 340px;
+    display: flex;
+    flex-direction: column;
+
+    .title {
+      font-size: 50px;
+      margin-bottom: 50px;
+    }
+
+    .textField {
+      margin-bottom: 30px;
+      padding: 10px;
+      font-size: 20px;
+      border: 1px;
+      background: #000;
+      border-radius: 3px;
+      color: #faf8f8;
+      transition: .3s;
+
+      &:focus {
+        outline: none;
+      }
+
+      &:hover {
+      background: #121111;
+        transition: .3s;
+    }
+    }
+
+    .logInBtn {
+      margin-top: 10px;
+      text-align: center;
+      color: #0b0800;
+      background: #ffffff;
+      padding: 12px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: .3s;
+
+      &:hover {
+        transition: .3s;
+        background: #cfcccc;
+      }
+    }
+  }
+}
