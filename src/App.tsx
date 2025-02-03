@@ -1,6 +1,6 @@
 import React from 'react';
 import s from './main.module.scss'
-import {instance} from "./API";
+import {mainInstance} from "./API";
 import axios from "axios";
 import {Navigation} from "./Surface/Navigation";
 import {Footer} from "./Surface/Footer";

@@ -8,6 +8,8 @@ import {all} from 'redux-saga/effects'
 import appSlice from "./appSlice";
 import commonPageSlice from "./Pages/CommonPage/commonPageSlise";
 import commonPageSaga from "./Pages/CommonPage/commonPageSaga";
+import accountSlice from "./Pages/Account/AccountSlice";
+import accountSaga from "./Pages/Account/AccountSaga";
 
 const sagaMiddleware = createSagaMiddleware()
 
@@ -16,7 +18,8 @@ const store = configureStore({
         games: gamesSlice,
         gameDetails: gameDetailsSlice,
         appData: appSlice,
-        commonPageData: commonPageSlice
+        commonPageData: commonPageSlice,
+        accountData: accountSlice
     },
     middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(sagaMiddleware)
 })
@@ -26,7 +29,8 @@ function* rootSaga() {
     yield all([
         gamesSaga(),
         gameDetailsSaga(),
-        commonPageSaga()
+        commonPageSaga(),
+        accountSaga()
     ])
 }
 

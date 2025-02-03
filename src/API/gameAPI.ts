@@ -1,4 +1,4 @@
-import {instance} from "./index";
+import {mainInstance} from "./index";
 import {gamesListType, gamesSearchParamsType} from "../Pages/Games/gamesTypes";
 import {
     gameDetailsType,
@@ -9,17 +9,17 @@ import {
 
 export const gameAPI = {
     getGames: async (params: gamesSearchParamsType): Promise<gamesListType> => {
-        const response = await instance.get<gamesListType>('games', {
+        const response = await mainInstance.get<gamesListType>('games', {
             params: {...params}
         })
         return response.data
     },
     getGameDetails: async (gameId: number): Promise<gameDetailsType> => {
-        const response = await instance.get<gameDetailsType>(`games/${gameId}`)
+        const response = await mainInstance.get<gameDetailsType>(`games/${gameId}`)
         return response.data
     },
     getGameAdditions: async (gameId: number): Promise<gameListType> => {
-        const response = await instance.get<gameListType>(`games/${gameId}/additions`, {
+        const response = await mainInstance.get<gameListType>(`games/${gameId}/additions`, {
             params: {
                 page_size: 30
             }
@@ -27,7 +27,7 @@ export const gameAPI = {
         return response.data
     },
     getGameSeries: async (gameId: number): Promise<gameListType> => {
-        const response = await instance.get<gameListType>(`games/${gameId}/game-series`, {
+        const response = await mainInstance.get<gameListType>(`games/${gameId}/game-series`, {
             params: {
                 page_size: 30
             }
@@ -35,7 +35,7 @@ export const gameAPI = {
         return response.data
     },
     getGameScreenshots: async (gameId: number): Promise<gameScreenshotsType> => {
-        const response = await instance.get<gameScreenshotsType>(`games/${gameId}/screenshots`, {
+        const response = await mainInstance.get<gameScreenshotsType>(`games/${gameId}/screenshots`, {
             params: {
                 page_size: 30
             }
@@ -43,7 +43,7 @@ export const gameAPI = {
         return response.data
     },
     getGameStores: async (gameId: number): Promise<gameScreenshotsType> => {
-        const response = await instance.get<gameScreenshotsType>(`games/${gameId}/stores`, {
+        const response = await mainInstance.get<gameScreenshotsType>(`games/${gameId}/stores`, {
             params: {
                 page_size: 30
             }
@@ -51,7 +51,7 @@ export const gameAPI = {
         return response.data
     },
     getStoresList: async (): Promise<storesListType> => {
-        const response = await instance.get<storesListType>(`stores`, {
+        const response = await mainInstance.get<storesListType>(`stores`, {
             params: {
                 page_size: 30
             }
