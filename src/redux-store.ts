@@ -10,7 +10,6 @@ import commonPageSlice from "./Pages/CommonPage/commonPageSlise";
 import commonPageSaga from "./Pages/CommonPage/commonPageSaga";
 import accountSlice from "./Pages/Account/AccountSlice";
 import accountSaga from "./Pages/Account/AccountSaga";
-import authSaga from "./Pages/Authorization/AuthSaga";
 
 const sagaMiddleware = createSagaMiddleware()
 
