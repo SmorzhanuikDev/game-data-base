@@ -4,7 +4,7 @@ import App from './App';
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
 import {Games} from "./Pages/Games/Games";
 import {Home} from "./Pages/Home";
-import {Profile} from "./Pages/Profile/Profile";
+import {Auth} from "./Pages/Authorization/Auth";
 import {Provider} from "react-redux";
 import store from './redux-store'
 import GameDetails from "./Pages/GameDetails/GameDetails";
@@ -41,7 +41,7 @@ const router = createBrowserRouter([
             },
             {
                 path: '/profile',
-                element: <Profile/>
+                element: <Auth/>
             },
             {
                 path: '/genres',

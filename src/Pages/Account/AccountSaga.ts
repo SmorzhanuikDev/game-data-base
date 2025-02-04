@@ -1,8 +1,17 @@
 import {call, put, takeEvery} from 'redux-saga/effects'
 import {createAction, PayloadAction} from "@reduxjs/toolkit";
-import {FETCH_USER, user} from "./accountTypes";
+import {FETCH_USER, LOG_IN, user} from "./accountTypes";
 import {accountAPI} from "../../API/accountAPI";
 import {setUser} from "./AccountSlice";
+
+function* logIn({payload}: PayloadAction<{ password: string, login: string }>) {
+    try {
+        const token: string = yield call(() => accountAPI.logIn(payload.password, payload.login));
+        localStorage.setItem("token", token);
+    } catch (e: any) {
+        yield put({type: 'ERROR', message: e.message})
+    }
+}
 
 function* fetchUser({payload}: PayloadAction<{ password: string, login: string }>) {
     try {
@@ -13,13 +22,20 @@ function* fetchUser({payload}: PayloadAction<{ password: string, login: string }
     }
 }
 
-export const fetchUserAction = createAction(
-    FETCH_USER,
-    (password: string, login: string) => ({payload: {password, login}})
-)
+const accountAction = {
+    fetchUserAction: createAction(
+        FETCH_USER,
+        (password: string, login: string) => ({payload: {password, login}})
+    ),
+    logInAction: createAction(
+        LOG_IN,
+        (password: string, login: string) => ({payload: {password, login}})
+    )
+}
 
 function* userSaga() {
     yield takeEvery(FETCH_USER, fetchUser)
+    yield takeEvery(LOG_IN, logIn)
 }
 
 export default userSaga

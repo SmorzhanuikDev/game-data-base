@@ -1,10 +1,10 @@
 @use 'src/base';
 
-.profile {
+.auth {
   height: 100%;
-  margin: 50px 100px;
+  margin: 50px 200px;
 
-  .authBlock {
+  .logIn {
     max-width: 340px;
     display: flex;
     flex-direction: column;
@@ -16,7 +16,7 @@
 
     .textField {
       margin-bottom: 30px;
-      padding: 10px;
+      padding: 13px;
       font-size: 20px;
       border: 1px;
       background: #000;
