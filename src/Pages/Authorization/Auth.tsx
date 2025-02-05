@@ -18,12 +18,12 @@ export const Auth = () => {
             if (activeOption === 'logIn') {
                 descBlock.current.style.right = '-20%'
                 singIn.current.style.left = '1px'
-                logIn.current.style.left = '1300px'
+                logIn.current.style.left = '100vw'
                 setActiveOption('singIn')
             } else {
                 setActiveOption('logIn')
                 descBlock.current.style.right = '-195%'
-                singIn.current.style.left = '-1000px'
+                singIn.current.style.left = '-100vw'
                 logIn.current.style.left = '1px'
 
             }
@@ -37,13 +37,27 @@ export const Auth = () => {
     return (
         <div className={s.auth}>
             <div className={s.logIn}>
-                <div className={s.description} ref={descBlock} onClick={click}>
-                    <p className={s.descText} ref={singIn}>
-                        sing in
-                    </p>
-                    <p className={s.descText2} ref={logIn}>
-                        log in
-                    </p>
+                <div className={s.description} ref={descBlock}>
+                    <div className={s.descText} ref={singIn}>
+                        <h3>Authorization allow you:</h3>
+                        <div className={s.listItem}>- Create lists of games for any needs</div>
+                        <div className={s.listItem}>- Rate games for share your impressions</div>
+                        <div className={s.listItem}>- Get access to your list and rates on other device</div>
+                        <div className={s.switchOption}>
+                            <span className={s.text}>Have an account?&nbsp;</span>
+                            <span className={s.link}  onClick={click}>Log in</span>
+                        </div>
+                    </div>
+                    <div className={s.descText2} ref={logIn}>
+                        <h3>Authorization allow you:</h3>
+                        <div className={s.listItem}>- Create lists of games for any needs</div>
+                        <div className={s.listItem}>- Rate games for share your impressions</div>
+                        <div className={s.listItem}>- Get access to your list and rates on other device</div>
+                        <div className={s.switchOption}>
+                            <span className={s.text}>Don't have an account?&nbsp;</span>
+                            <span className={s.link}  onClick={click}>Sing in</span>
+                        </div>
+                    </div>
                     <img className={s.image} src={descImage} alt="desc"/>
                     <div className={s.gradient}/>
                 </div>

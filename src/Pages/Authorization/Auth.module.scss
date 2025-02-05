@@ -1,5 +1,46 @@
 @use 'src/base';
 
+@mixin descTextCommon {
+  padding-left: 20%;
+  position: absolute;
+  color: #fff;
+  z-index: 3;
+  width: 60%;
+  transition: .7s;
+
+  h3 {
+    font-size: 30px;
+    font-weight: 500;
+    margin: 50px 0;
+  }
+
+  .listItem {
+    font-size: 22px;
+    margin-bottom: 18px;
+    color: #e3e3e3;
+  }
+
+  .switchOption {
+    margin-top: 50px;
+    font-size: 20px;
+
+    .text {
+
+    }
+
+    .link {
+      cursor: pointer;
+      text-decoration: underline;
+      transition: .4s;
+
+      &:hover {
+        opacity: 0.7;
+        transition: .4s;
+      }
+    }
+  }
+}
+
 .auth {
   height: 100%;
   padding: 20px 17%;
@@ -15,7 +56,7 @@
     .description {
       box-shadow: 0 0 35px #000000;
       width: 170%;
-      height: 70vh;
+      height: 65vh;
       position: absolute;
       right: -195%;
       z-index: 2;
@@ -23,25 +64,13 @@
       border-radius: 10px;
 
       .descText {
-        padding-left: 100px;
-        position: absolute;
-        left: -1000px;
-        color: #fff;
-        font-size: 40px;
-        z-index: 3;
-        width: 60%;
-        transition: .7s;
+        @include descTextCommon;
+        left: -100vw;
       }
 
       .descText2 {
-        padding-left: 20%;
-        position: absolute;
+        @include descTextCommon;
         left: 1px;
-        color: #fff;
-        font-size: 40px;
-        z-index: 3;
-        width: 60%;
-        transition: .7s;
       }
 
       .gradient {
