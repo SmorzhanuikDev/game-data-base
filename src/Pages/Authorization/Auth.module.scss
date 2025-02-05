@@ -13,13 +13,36 @@
     position: relative;
 
     .description {
+      box-shadow: 0 0 35px #000000;
       width: 170%;
       height: 70vh;
       position: absolute;
       right: -195%;
       z-index: 2;
-      transition: .3s;
+      transition: .7s;
       border-radius: 10px;
+
+      .descText {
+        padding-left: 100px;
+        position: absolute;
+        left: -1000px;
+        color: #fff;
+        font-size: 40px;
+        z-index: 3;
+        width: 60%;
+        transition: .7s;
+      }
+
+      .descText2 {
+        padding-left: 20%;
+        position: absolute;
+        left: 1px;
+        color: #fff;
+        font-size: 40px;
+        z-index: 3;
+        width: 60%;
+        transition: .7s;
+      }
 
       .gradient {
         border-radius: 10px;
@@ -45,6 +68,7 @@
     .title {
       font-size: 50px;
       margin-bottom: 50px;
+      padding-top: 10px;
     }
 
     .textField {

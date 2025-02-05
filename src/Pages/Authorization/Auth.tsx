@@ -1,4 +1,4 @@
-import React, {useEffect, useRef} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import s from './Auth.module.scss'
 import {useBgImage} from "../../Surface/Content";
 import profileBGImage from '../../Images/profileBGImage.jpg'
@@ -8,11 +8,25 @@ import descImage from '../../Images/authDescImage.jpg'
 export const Auth = () => {
 
     const {sendImage} = useBgImage()
-    const ref = useRef<HTMLDivElement>(null)
+    const descBlock = useRef<HTMLDivElement>(null)
+    const singIn = useRef<HTMLDivElement>(null)
+    const logIn = useRef<HTMLDivElement>(null)
+    const [activeOption, setActiveOption] = useState<'singIn' | 'logIn'>('logIn')
 
     const click = () => {
-        if (ref.current) {
-            ref.current.style.right = '-20%'
+        if (descBlock.current && singIn.current && logIn.current) {
+            if (activeOption === 'logIn') {
+                descBlock.current.style.right = '-20%'
+                singIn.current.style.left = '1px'
+                logIn.current.style.left = '1300px'
+                setActiveOption('singIn')
+            } else {
+                setActiveOption('logIn')
+                descBlock.current.style.right = '-195%'
+                singIn.current.style.left = '-1000px'
+                logIn.current.style.left = '1px'
+
+            }
         }
     }
 
@@ -23,7 +37,13 @@ export const Auth = () => {
     return (
         <div className={s.auth}>
             <div className={s.logIn}>
-                <div className={s.description} ref={ref} onClick={click}>
+                <div className={s.description} ref={descBlock} onClick={click}>
+                    <p className={s.descText} ref={singIn}>
+                        sing in
+                    </p>
+                    <p className={s.descText2} ref={logIn}>
+                        log in
+                    </p>
                     <img className={s.image} src={descImage} alt="desc"/>
                     <div className={s.gradient}/>
                 </div>
