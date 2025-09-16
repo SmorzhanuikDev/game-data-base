@@ -3,6 +3,8 @@ import s from './Auth.module.scss'
 import {useBgImage} from "../../Surface/Content";
 import profileBGImage from '../../Images/profileBGImage.jpg'
 import descImage from '../../Images/authDescImage.jpg'
+import {IoEyeOffOutline} from "react-icons/io5";
+import {IoEyeOutline} from "react-icons/io5";
 
 
 export const Auth = () => {
@@ -12,8 +14,9 @@ export const Auth = () => {
     const singUp = useRef<HTMLDivElement>(null)
     const logIn = useRef<HTMLDivElement>(null)
     const [activeOption, setActiveOption] = useState<'singUp' | 'logIn'>('logIn')
+    const [passwordType, setPasswordType] = useState<'text' | 'password'>('password')
 
-    const click = () => {
+    const changeAuthOption = () => {
         if (descBlock.current && singUp.current && logIn.current) {
             if (activeOption === 'logIn') {
                 descBlock.current.style.right = '-20%'
@@ -27,6 +30,13 @@ export const Auth = () => {
                 logIn.current.style.left = '1px'
 
             }
+        }
+    }
+    const changePassType = () => {
+        if (passwordType === 'password') {
+            setPasswordType('text')
+        } else {
+            setPasswordType('password')
         }
     }
 
@@ -45,7 +55,7 @@ export const Auth = () => {
                         <div className={s.listItem}>&#x2022; Get access to your lists and rates on other device</div>
                         <div className={s.switchOption}>
                             <span className={s.text}>Have an account?&nbsp;</span>
-                            <span className={s.link}  onClick={click}>Log in</span>
+                            <span className={s.link} onClick={changeAuthOption}>Log in</span>
                         </div>
                     </div>
                     <div className={s.descText2} ref={logIn}>
@@ -55,7 +65,7 @@ export const Auth = () => {
                         <div className={s.listItem}>&#x2022; Get access to your lists and rates on other device</div>
                         <div className={s.switchOption}>
                             <span className={s.text}>Don't have an account?&nbsp;</span>
-                            <span className={s.link}  onClick={click}>Sing up</span>
+                            <span className={s.link} onClick={changeAuthOption}>Sing up</span>
                         </div>
                     </div>
                     <img className={s.image} src={descImage} alt="desc"/>
@@ -65,7 +75,15 @@ export const Auth = () => {
                     Log in
                 </span>
                 <input placeholder={'Login'} className={s.textField} type="text"/>
-                <input placeholder={'Password'} className={s.textField} type="password"/>
+                <div className={s.passBlock}>
+                    <input placeholder={'Password'} className={s.textField} type={passwordType}/>
+                    {
+                        passwordType === 'text'
+                            ? <IoEyeOffOutline className={s.showPass} onClick={changePassType}/>
+                            : <IoEyeOutline className={s.showPass} onClick={changePassType}/>
+                    }
+                </div>
+
                 <div className={s.logInBtn}>Log in</div>
             </div>
             <div className={s.singUp}>
