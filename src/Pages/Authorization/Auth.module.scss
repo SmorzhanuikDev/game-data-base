@@ -1,6 +1,25 @@
 @use 'src/base';
 
+@mixin  textField {
+  width: 100%;
+  margin-bottom: 20px;
+  padding: 13px;
+  font-size: 20px;
+  border: 1px;
+  background: #000;
+  border-radius: 3px;
+  color: #faf8f8;
+  transition: .3s;
 
+  &:focus {
+    outline: none;
+  }
+
+  &:hover {
+    background: #121111;
+    transition: .3s;
+  }
+}
 
 .auth {
   height: 100%;
@@ -20,45 +39,9 @@
       padding-top: 10px;
     }
 
-    .textField {
-      width: 100%;
-      margin-bottom: 20px;
-      padding: 13px;
-      font-size: 20px;
-      border: 1px;
-      background: #000;
-      border-radius: 3px;
-      color: #faf8f8;
-      transition: .3s;
-
-      &:focus {
-        outline: none;
-      }
-
-      &:hover {
-      background: #121111;
-        transition: .3s;
-    }
-    }
-
-    .passBlock {
-      display: block;
-      position: relative;
-    }
-
-    .showPass {
-      position: absolute;
-      right: -10px;
-      top: 14px;
-      font-size: 20px;
-      cursor: pointer;
-      transition: .3s;
-
-      &:hover {
-        opacity: 0.7;
-        transition: .3s;
-      }
-    }
+   .textField {
+     @include textField;
+   }
 
     .logInBtn {
       width: 100%;

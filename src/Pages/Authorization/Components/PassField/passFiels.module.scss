@@ -1,0 +1,29 @@
+@use "../../Auth.module";
+
+.passBlock {
+  display: block;
+  position: relative;
+
+  .textField{
+    @include Auth.textField
+  }
+
+  .showPass {
+    position: absolute;
+    right: -10px;
+    top: 14px;
+    font-size: 20px;
+    cursor: pointer;
+    transition: .3s;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+
+    &:hover {
+      opacity: 0.7;
+      transition: .3s;
+    }
+  }
+}
+
