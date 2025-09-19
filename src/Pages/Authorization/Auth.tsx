@@ -1,20 +1,23 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import s from './Auth.module.scss'
 import {useBgImage} from "../../Surface/Content";
 import profileBGImage from '../../Images/profileBGImage.jpg'
-import {IoEyeOffOutline, IoEyeOutline} from "react-icons/io5";
 import {Opportunities} from "./Components/Opportunities/Opportunities";
 import {PassField} from "./Components/PassField/PassField";
+import {useAppDispatch} from "../../hooks";
+import {fetchTokenAction} from "./authSaga";
 
 
 export const Auth = () => {
 
     const {sendImage} = useBgImage()
+    const dispatch = useAppDispatch();
 
 
     useEffect(() => {
         sendImage(profileBGImage);
-    }, [sendImage]);
+        dispatch(fetchTokenAction('testUser', '324e2342'))
+    }, [dispatch, sendImage]);
 
     return (
         <div className={s.auth}>

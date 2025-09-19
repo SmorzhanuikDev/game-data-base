@@ -10,6 +10,8 @@ import commonPageSlice from "./Pages/CommonPage/commonPageSlise";
 import commonPageSaga from "./Pages/CommonPage/commonPageSaga";
 import accountSlice from "./Pages/Account/AccountSlice";
 import accountSaga from "./Pages/Account/AccountSaga";
+import authSaga from "./Pages/Authorization/authSaga";
+import authSlice from "./Pages/Authorization/authSlice";
 
 const sagaMiddleware = createSagaMiddleware()
 
@@ -19,7 +21,8 @@ const store = configureStore({
         gameDetails: gameDetailsSlice,
         appData: appSlice,
         commonPageData: commonPageSlice,
-        accountData: accountSlice
+        accountData: accountSlice,
+        authSaga: authSlice,
     },
     middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(sagaMiddleware)
 })
@@ -30,7 +33,8 @@ function* rootSaga() {
         gamesSaga(),
         gameDetailsSaga(),
         commonPageSaga(),
-        accountSaga()
+        accountSaga(),
+        authSaga()
     ])
 }
 
