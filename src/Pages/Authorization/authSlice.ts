@@ -2,8 +2,8 @@ import {createSlice, PayloadAction} from '@reduxjs/toolkit'
 import {currentUser} from "./authTypes";
 
 type initialStateType = {
-    token: string
-    error: string
+    token: string | undefined
+    error: any
     currentUser: currentUser
 }
 const initialState: initialStateType = {
@@ -15,10 +15,10 @@ const authSlice = createSlice({
     name: 'auth',
     initialState,
     reducers: {
-        setToken: (state, action: PayloadAction<string>) => {
+        setToken: (state, action: PayloadAction<string | undefined>) => {
             state.token = action.payload
         },
-        setError: (state, action: PayloadAction<string>) => {
+        setError: (state, action: PayloadAction<any>) => {
             state.error = action.payload
         },
         setCurrentUser: (state, action: PayloadAction<currentUser>) => {

@@ -3,10 +3,13 @@ import s from "./passFiels.module.scss";
 import {IoEyeOffOutline, IoEyeOutline} from "react-icons/io5";
 
 interface props {
-    placeholder?: string;
+    value?: string
+    placeholder?: string
+    handleChange: any
+    handleBlur: any
 }
 
-export const PassField:FC<props> = ({placeholder}) => {
+export const PassField: FC<props> = ({placeholder, value, handleChange, handleBlur}) => {
 
     const [passwordType, setPasswordType] = useState<'text' | 'password'>('password')
 
@@ -20,7 +23,8 @@ export const PassField:FC<props> = ({placeholder}) => {
 
     return (
         <div className={s.passBlock}>
-            <input placeholder={placeholder || 'Password'} className={s.textField} type={passwordType}/>
+            <input name='pass' placeholder={placeholder || 'Password'} value={value}
+                   onChange={handleChange} onBlur={handleBlur} className={s.textField} type={passwordType}/>
             {
                 passwordType === 'text'
                     ? <IoEyeOffOutline className={s.showPass} onClick={changePassType}/>

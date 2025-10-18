@@ -7,13 +7,9 @@ import {accountAPI} from "../../API/accountAPI";
 function* fetchToken({payload}: PayloadAction<{ login: string, password: string }>) {
     try {
         const response: token = yield call(() => accountAPI.logIn(payload.password, payload.login));
-        if (response.token) {
-            yield put(setToken(response.token))
-        } else {
-            yield put(setError(response.message));
-        }
+        yield put(setToken(response.token))
     } catch (e: any) {
-        yield put({type: 'ERROR', message: e.message})
+        yield put(setError(e))
     }
 }
 
