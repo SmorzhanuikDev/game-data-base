@@ -1,6 +1,6 @@
 import {call, put, takeEvery} from 'redux-saga/effects'
 import {createAction, PayloadAction} from "@reduxjs/toolkit";
-import {currentUser, FETCH_AUTH_USER, FETCH_TOKEN, token} from "./authTypes";
+import {currentUser, FETCH_AUTH_USER, FETCH_TOKEN, singInData, token} from "./authTypes";
 import {setCurrentUser, setError, setToken} from "./authSlice";
 import {accountAPI} from "../../API/accountAPI";
 
@@ -27,7 +27,7 @@ export const fetchAuthUserAction = createAction(FETCH_AUTH_USER,
     (login: string, password: string) => ({payload: {login, password}})
 )
 export const fetchTokenAction = createAction(FETCH_TOKEN,
-    (login: string, password: string) => ({payload: {login, password}})
+    (authData: singInData) => ({payload: authData})
 )
 
 function* authSaga() {

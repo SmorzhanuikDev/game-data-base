@@ -13,6 +13,10 @@ export interface commonApiRes {
 export interface token extends commonApiRes {
     token?: string
 }
+export interface singInData {
+    login: string
+    password: string
+}
 
 export interface currentUser {
     login: string,

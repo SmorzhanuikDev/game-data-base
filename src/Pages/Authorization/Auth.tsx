@@ -6,50 +6,42 @@ import {Opportunities} from "./Components/Opportunities/Opportunities";
 import {PassField} from "./Components/PassField/PassField";
 import {useAppDispatch} from "../../hooks";
 import {fetchTokenAction} from "./authSaga";
-import {Formik, FormikErrors} from 'formik';
-
-interface authData {
-    login: string;
-    pass: string;
-}
+import {Formik} from 'formik';
+import {singInData} from "./authTypes";
 
 
 export const Auth = () => {
 
     const {sendImage} = useBgImage()
     const dispatch = useAppDispatch();
-    const authData: authData = {login: "", pass: "",};
+    const authData: singInData = {login: "", password: "",};
 
 
     useEffect(() => {
         sendImage(profileBGImage);
     }, [dispatch, sendImage]);
 
-    const LogIn = () => {
-        dispatch(fetchTokenAction('testUser', '324e2342'))
-    }
+
+    // 'testUser', '324e2342'
 
     return (
         <div className={s.auth}>
             <div className={s.singUp}>
+                <span className={s.title}>
+                    Sing in
+                </span>
                 <Formik
                     initialValues={authData}
                     validate={values => {
                         const errors = {};
-                        if (!values.login) {
-                            let errors: FormikErrors<authData> = {};
-                            errors.login = 'Required';
-                        }
-                        if (!values.pass) {
-                            let errors: FormikErrors<authData> = {};
-                            errors.pass = 'Required';
-                        }
-                        console.log('dfdsf')
+
                         return errors;
                     }}
                     onSubmit={(values, {setSubmitting}) => {
-                        dispatch(fetchTokenAction(values.login, values.pass));
-                        setSubmitting(false);
+                        setTimeout(() => {
+                            dispatch(fetchTokenAction(values))
+                            setSubmitting(false);
+                        }, 400);
                     }}
                 >
                     {({
@@ -60,7 +52,7 @@ export const Auth = () => {
                           handleBlur,
                           handleSubmit,
                           isSubmitting,
-                          /* and other goodies */
+                          submitForm
                       }) => (
                         <form onSubmit={handleSubmit}>
                             <Opportunities/>
@@ -73,12 +65,11 @@ export const Auth = () => {
                                 onBlur={handleBlur}
                                 value={values.login}
                             />
+                            <PassField value={values.password} handleChange={handleChange} handleBlur={handleBlur}/>
 
-                            <PassField value={values.pass} handleChange={handleChange} handleBlur={handleBlur} />
-
-                            <button className={s.logInBtn} type="submit" >
+                            <div className={s.logInBtn} onClick={submitForm}>
                                 Log in
-                            </button>
+                            </div>
                         </form>
                     )}
                 </Formik>

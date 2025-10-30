@@ -23,7 +23,7 @@ export const PassField: FC<props> = ({placeholder, value, handleChange, handleBl
 
     return (
         <div className={s.passBlock}>
-            <input name='pass' placeholder={placeholder || 'Password'} value={value}
+            <input name='password' placeholder={placeholder || 'Password'} value={value}
                    onChange={handleChange} onBlur={handleBlur} className={s.textField} type={passwordType}/>
             {
                 passwordType === 'text'
