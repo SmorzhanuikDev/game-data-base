@@ -1,6 +1,6 @@
 @use 'src/base';
 
-@mixin  textField {
+@mixin textField {
   width: 100%;
   margin-bottom: 20px;
   padding: 13px;
@@ -27,7 +27,7 @@
   display: flex;
   justify-content: space-between;
 
-  .singUp {
+  .authForm {
     min-width: 40%;
     display: flex;
     flex-direction: column;
@@ -38,10 +38,19 @@
       margin-bottom: 50px;
       padding-top: 10px;
     }
+    .FieldBox {
+      position: relative;
 
-   .textField {
-     @include textField;
-   }
+      .textField {
+        @include textField;
+      }
+
+      .error {
+        position: absolute;
+        bottom: 1px;
+        z-index: 10;
+      }
+    }
 
     .logInBtn {
       width: 100%;

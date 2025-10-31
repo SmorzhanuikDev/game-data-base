@@ -6,7 +6,7 @@ import {Opportunities} from "./Components/Opportunities/Opportunities";
 import {PassField} from "./Components/PassField/PassField";
 import {useAppDispatch} from "../../hooks";
 import {fetchTokenAction} from "./authSaga";
-import {Formik} from 'formik';
+import {Formik, FormikErrors} from 'formik';
 import {singInData} from "./authTypes";
 
 
@@ -26,22 +26,22 @@ export const Auth = () => {
 
     return (
         <div className={s.auth}>
-            <div className={s.singUp}>
-                <span className={s.title}>
-                    Sing in
-                </span>
+            <div className={s.authForm}>
                 <Formik
                     initialValues={authData}
                     validate={values => {
-                        const errors = {};
-
+                        const errors: FormikErrors<singInData> = {};
+                        if (values.password.length <= 6) {
+                            errors.password = "Password must be at least 6 characters";
+                        }
+                        if (values.login.length <= 4) {
+                            errors.login = "Login must be at least 4 characters";
+                        }
                         return errors;
                     }}
                     onSubmit={(values, {setSubmitting}) => {
-                        setTimeout(() => {
-                            dispatch(fetchTokenAction(values))
-                            setSubmitting(false);
-                        }, 400);
+                        dispatch(fetchTokenAction(values))
+                        setSubmitting(false);
                     }}
                 >
                     {({
@@ -56,15 +56,22 @@ export const Auth = () => {
                       }) => (
                         <form onSubmit={handleSubmit}>
                             <Opportunities/>
-                            <input
-                                type="text"
-                                className={s.textField}
-                                placeholder={'Login'}
-                                name="login"
-                                onChange={handleChange}
-                                onBlur={handleBlur}
-                                value={values.login}
-                            />
+                            <span className={s.title}>
+                                Sing in
+                            </span>
+                            <div className={s.FieldBox}>
+                                <input
+                                    type="text"
+                                    className={s.textField}
+                                    placeholder={'Login'}
+                                    name="login"
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                    value={values.login}
+                                />
+                                <div className={s.error}>{errors.login && touched.login && errors.login}</div>
+                            </div>
+
                             <PassField value={values.password} handleChange={handleChange} handleBlur={handleBlur}/>
 
                             <div className={s.logInBtn} onClick={submitForm}>
@@ -74,12 +81,16 @@ export const Auth = () => {
                     )}
                 </Formik>
             </div>
-            <div className={s.singUp}>
+            <div className={s.authForm}>
                 <span className={s.title}>
                     Sing up
                 </span>
-                <input placeholder={'Name'} className={s.textField} type="text"/>
-                <input placeholder={'Login'} className={s.textField} type="email"/>
+                <div className={s.FieldBox}>
+                    <input placeholder={'Name'} className={s.textField} type="text"/>
+                </div>
+                <div className={s.FieldBox}>
+                    <input placeholder={'Login'} className={s.textField} type="email"/>
+                </div>
                 {/*<PassField/>*/}
                 {/*<PassField placeholder={'Confirm password'}/>*/}
                 <div className={s.logInBtn}>
