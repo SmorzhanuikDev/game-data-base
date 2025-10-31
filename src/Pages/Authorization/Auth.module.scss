@@ -47,8 +47,38 @@
 
       .error {
         position: absolute;
+        font-size: 12px;
         bottom: 1px;
         z-index: 10;
+        background-color: #4c4b4b;
+        border: #9c9a9a 1px solid;
+        padding: 2px 7px;
+        border-radius: 6px;
+        opacity: .9;
+
+        .errorText {
+          margin-left: 22px;
+        }
+
+        .errorIcon {
+          font-size: 16px;
+          position: absolute;
+          top: 1px;
+          color: #aea720;
+        }
+
+        &:after, &:before {
+          content: '';
+          position: absolute;
+          left: 20px; top: -20px;
+          border: 7px solid transparent;
+          border-bottom: 7px solid green;
+        }
+
+        &:after {
+          border-bottom: 7px solid white;
+          top: -13px;
+        }
       }
     }
 

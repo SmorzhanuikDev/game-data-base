@@ -8,6 +8,7 @@ import {useAppDispatch} from "../../hooks";
 import {fetchTokenAction} from "./authSaga";
 import {Formik, FormikErrors} from 'formik';
 import {singInData} from "./authTypes";
+import {ErrorMessage} from "../Account/Components/ErrorMessage";
 
 
 export const Auth = () => {
@@ -34,7 +35,7 @@ export const Auth = () => {
                         if (values.password.length <= 6) {
                             errors.password = "Password must be at least 6 characters";
                         }
-                        if (values.login.length <= 4) {
+                        if (values.login.length <= 3) {
                             errors.login = "Login must be at least 4 characters";
                         }
                         return errors;
@@ -57,7 +58,7 @@ export const Auth = () => {
                         <form onSubmit={handleSubmit}>
                             <Opportunities/>
                             <span className={s.title}>
-                                Sing in
+                                Log in
                             </span>
                             <div className={s.FieldBox}>
                                 <input
@@ -69,7 +70,7 @@ export const Auth = () => {
                                     onBlur={handleBlur}
                                     value={values.login}
                                 />
-                                <div className={s.error}>{errors.login && touched.login && errors.login}</div>
+                                <ErrorMessage error={errors.login} isTouched={touched.login}/>
                             </div>
 
                             <PassField value={values.password} handleChange={handleChange} handleBlur={handleBlur}/>
