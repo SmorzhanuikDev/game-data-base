@@ -1,5 +1,5 @@
 import React, {FC, PropsWithChildren} from 'react';
-import s from "../../Authorization/Auth.module.scss";
+import s from "../Auth.module.scss";
 import {ErrorMessage} from "./ErrorMessage";
 
 interface props extends PropsWithChildren{

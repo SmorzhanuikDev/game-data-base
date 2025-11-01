@@ -1,11 +1,11 @@
 import React from 'react';
-import s from "../../Authorization/Auth.module.scss";
+import s from "../Auth.module.scss";
 import {Formik, FormikErrors} from "formik";
-import {fetchTokenAction} from "../../Authorization/authSaga";
-import {Opportunities} from "../../Authorization/Components/Opportunities/Opportunities";
+import {fetchTokenAction} from "../authSaga";
+import {Opportunities} from "./Opportunities/Opportunities";
 import {FieldBox} from "./FieldBox";
-import {PassField} from "../../Authorization/Components/PassField/PassField";
-import {singInData} from "../../Authorization/authTypes";
+import {PassField} from "./PassField/PassField";
+import {singInData} from "../authTypes";
 import {useAppDispatch} from "../../../hooks";
 
 export const SingInForm = () => {
@@ -42,7 +42,6 @@ export const SingInForm = () => {
                       handleChange,
                       handleBlur,
                       handleSubmit,
-                      isSubmitting,
                       submitForm
                   }) => (
                     <form onSubmit={handleSubmit}>

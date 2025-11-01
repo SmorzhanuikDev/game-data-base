@@ -17,6 +17,12 @@ export interface singInData {
     login: string
     password: string
 }
+export interface singUpData {
+    login: string
+    name: string
+    password: string
+    passwordConfirm: string
+}
 
 export interface currentUser {
     login: string,

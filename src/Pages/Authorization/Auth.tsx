@@ -3,8 +3,9 @@ import s from './Auth.module.scss'
 import {useBgImage} from "../../Surface/Content";
 import profileBGImage from '../../Images/profileBGImage.jpg'
 import {useAppDispatch} from "../../hooks";
-import {SingInForm} from "../Account/Components/SingInForm";
+import {SingInForm} from "./Components/SingInForm";
 import {PassField} from "./Components/PassField/PassField";
+import {SingUp} from "./Components/SingUp";
 
 
 export const Auth = () => {
@@ -22,22 +23,7 @@ export const Auth = () => {
     return (
         <div className={s.auth}>
             <SingInForm/>
-            <div className={s.authForm}>
-                <h4 className={s.title}>
-                    Sing up
-                </h4>
-                <div className={s.FieldBox}>
-                    <input placeholder={'Name'} className={s.textField} type="text"/>
-                </div>
-                <div className={s.FieldBox}>
-                    <input placeholder={'Login'} className={s.textField} type="email"/>
-                </div>
-                {/*<PassField />*/}
-                {/*<PassField placeholder={'Confirm password'}/>*/}
-                <div className={s.logInBtn}>
-                    Sing up
-                </div>
-            </div>
+            <SingUp/>
         </div>
     );
 };

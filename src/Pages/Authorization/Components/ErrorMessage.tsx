@@ -1,5 +1,5 @@
 import React, {FC} from 'react';
-import s from "../../Authorization/Auth.module.scss";
+import s from "../Auth.module.scss";
 import {CgDanger} from "react-icons/cg";
 
 interface props {
