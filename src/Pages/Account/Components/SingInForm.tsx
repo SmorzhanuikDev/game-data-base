@@ -16,7 +16,7 @@ export const SingInForm = () => {
 
     const validate = (values: singInData) => {
         const errors: FormikErrors<singInData> = {};
-        if (values.password.length <= 6) {
+        if (values.password.length <= 5) {
             errors.password = "Password must be at least 6 characters";
         }
         if (values.login.length <= 3) {
@@ -47,7 +47,7 @@ export const SingInForm = () => {
                   }) => (
                     <form onSubmit={handleSubmit}>
                         <Opportunities/>
-                        <span className={s.title}>Sing in</span>
+                        <h4 className={s.title}>Sing in</h4>
                         <FieldBox isTouched={touched.login} error={errors.login}>
                             <input
                                 type="text"
@@ -59,7 +59,10 @@ export const SingInForm = () => {
                                 value={values.login}
                             />
                         </FieldBox>
-                        <PassField value={values.password} handleChange={handleChange} handleBlur={handleBlur}/>
+                        <FieldBox isTouched={touched.password} error={errors.password}>
+                            <PassField value={values.password} handleChange={handleChange} handleBlur={handleBlur}/>
+                        </FieldBox>
+
                         <div className={s.logInBtn} onClick={submitForm}>
                             Log in
                         </div>

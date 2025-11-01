@@ -4,6 +4,7 @@ import {useBgImage} from "../../Surface/Content";
 import profileBGImage from '../../Images/profileBGImage.jpg'
 import {useAppDispatch} from "../../hooks";
 import {SingInForm} from "../Account/Components/SingInForm";
+import {PassField} from "./Components/PassField/PassField";
 
 
 export const Auth = () => {
@@ -22,16 +23,16 @@ export const Auth = () => {
         <div className={s.auth}>
             <SingInForm/>
             <div className={s.authForm}>
-                <span className={s.title}>
+                <h4 className={s.title}>
                     Sing up
-                </span>
+                </h4>
                 <div className={s.FieldBox}>
                     <input placeholder={'Name'} className={s.textField} type="text"/>
                 </div>
                 <div className={s.FieldBox}>
                     <input placeholder={'Login'} className={s.textField} type="email"/>
                 </div>
-                {/*<PassField/>*/}
+                {/*<PassField />*/}
                 {/*<PassField placeholder={'Confirm password'}/>*/}
                 <div className={s.logInBtn}>
                     Sing up
