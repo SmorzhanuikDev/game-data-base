@@ -12,6 +12,7 @@ interface props {
 export const PassField: FC<props> = ({placeholder, value, handleChange, handleBlur}) => {
 
     const [passwordType, setPasswordType] = useState<'text' | 'password'>('password')
+    const fieldName = placeholder !== 'Password' ? 'passwordConfirm' : 'password'
 
     const changePassType = () => {
         if (passwordType === 'password') {
@@ -23,7 +24,7 @@ export const PassField: FC<props> = ({placeholder, value, handleChange, handleBl
 
     return (
         <div className={s.passBlock}>
-            <input name='password' placeholder={placeholder || 'Password'} value={value}
+            <input name={fieldName} placeholder={placeholder || 'Password'} value={value}
                    onChange={handleChange} onBlur={handleBlur} className={s.textField} type={passwordType}/>
             {
                 passwordType === 'text'

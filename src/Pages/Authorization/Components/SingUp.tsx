@@ -13,13 +13,20 @@ export const SingUp = () => {
     const authData: singUpData = {login: "", password: "", name: '', passwordConfirm: ''};
 
 
-    const validate = (values: singInData) => {
+    const validate = (values: singUpData) => {
         const errors: FormikErrors<singUpData> = {};
         if (values.password.length <= 5) {
             errors.password = "Password must be at least 6 characters";
         }
         if (values.login.length <= 3) {
             errors.login = "Login must be at least 4 characters";
+        }
+        if (values.password !== values.passwordConfirm) {
+            errors.passwordConfirm = "Passwords do not match";
+            errors.password = "Passwords do not match";
+        }
+        if (values.name.length <= 3) {
+            errors.name = "Name must be at least 4 characters";
         }
         return errors;
     }
@@ -71,7 +78,7 @@ export const SingUp = () => {
                         </FieldBox>
                         <FieldBox isTouched={touched.passwordConfirm} error={errors.passwordConfirm}>
                             <PassField placeholder={'Confirm password'} handleChange={handleChange}
-                                       handleBlur={handleBlur} value={values.password}/>
+                                       handleBlur={handleBlur} value={values.passwordConfirm}/>
                         </FieldBox>
                         <div className={s.logInBtn} onClick={submitForm}>
                             Sing up
