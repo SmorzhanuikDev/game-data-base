@@ -1,14 +1,15 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit'
 import {currentUser} from "./authTypes";
+import {AxiosError} from "axios";
 
 type initialStateType = {
     token: string | undefined
-    error: any
+    error: AxiosError | undefined
     currentUser: currentUser
 }
 const initialState: initialStateType = {
     token: '',
-    error: '',
+    error: undefined,
     currentUser: {} as currentUser,
 }
 const authSlice = createSlice({

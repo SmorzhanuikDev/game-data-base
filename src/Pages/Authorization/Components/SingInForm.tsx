@@ -60,7 +60,7 @@ export const SingInForm = () => {
                         </FieldBox>
                         <FieldBox isTouched={touched.password} error={errors.password}>
                             <PassField value={values.password} handleChange={handleChange}
-                                       handleBlur={handleBlur}/>
+                                       handleBlur={handleBlur} fieldName={'password'} placeholder={'Password'}/>
                         </FieldBox>
 
                         <div className={s.logInBtn} onClick={submitForm}>

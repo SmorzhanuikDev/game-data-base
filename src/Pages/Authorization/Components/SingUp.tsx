@@ -74,11 +74,11 @@ export const SingUp = () => {
                         </FieldBox>
                         <FieldBox isTouched={touched.password} error={errors.password}>
                             <PassField value={values.password} handleChange={handleChange} handleBlur={handleBlur}
-                                       placeholder={'Password'}/>
+                                       placeholder={'Password'} fieldName={'password'}/>
                         </FieldBox>
                         <FieldBox isTouched={touched.passwordConfirm} error={errors.passwordConfirm}>
                             <PassField placeholder={'Confirm password'} handleChange={handleChange}
-                                       handleBlur={handleBlur} value={values.passwordConfirm}/>
+                                       handleBlur={handleBlur} value={values.passwordConfirm} fieldName={'passwordConfirm'}/>
                         </FieldBox>
                         <div className={s.logInBtn} onClick={submitForm}>
                             Sing up

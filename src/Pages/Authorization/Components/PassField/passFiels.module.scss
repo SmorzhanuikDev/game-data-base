@@ -5,7 +5,8 @@
   position: relative;
 
   .textField{
-    @include Auth.textField
+    @include Auth.textField;
+
   }
 
   .showPass {

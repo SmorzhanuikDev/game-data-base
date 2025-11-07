@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import s from './Surface.module.scss'
-import {useNavigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import blankProfile from '../Images/blank-profile.webp'
 import {SearchField} from "./SearchField";
 
@@ -25,18 +25,18 @@ export const Navigation = () => {
 
     return (
         <header className={cls}>
-            <div onClick={() => navigate('/home')} className={s.logo}>
+            <a href={'/home'} className={s.logo}>
                 <span className={s.logoAbr}>
                     GDB
                 </span>
                 <span>
                     game data base
                 </span>
-            </div>
+            </a>
             <div className={s.navigation}>
-                <a href="/games" className={s.link}>
+                <Link to="/games" className={s.link}>
                     <p>Games</p>
-                </a>
+                </Link>
                 <a href="/genres" className={s.link}>
                     <p>Genres</p>
                 </a>
@@ -48,8 +48,8 @@ export const Navigation = () => {
                 </a>
             </div>
             <SearchField/>
-            <div onClick={() => navigate('/profile')} className={s.avatarLink}>
-                <img src={blankProfile} alt="avatar"/>
+            <div className={s.avatarLink}>
+                <a href="/profile"><img src={blankProfile} alt="avatar"/> </a>
             </div>
         </header>
     );

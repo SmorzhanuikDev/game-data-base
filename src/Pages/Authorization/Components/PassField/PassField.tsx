@@ -7,27 +7,27 @@ interface props {
     placeholder?: string
     handleChange: any
     handleBlur: any
+    fieldName: string
 }
 
-export const PassField: FC<props> = ({placeholder, value, handleChange, handleBlur}) => {
+export const PassField: FC<props> = ({placeholder, value, handleChange, handleBlur, fieldName}) => {
 
-    const [passwordType, setPasswordType] = useState<'text' | 'password'>('password')
-    const fieldName = placeholder !== 'Password' ? 'passwordConfirm' : 'password'
+    const [fieldType, setFieldType] = useState<'text' | 'password'>('password')
 
     const changePassType = () => {
-        if (passwordType === 'password') {
-            setPasswordType('text')
+        if (fieldType === 'password') {
+            setFieldType('text')
         } else {
-            setPasswordType('password')
+            setFieldType('password')
         }
     }
 
     return (
         <div className={s.passBlock}>
-            <input name={fieldName} placeholder={placeholder || 'Password'} value={value}
-                   onChange={handleChange} onBlur={handleBlur} className={s.textField} type={passwordType}/>
+            <input name={fieldName} placeholder={placeholder} value={value}
+                   onChange={handleChange} onBlur={handleBlur} className={s.textField} type={fieldType}/>
             {
-                passwordType === 'text'
+                fieldType === 'text'
                     ? <IoEyeOffOutline className={s.showPass} onClick={changePassType}/>
                     : <IoEyeOutline className={s.showPass} onClick={changePassType}/>
             }
