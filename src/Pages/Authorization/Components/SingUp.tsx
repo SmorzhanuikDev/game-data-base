@@ -6,6 +6,8 @@ import {singInData, singUpData} from "../authTypes";
 import {Formik, FormikErrors} from "formik";
 import {fetchTokenAction} from "../authSaga";
 import {FieldBox} from "./FieldBox";
+import {MdNoEncryptionGmailerrorred} from "react-icons/md";
+import {SubmitBtn} from "./SubmitBtn";
 
 export const SingUp = () => {
 
@@ -80,9 +82,9 @@ export const SingUp = () => {
                             <PassField placeholder={'Confirm password'} handleChange={handleChange}
                                        handleBlur={handleBlur} value={values.passwordConfirm} fieldName={'passwordConfirm'}/>
                         </FieldBox>
-                        <div className={s.logInBtn} onClick={submitForm}>
-                            Sing up
-                        </div>
+
+                        <SubmitBtn submitForm={submitForm} text={'Sing up'} />
+
                     </form>
                 )}
             </Formik>

@@ -1,15 +1,15 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit'
-import {currentUser} from "./authTypes";
+import {commonApiRes, currentUser} from "./authTypes";
 import {AxiosError} from "axios";
 
 type initialStateType = {
     token: string | undefined
-    error: AxiosError | undefined
+    error: string
     currentUser: currentUser
 }
 const initialState: initialStateType = {
     token: '',
-    error: undefined,
+    error: '',
     currentUser: {} as currentUser,
 }
 const authSlice = createSlice({
@@ -19,7 +19,7 @@ const authSlice = createSlice({
         setToken: (state, action: PayloadAction<string | undefined>) => {
             state.token = action.payload
         },
-        setError: (state, action: PayloadAction<any>) => {
+        setError: (state, action: PayloadAction<string>) => {
             state.error = action.payload
         },
         setCurrentUser: (state, action: PayloadAction<currentUser>) => {

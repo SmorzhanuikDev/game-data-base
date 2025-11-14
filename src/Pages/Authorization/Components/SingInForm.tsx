@@ -6,12 +6,16 @@ import {Opportunities} from "./Opportunities/Opportunities";
 import {FieldBox} from "./FieldBox";
 import {PassField} from "./PassField/PassField";
 import {singInData} from "../authTypes";
-import {useAppDispatch} from "../../../hooks";
+import {useAppDispatch, useAppSelector} from "../../../hooks";
+import {MdNoEncryptionGmailerrorred} from "react-icons/md";
+import {SubmitBtn} from "./SubmitBtn";
+
 
 export const SingInForm = () => {
 
     const dispatch = useAppDispatch();
     const authData: singInData = {login: "", password: "",};
+
 
 
     const validate = (values: singInData) => {
@@ -30,7 +34,7 @@ export const SingInForm = () => {
             <Formik
                 initialValues={authData}
                 validate={validate}
-                onSubmit={(values, {setSubmitting}) => {
+                onSubmit={async (values, {setSubmitting}) => {
                     dispatch(fetchTokenAction(values))
                     setSubmitting(false);
                 }}
@@ -62,10 +66,7 @@ export const SingInForm = () => {
                             <PassField value={values.password} handleChange={handleChange}
                                        handleBlur={handleBlur} fieldName={'password'} placeholder={'Password'}/>
                         </FieldBox>
-
-                        <div className={s.logInBtn} onClick={submitForm}>
-                            Log in
-                        </div>
+                        <SubmitBtn submitForm={submitForm} text={'Sing in'} />
                     </form>
                 )}
             </Formik>
