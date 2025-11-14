@@ -1,6 +1,8 @@
 import React, {useRef, useState} from 'react';
 import s from "./opportunities.module.scss";
 import descImage from "../../../../Images/authDescImage.jpg";
+import {useAppDispatch} from "../../../../hooks";
+import {setError} from "../../authSlice";
 
 
 
@@ -10,8 +12,10 @@ export const Opportunities: React.FC = () => {
     const singUp = useRef<HTMLDivElement>(null)
     const logIn = useRef<HTMLDivElement>(null)
     const [activeOption, setActiveOption] = useState<'singUp' | 'logIn'>('logIn')
+    const dispatch = useAppDispatch()
 
     const changeAuthOption = () => {
+        dispatch(setError(''))
         if (opportunitiesRef.current && singUp.current && logIn.current) {
             if (activeOption === 'logIn') {
                 opportunitiesRef.current.style.right = '-20%'

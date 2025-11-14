@@ -6,16 +6,15 @@ import {Opportunities} from "./Opportunities/Opportunities";
 import {FieldBox} from "./FieldBox";
 import {PassField} from "./PassField/PassField";
 import {singInData} from "../authTypes";
-import {useAppDispatch, useAppSelector} from "../../../hooks";
-import {MdNoEncryptionGmailerrorred} from "react-icons/md";
+import {useAppDispatch} from "../../../hooks";
 import {SubmitBtn} from "./SubmitBtn";
+import {setError} from "../authSlice";
 
 
-export const SingInForm = () => {
+export const SingIn = () => {
 
     const dispatch = useAppDispatch();
     const authData: singInData = {login: "", password: "",};
-
 
 
     const validate = (values: singInData) => {
@@ -38,6 +37,7 @@ export const SingInForm = () => {
                     dispatch(fetchTokenAction(values))
                     setSubmitting(false);
                 }}
+
             >
                 {({
                       values,
@@ -57,7 +57,10 @@ export const SingInForm = () => {
                                 className={s.textField}
                                 placeholder={'Login'}
                                 name="login"
-                                onChange={handleChange}
+                                onChange={(e) => {
+                                    dispatch(setError(''))
+                                    handleChange(e)
+                                }}
                                 onBlur={handleBlur}
                                 value={values.login}
                             />
@@ -66,7 +69,7 @@ export const SingInForm = () => {
                             <PassField value={values.password} handleChange={handleChange}
                                        handleBlur={handleBlur} fieldName={'password'} placeholder={'Password'}/>
                         </FieldBox>
-                        <SubmitBtn submitForm={submitForm} text={'Sing in'} />
+                        <SubmitBtn submitForm={submitForm} text={'Sing in'}/>
                     </form>
                 )}
             </Formik>

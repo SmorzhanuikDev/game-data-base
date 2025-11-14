@@ -2,12 +2,12 @@ import React from 'react';
 import s from "../Auth.module.scss";
 import {PassField} from "./PassField/PassField";
 import {useAppDispatch} from "../../../hooks";
-import {singInData, singUpData} from "../authTypes";
+import {singUpData} from "../authTypes";
 import {Formik, FormikErrors} from "formik";
 import {fetchTokenAction} from "../authSaga";
 import {FieldBox} from "./FieldBox";
-import {MdNoEncryptionGmailerrorred} from "react-icons/md";
 import {SubmitBtn} from "./SubmitBtn";
+import {setError} from "../authSlice";
 
 export const SingUp = () => {
 
@@ -59,7 +59,10 @@ export const SingUp = () => {
                                    className={s.textField}
                                    type="text"
                                    name="name"
-                                   onChange={handleChange}
+                                   onChange={(e)=>{
+                                       dispatch(setError(''))
+                                       handleChange(e)
+                                   }}
                                    onBlur={handleBlur}
                                    value={values.name}
                             />
@@ -69,7 +72,10 @@ export const SingUp = () => {
                                    className={s.textField}
                                    type="text"
                                    name="login"
-                                   onChange={handleChange}
+                                   onChange={(e)=>{
+                                       dispatch(setError(''))
+                                       handleChange(e)
+                                   }}
                                    onBlur={handleBlur}
                                    value={values.login}
                             />

@@ -3,7 +3,7 @@ import s from './Auth.module.scss'
 import {useBgImage} from "../../Surface/Content";
 import profileBGImage from '../../Images/profileBGImage.jpg'
 import {useAppDispatch} from "../../hooks";
-import {SingInForm} from "./Components/SingInForm";
+import {SingIn} from "./Components/SingIn";
 import {PassField} from "./Components/PassField/PassField";
 import {SingUp} from "./Components/SingUp";
 
@@ -22,7 +22,7 @@ export const Auth = () => {
 
     return (
         <div className={s.auth}>
-            <SingInForm/>
+            <SingIn/>
             <SingUp/>
         </div>
     );
