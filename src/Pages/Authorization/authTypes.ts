@@ -2,6 +2,7 @@ import {gameType} from "../Games/gamesTypes";
 import {defaultResponse} from "../../Common/commonTypes";
 
 export const FETCH_TOKEN = 'FETCH_TOKEN'
+export const CREATE_ACCOUNT = 'CREATE_ACCOUNT'
 
 
 export interface commonApiRes {
@@ -9,19 +10,23 @@ export interface commonApiRes {
     message: string
 }
 
-export interface token extends commonApiRes {
+export interface tokenRes extends commonApiRes {
     token?: string
 }
-export interface singInData {
+export interface singInFormData {
     login: string
     password: string
 }
-export interface singUpData {
+export interface singUpFormData {
     login: string
     name: string
     password: string
     passwordConfirm: string
 }
-
+export interface singUpData {
+    login: string
+    name: string
+    password: string
+}
 
 

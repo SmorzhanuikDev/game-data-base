@@ -22,6 +22,7 @@ export const Auth = () => {
 
     useEffect(() => {
         if (token) {
+            localStorage.setItem("token", token);
             navigate('/profile');
         }
     }, [navigate, token]);

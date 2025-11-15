@@ -2,9 +2,9 @@ import React from 'react';
 import s from "../Auth.module.scss";
 import {PassField} from "./PassField/PassField";
 import {useAppDispatch} from "../../../hooks";
-import {singUpData} from "../authTypes";
+import {singUpFormData} from "../authTypes";
 import {Formik, FormikErrors} from "formik";
-import {fetchTokenAction} from "../authSaga";
+import {createAccountAction, fetchTokenAction} from "../authSaga";
 import {FieldBox} from "./FieldBox";
 import {SubmitBtn} from "./SubmitBtn";
 import {setError} from "../authSlice";
@@ -12,11 +12,11 @@ import {setError} from "../authSlice";
 export const SingUp = () => {
 
     const dispatch = useAppDispatch();
-    const authData: singUpData = {login: "", password: "", name: '', passwordConfirm: ''};
+    const authData: singUpFormData = {login: "", password: "", name: '', passwordConfirm: ''};
 
 
-    const validate = (values: singUpData) => {
-        const errors: FormikErrors<singUpData> = {};
+    const validate = (values: singUpFormData) => {
+        const errors: FormikErrors<singUpFormData> = {};
         if (values.password.length <= 5) {
             errors.password = "Password must be at least 6 characters";
         }
@@ -39,7 +39,7 @@ export const SingUp = () => {
                 initialValues={authData}
                 validate={validate}
                 onSubmit={(values, {setSubmitting}) => {
-                    dispatch(fetchTokenAction(values))
+                    dispatch(createAccountAction(values))
                     setSubmitting(false);
                 }}
             >

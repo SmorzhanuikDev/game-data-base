@@ -1,15 +1,19 @@
 import {accountInstance, mainInstance} from "./index";
 import {content} from "../Pages/CommonPage/commonPageTypes";
-import {token} from "../Pages/Authorization/authTypes";
+import {singUpData, singUpFormData, tokenRes} from "../Pages/Authorization/authTypes";
 
 export const accountAPI = {
-    logIn: async (password: string, login: string): Promise<token> => {
-        const response = await accountInstance.get<token>('account', {
+    logIn: async (password: string, login: string): Promise<tokenRes> => {
+        const response = await accountInstance.get<tokenRes>('account', {
             params: {
                 password,
                 login
             }
         })
+        return response.data
+    },
+    createAccount: async (singUpData: singUpData): Promise<tokenRes> => {
+        const response = await accountInstance.post<tokenRes>('account', singUpData)
         return response.data
     },
 }

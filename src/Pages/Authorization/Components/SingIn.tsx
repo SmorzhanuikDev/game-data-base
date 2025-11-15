@@ -5,7 +5,7 @@ import {fetchTokenAction} from "../authSaga";
 import {Opportunities} from "./Opportunities/Opportunities";
 import {FieldBox} from "./FieldBox";
 import {PassField} from "./PassField/PassField";
-import {singInData} from "../authTypes";
+import {singInFormData} from "../authTypes";
 import {useAppDispatch} from "../../../hooks";
 import {SubmitBtn} from "./SubmitBtn";
 import {setError} from "../authSlice";
@@ -14,11 +14,11 @@ import {setError} from "../authSlice";
 export const SingIn = () => {
 
     const dispatch = useAppDispatch();
-    const authData: singInData = {login: "testUser", password: "324e2342",};
+    const authData: singInFormData = {login: "testUser", password: "324e2342",};
 
 
-    const validate = (values: singInData) => {
-        const errors: FormikErrors<singInData> = {};
+    const validate = (values: singInFormData) => {
+        const errors: FormikErrors<singInFormData> = {};
         if (values.password.length <= 5) {
             errors.password = "Password must be at least 6 characters";
         }
