@@ -6,6 +6,7 @@ import {useAppDispatch, useAppSelector} from "../../hooks";
 import {SingIn} from "./Components/SingIn";
 import {SingUp} from "./Components/SingUp";
 import {useNavigate} from "react-router-dom";
+import {ShadowLoader} from "../../Surface/ShadowLoader/ShadowLoader";
 
 
 export const Auth = () => {
@@ -14,6 +15,7 @@ export const Auth = () => {
     const dispatch = useAppDispatch();
     const token = useAppSelector(state => state.auth.token);
     const navigate = useNavigate()
+    const isLoading = useAppSelector(state => state.auth.isLoading);
 
     useEffect(() => {
         sendImage(profileBGImage);
@@ -29,6 +31,7 @@ export const Auth = () => {
 
     return (
         <div className={s.auth}>
+            <ShadowLoader isLoading={isLoading} />
             <SingIn/>
             <SingUp/>
         </div>

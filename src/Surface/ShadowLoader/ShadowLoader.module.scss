@@ -1,0 +1,33 @@
+.shadowLoading {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: #0b0800;
+  width: 100vw;
+  height: 100vh;
+  z-index: 3;
+  opacity: .4;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .circle {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    border: 5px solid #FFF;
+    border-bottom-color: transparent;
+    border-radius: 50%;
+    display: inline-block;
+    box-sizing: border-box;
+    animation: rotation 1s linear infinite;
+    @keyframes rotation {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+  }
+}

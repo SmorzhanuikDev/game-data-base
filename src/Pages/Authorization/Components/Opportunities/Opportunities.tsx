@@ -1,4 +1,4 @@
-import React, {useRef, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import s from "./opportunities.module.scss";
 import descImage from "../../../../Images/authDescImage.jpg";
 import {useAppDispatch} from "../../../../hooks";
@@ -31,6 +31,11 @@ export const Opportunities: React.FC = () => {
             }
         }
     }
+
+    useEffect(() => {
+        localStorage.setItem('option', activeOption)
+    }, [activeOption]);
+
     return (
         <div className={s.opportunities} ref={opportunitiesRef}>
             <div className={s.logInText} ref={singUp}>

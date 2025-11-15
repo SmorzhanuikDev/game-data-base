@@ -44,6 +44,7 @@
       margin-top: 10px;
       margin-bottom: 30px;
     }
+
     .FieldBox {
       position: relative;
 
@@ -76,7 +77,8 @@
         &:after, &:before {
           content: '';
           position: absolute;
-          left: 20px; top: -20px;
+          left: 20px;
+          top: -20px;
           border: 7px solid transparent;
           border-bottom: 7px solid green;
         }
@@ -127,6 +129,7 @@
         opacity: .9;
       }
     }
+
   }
 
 

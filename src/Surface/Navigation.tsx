@@ -62,7 +62,6 @@ export const Navigation = () => {
                             <MdLogin/>
                         </a>
                 }
-
             </div>
         </header>
     );

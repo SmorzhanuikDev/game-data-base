@@ -1,11 +1,12 @@
 import {call, put, takeEvery} from 'redux-saga/effects'
 import {createAction, PayloadAction} from "@reduxjs/toolkit";
 import {CREATE_ACCOUNT, FETCH_TOKEN, singInFormData, singUpData, singUpFormData, tokenRes} from "./authTypes";
-import {setError, setToken} from "./authSlice";
+import {setError, setIsLoading, setToken} from "./authSlice";
 import {accountAPI} from "../../API/accountAPI";
 
 function* fetchToken({payload}: PayloadAction<singInFormData>) {
     try {
+        yield put(setIsLoading(true));
         const response: tokenRes = yield call(() => accountAPI.logIn(payload.password, payload.login));
         if (response.success) {
             yield put(setToken(response.token))
@@ -17,9 +18,8 @@ function* fetchToken({payload}: PayloadAction<singInFormData>) {
     }
 }
 function* createAccount({payload}: PayloadAction<singUpData>) {
-    debugger
     try {
-
+        yield put(setIsLoading(true));
         const response: tokenRes = yield call(() => accountAPI.createAccount(payload));
         if (response.success) {
             yield put(setToken(response.token))

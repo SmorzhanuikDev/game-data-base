@@ -1,7 +1,7 @@
 import React from 'react';
 import s from "../Auth.module.scss";
 import {PassField} from "./PassField/PassField";
-import {useAppDispatch} from "../../../hooks";
+import {useAppDispatch, useAppSelector} from "../../../hooks";
 import {singUpFormData} from "../authTypes";
 import {Formik, FormikErrors} from "formik";
 import {createAccountAction, fetchTokenAction} from "../authSaga";
@@ -25,7 +25,6 @@ export const SingUp = () => {
         }
         if (values.password !== values.passwordConfirm) {
             errors.passwordConfirm = "Passwords do not match";
-            errors.password = "Passwords do not match";
         }
         if (values.name.length <= 3) {
             errors.name = "Name must be at least 4 characters";

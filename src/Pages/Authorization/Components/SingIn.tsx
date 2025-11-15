@@ -15,8 +15,6 @@ export const SingIn = () => {
 
     const dispatch = useAppDispatch();
     const authData: singInFormData = {login: "testUser", password: "324e2342",};
-    const [loading, setLoading] = React.useState(false);
-
 
     const validate = (values: singInFormData) => {
         const errors: FormikErrors<singInFormData> = {};
@@ -35,7 +33,6 @@ export const SingIn = () => {
                 initialValues={authData}
                 validate={validate}
                 onSubmit={async (values, {setSubmitting}) => {
-                    setLoading(true)
                     dispatch(fetchTokenAction(values))
                     setSubmitting(false);
                 }}
@@ -72,7 +69,7 @@ export const SingIn = () => {
                             <PassField value={values.password} handleChange={handleChange}
                                        handleBlur={handleBlur} fieldName={'password'} placeholder={'Password'}/>
                         </FieldBox>
-                        <SubmitBtn submitForm={submitForm} text={!loading ? 'Sing in' : 'Loading...'}/>
+                        <SubmitBtn submitForm={submitForm} text={'Sing in'}/>
                     </form>
                 )}
             </Formik>
