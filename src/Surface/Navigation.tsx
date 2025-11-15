@@ -3,13 +3,17 @@ import s from './Surface.module.scss'
 import {Link, useNavigate} from "react-router-dom";
 import blankProfile from '../Images/blank-profile.webp'
 import {SearchField} from "./SearchField";
+import {MdAccountCircle, MdLogin} from "react-icons/md";
+import {useAppSelector} from "../hooks";
+
 
 export const Navigation = () => {
 
     const [position, setPosition] = useState(window.pageYOffset)
     const [visible, setVisible] = useState(true)
     const cls = visible ? s.visible : s.hidden;
-    const navigate = useNavigate()
+    const token = useAppSelector(state => state.auth.token)
+
 
     useEffect(() => {
         const handleScroll = () => {
@@ -48,8 +52,17 @@ export const Navigation = () => {
                 </a>
             </div>
             <SearchField/>
-            <div className={s.avatarLink}>
-                <a href="/profile"><img src={blankProfile} alt="avatar"/> </a>
+            <div className={s.account}>
+                {
+                    token
+                        ? <a href="/profile">
+                            <MdAccountCircle/>
+                        </a>
+                        : <a href="/auth">
+                            <MdLogin/>
+                        </a>
+                }
+
             </div>
         </header>
     );

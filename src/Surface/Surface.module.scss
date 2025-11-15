@@ -231,16 +231,8 @@ header {
     }
   }
 
-  .switchTheme {
-    margin-left: 15px;
-  }
-  .avatarLink {
+  .account {
     cursor: pointer;
-    border-radius: 50%;
-
-    img {
-      height: 50px;
-      border-radius: 50%;
-    }
+    font-size: 35px;
   }
 }

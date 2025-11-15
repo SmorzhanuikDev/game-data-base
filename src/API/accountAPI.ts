@@ -1,6 +1,5 @@
-import {accountInstance, mainInstance} from "./index";
-import {content} from "../Pages/CommonPage/commonPageTypes";
-import {singUpData, singUpFormData, tokenRes} from "../Pages/Authorization/authTypes";
+import {accountInstance} from "./index";
+import {singUpData, tokenRes} from "../Pages/Authorization/authTypes";
 
 export const accountAPI = {
     logIn: async (password: string, login: string): Promise<tokenRes> => {
