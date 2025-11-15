@@ -10,7 +10,7 @@ interface props {
 
 export const SubmitBtn: React.FC<props> = ({text, submitForm}) => {
 
-    const resError = useAppSelector(state => state.authSaga.error)
+    const resError = useAppSelector(state => state.auth.error)
 
     return (
         <div className={s.SubmitBox}>

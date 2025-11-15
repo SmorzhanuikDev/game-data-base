@@ -9,6 +9,7 @@ import {Provider} from "react-redux";
 import store from './redux-store'
 import GameDetails from "./Pages/GameDetails/GameDetails";
 import {CommonPage} from "./Pages/CommonPage/CommonPage";
+import Account from "./Pages/Account/Account";
 
 const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement
@@ -40,8 +41,12 @@ const router = createBrowserRouter([
                 element: <CommonPage/>
             },
             {
-                path: '/profile',
+                path: '/auth',
                 element: <Auth/>
+            },
+            {
+                path: '/profile',
+                element: <Account/>
             },
             {
                 path: '/genres',

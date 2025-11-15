@@ -12,6 +12,8 @@ export interface user {
     login: string,
     name: string,
     password: string,
-    token: string,
     gameLists: gameListItem[]
+    ratedGames: any
 }
+
+

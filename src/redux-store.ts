@@ -22,7 +22,7 @@ const store = configureStore({
         appData: appSlice,
         commonPageData: commonPageSlice,
         accountData: accountSlice,
-        authSaga: authSlice,
+        auth: authSlice,
     },
     middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(sagaMiddleware)
 })

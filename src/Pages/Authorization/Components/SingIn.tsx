@@ -14,7 +14,7 @@ import {setError} from "../authSlice";
 export const SingIn = () => {
 
     const dispatch = useAppDispatch();
-    const authData: singInData = {login: "", password: "",};
+    const authData: singInData = {login: "testUser", password: "324e2342",};
 
 
     const validate = (values: singInData) => {
