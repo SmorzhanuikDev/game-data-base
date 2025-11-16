@@ -2,6 +2,7 @@ import React, {useEffect} from 'react';
 import {useNavigate} from "react-router-dom";
 import {useAppDispatch, useAppSelector} from "../../hooks";
 import {setToken} from "../Authorization/authSlice";
+import {accountAction} from "./AccountSaga";
 
 const Account = () => {
 
@@ -19,6 +20,10 @@ const Account = () => {
         localStorage.removeItem("token");
         dispatch(setToken(''));
     }
+
+    useEffect(() => {
+        dispatch(accountAction.fetchUserAction())
+    }, []);
 
     return (
         <div>
