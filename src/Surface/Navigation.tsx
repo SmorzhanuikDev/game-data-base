@@ -55,7 +55,7 @@ export const Navigation = () => {
             <div className={s.account}>
                 {
                     token
-                        ? <a href="/profile">
+                        ? <a href="/profile/account">
                             <MdAccountCircle/>
                         </a>
                         : <a href="/auth">

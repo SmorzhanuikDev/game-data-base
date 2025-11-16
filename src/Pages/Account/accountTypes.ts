@@ -18,7 +18,7 @@ export interface user {
     ratedGames: any
 }
 
-export interface userResponse extends commonApiRes {
+export interface userRes extends commonApiRes {
     user: user
 }
 

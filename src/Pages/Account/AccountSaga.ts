@@ -1,13 +1,15 @@
 import {call, put, takeEvery} from 'redux-saga/effects'
 import {createAction, PayloadAction} from "@reduxjs/toolkit";
-import {FETCH_USER, LOG_IN, user} from "./accountTypes";
+import {FETCH_USER, LOG_IN, user, userRes} from "./accountTypes";
 import {accountAPI} from "../../API/accountAPI";
 import {setUser} from "./AccountSlice";
 
 function* fetchUser() {
     try {
-        const user: user = yield call(() => accountAPI.getUser());
-        yield put(setUser(user))
+        const userRes: userRes = yield call(() => accountAPI.getUser());
+        if (userRes.success) {
+            yield put(setUser(userRes.user))
+        }
     } catch (e: any) {
         yield put({type: 'ERROR', message: e.message})
     }
