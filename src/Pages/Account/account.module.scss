@@ -18,25 +18,9 @@
 }
 
 
-.accountNav {
-  display: flex;
-  justify-content: space-around;
 
-  .activeNavItem {
-    @include commonNavItem;
-    @include box;
-
-    transform: translate(0, 10px);
-  }
-
-  .navItem {
-    @include commonNavItem;
-
-    &:hover {
-      background: rgba(0, 0, 0, 0.2);
-      transition: .3s;
-
-    }
-
-  }
+.content {
+  @include box;
+  padding: 20px 35px;
+  margin: 0 13px;
 }

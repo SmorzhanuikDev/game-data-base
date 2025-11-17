@@ -1,13 +1,12 @@
 import React, {useEffect} from 'react';
-import {Link, useNavigate, useParams} from "react-router-dom";
-import {useAppDispatch, useAppSelector} from "../../hooks";
+import {useNavigate, useParams} from "react-router-dom";
+import {useAppDispatch} from "../../hooks";
 import {setToken} from "../Authorization/authSlice";
 import {accountAction} from "./AccountSaga";
 import s from './account.module.scss'
 import {useBgImage} from "../../Surface/Content";
 import accountBG from '../../Images/accountBGImage.jpg'
-
-type navName = 'account' | 'lists' | 'ratings'
+import {ProfileNav} from "./Components/Navigation/Navigation";
 
 const Account = () => {
 
@@ -17,15 +16,6 @@ const Account = () => {
         const {chapter} = useParams()
         const {sendImage} = useBgImage()
 
-        const chooseActiveStyle = (navName: navName) => {
-            if (chapter === navName) {
-                return s.activeNavItem
-            } else {
-                return s.navItem
-            }
-        }
-
-
         useEffect(() => {
             if (!token) {
                 navigate(`/auth`);
@@ -33,7 +23,7 @@ const Account = () => {
                 dispatch(accountAction.fetchUserAction())
                 sendImage(accountBG)
             }
-        }, [dispatch, navigate, token]);
+        }, [dispatch, navigate, sendImage, token]);
 
         const logOut = () => {
             localStorage.removeItem("token");
@@ -43,21 +33,7 @@ const Account = () => {
 
         return (
             <div>
-                <div className={s.accountNav}>
-                    <Link to={'/profile/account'} className={chooseActiveStyle('account')}>
-                        <span className={s.navText}>Account</span>
-                        <div className={s.linkBG}></div>
-                    </Link>
-                    <Link to={'/profile/lists'} className={chooseActiveStyle('lists')}>
-                        <span className={s.navText}>Game lists</span>
-                        <div className={s.linkBG}></div>
-                    </Link>
-                    <Link to={'/profile/ratings'} className={chooseActiveStyle('ratings')}>
-                        <span className={s.navText}>Rated games</span>
-                        <div className={s.linkBG}></div>
-                    </Link>
-
-                </div>
+                <ProfileNav chapter={chapter}/>
                 <div className={s.content}>
                     {chapter === 'account' && <div>
                         <button onClick={logOut}>log out</button>

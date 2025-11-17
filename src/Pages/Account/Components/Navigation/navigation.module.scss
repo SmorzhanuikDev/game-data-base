@@ -1,0 +1,24 @@
+@use '../../account.module';
+
+.accountNav {
+  display: flex;
+  justify-content: space-around;
+
+  .activeNavItem {
+    @include account.commonNavItem;
+    @include account.box;
+
+    transform: translate(0, 13px);
+  }
+
+  .navItem {
+    @include account.commonNavItem;
+
+    &:hover {
+      background: rgba(0, 0, 0, 0.2);
+      transition: .3s;
+
+    }
+
+  }
+}
