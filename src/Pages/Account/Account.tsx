@@ -1,12 +1,14 @@
 import React, {useEffect} from 'react';
 import {useNavigate, useParams} from "react-router-dom";
 import {useAppDispatch} from "../../hooks";
-import {setToken} from "../Authorization/authSlice";
 import {accountAction} from "./AccountSaga";
 import s from './account.module.scss'
 import {useBgImage} from "../../Surface/Content";
 import accountBG from '../../Images/accountBGImage.jpg'
 import {ProfileNav} from "./Components/Navigation/Navigation";
+import {Lists} from "./Components/Lists/Lists";
+import {Setting} from "./Components/Account/Setting";
+import {Ratings} from "./Components/Ratings/Ratings";
 
 const Account = () => {
 
@@ -17,33 +19,21 @@ const Account = () => {
         const {sendImage} = useBgImage()
 
         useEffect(() => {
+            sendImage(accountBG)
             if (!token) {
                 navigate(`/auth`);
-            } else {
-                dispatch(accountAction.fetchUserAction())
-                sendImage(accountBG)
             }
         }, [dispatch, navigate, sendImage, token]);
 
-        const logOut = () => {
-            localStorage.removeItem("token");
-            dispatch(setToken(''));
-            navigate('/home')
-        }
+
 
         return (
             <div>
                 <ProfileNav chapter={chapter}/>
                 <div className={s.content}>
-                    {chapter === 'account' && <div>
-                        <button onClick={logOut}>log out</button>
-                    </div>}
-                    {chapter === 'lists' && <div>
-                        lists content
-                    </div>}
-                    {chapter === 'ratings' && <div>
-                        games content
-                    </div>}
+                    {chapter === 'account' && <Setting/>}
+                    {chapter === 'lists' && <Lists/>}
+                    {chapter === 'ratings' && <Ratings/>}
                 </div>
             </div>
         )
