@@ -1,6 +1,6 @@
 import {call, put, takeEvery} from 'redux-saga/effects'
-import {createAction, PayloadAction} from "@reduxjs/toolkit";
-import {FETCH_USER, LOG_IN, user, userRes} from "./accountTypes";
+import {createAction} from "@reduxjs/toolkit";
+import {FETCH_USER, userRes} from "./accountTypes";
 import {accountAPI} from "../../API/accountAPI";
 import {setUser} from "./AccountSlice";
 

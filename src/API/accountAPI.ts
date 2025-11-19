@@ -1,5 +1,5 @@
 import {accountInstance} from "./index";
-import {singInFormData, singUpData, tokenRes} from "../Pages/Authorization/authTypes";
+import {singUpData, tokenRes} from "../Pages/Authorization/authTypes";
 import {userRes} from "../Pages/Account/accountTypes";
 
 export const accountAPI = {

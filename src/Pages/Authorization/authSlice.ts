@@ -1,4 +1,5 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit'
+import {refreshToken} from "../../API";
 
 type initialStateType = {
     token: string | undefined
@@ -16,6 +17,7 @@ const authSlice = createSlice({
     reducers: {
         setToken: (state, action: PayloadAction<string | undefined>) => {
             state.token = action.payload
+            refreshToken(action.payload)
             state.isLoading = false
         },
         setError: (state, action: PayloadAction<string>) => {
