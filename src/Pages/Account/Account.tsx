@@ -7,7 +7,7 @@ import {useBgImage} from "../../Surface/Content";
 import accountBG from '../../Images/accountBGImage.jpg'
 import {ProfileNav} from "./Components/Navigation/Navigation";
 import {Lists} from "./Components/Lists/Lists";
-import {Setting} from "./Components/Account/Setting";
+import {Setting} from "./Components/Setting/Setting";
 import {Ratings} from "./Components/Ratings/Ratings";
 
 const Account = () => {
