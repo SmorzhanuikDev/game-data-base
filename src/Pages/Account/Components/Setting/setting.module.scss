@@ -1,5 +1,6 @@
 $btnColor: #252525;
 $btnBorder: 2px solid #c1c1c1;
+$inputBorder: 2px solid #7e7b7b;
 
 .profileBox {
   border-bottom: white 1px solid;
@@ -21,10 +22,11 @@ $btnBorder: 2px solid #c1c1c1;
 }
 
 .profileInput {
+  min-width: 370px;
   padding: 8px;
   font-size: 16px;
   transition: .3s;
-  border: $btnBorder;
+  border: $inputBorder;
   border-radius: 4px;
   background: $btnColor;
   color: white;
@@ -63,5 +65,23 @@ $btnBorder: 2px solid #c1c1c1;
     position: relative;
     top: 4px;
     color: #f48b2d;
+  }
+}
+
+.errorBox {
+  display: flex;
+  align-items: center;
+
+  .arrow {
+    border: 7px solid transparent;
+    border-right: 7px solid #ddb64b;
+  }
+
+  .errorMessage {
+    background: #ddb64b;
+    padding: 4px 10px;
+    color: #000000;
+    border-radius: 4px;
+    font-size: 15px;
   }
 }
