@@ -1,8 +1,7 @@
-import {defaultResponse} from "../../Common/commonTypes";
 import {commonApiRes} from "../Authorization/authTypes";
 
 export const FETCH_USER = 'FETCH_USER'
-export const LOG_IN = 'LOG_IN'
+export const CHANGE_PASSWORD = 'CHANGE_PASSWORD'
 
 export interface gameListItem {
     id: number,
@@ -20,6 +19,11 @@ export interface user {
 
 export interface userRes extends commonApiRes {
     user: user
+}
+
+export interface changePassData {
+    newPassword: string;
+    oldPassword: string;
 }
 
 

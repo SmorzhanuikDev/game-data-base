@@ -5,6 +5,7 @@ import s from './setting.module.scss'
 import {CiWarning} from "react-icons/ci";
 import {ProfileData} from "./ProfileData";
 import {ChangeName} from "./ChangeName";
+import {ChangePass} from "./ChangePass";
 
 
 export const Setting = () => {
@@ -13,20 +14,14 @@ export const Setting = () => {
     const token = useAppSelector(state => state.auth.token);
 
     useEffect(() => {
-        dispatch(accountAction.fetchUserAction())
+        dispatch(accountAction.fetchUser())
     }, [dispatch, token])
 
     return (
         <div>
             <ProfileData/>
             <ChangeName/>
-            <div className={s.profileBox}>
-                <span className={s.desc}>Change password</span>
-                <input className={s.profileInput} type="text"/>
-                <input className={s.profileInput} type="text"/>
-                <input className={s.profileInput} type="text"/>
-                <button className={s.profileButton}>Change</button>
-            </div>
+            <ChangePass/>
             <div className={s.profileBox}>
                 <div className={s.deleteInfo}>
                     <CiWarning className={s.warningIcon}/>

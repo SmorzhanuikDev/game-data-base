@@ -1,6 +1,7 @@
 import {accountInstance} from "./index";
 import {singUpData, tokenRes} from "../Pages/Authorization/authTypes";
-import {userRes} from "../Pages/Account/accountTypes";
+import {changePassData, userRes} from "../Pages/Account/accountTypes";
+
 
 export const accountAPI = {
     logIn: async (password: string, login: string): Promise<tokenRes> => {
@@ -20,4 +21,8 @@ export const accountAPI = {
         const response = await accountInstance.post<tokenRes>('account', singUpData)
         return response.data
     },
+    changePassword: async (changePassData: changePassData): Promise<tokenRes> => {
+        const response = await accountInstance.put<tokenRes>('account/pass', changePassData)
+        return response.data
+    }
 }

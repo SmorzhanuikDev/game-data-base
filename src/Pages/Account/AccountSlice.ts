@@ -1,23 +1,34 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit'
 import {user} from "./accountTypes";
+import {commonApiRes} from "../Authorization/authTypes";
 
 type initialStateType = {
     currentUser: user | null
+    passRes: commonApiRes
+    isLoading: boolean
 }
 
 const initialState: initialStateType = {
-    currentUser: null
+    currentUser: null,
+    passRes: {} as commonApiRes,
+    isLoading: false
 }
 const accountSlice = createSlice({
     name: 'account',
     initialState,
     reducers: {
-        setUser: (state, action: PayloadAction<user>) => {
-            state.currentUser = action.payload
+        setUser: (state, {payload}: PayloadAction<user>) => {
+            state.currentUser = payload
+        },
+        setMessage: (state, {payload}: PayloadAction<commonApiRes>) => {
+            state.passRes = payload
+        },
+        setIsLoading: (state, action: PayloadAction<boolean>) => {
+            state.isLoading = action.payload
         },
     }
 })
 
-export const {setUser} = accountSlice.actions
+export const {setUser, setMessage, setIsLoading} = accountSlice.actions
 
 export default accountSlice.reducer

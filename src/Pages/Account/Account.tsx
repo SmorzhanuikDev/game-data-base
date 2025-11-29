@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import {useNavigate, useParams} from "react-router-dom";
-import {useAppDispatch} from "../../hooks";
+import {useAppDispatch, useAppSelector} from "../../hooks";
 import {accountAction} from "./AccountSaga";
 import s from './account.module.scss'
 import {useBgImage} from "../../Surface/Content";
@@ -9,6 +9,7 @@ import {ProfileNav} from "./Components/Navigation/Navigation";
 import {Lists} from "./Components/Lists/Lists";
 import {Setting} from "./Components/Setting/Setting";
 import {Ratings} from "./Components/Ratings/Ratings";
+import {ShadowLoader} from "../../Surface/ShadowLoader/ShadowLoader";
 
 const Account = () => {
 
@@ -18,14 +19,13 @@ const Account = () => {
         const {chapter} = useParams()
         const {sendImage} = useBgImage()
 
-        useEffect(() => {
+        useEffect
+        (() => {
             sendImage(accountBG)
             if (!token) {
                 navigate(`/auth`);
             }
         }, [dispatch, navigate, sendImage, token]);
-
-
 
         return (
             <div>
@@ -36,8 +36,8 @@ const Account = () => {
                     {chapter === 'ratings' && <Ratings/>}
                 </div>
             </div>
-        )
-            ;
+
+        );
     }
 ;
 
