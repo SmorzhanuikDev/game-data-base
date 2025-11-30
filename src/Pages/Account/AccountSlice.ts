@@ -20,7 +20,7 @@ const accountSlice = createSlice({
         setUser: (state, {payload}: PayloadAction<user>) => {
             state.currentUser = payload
         },
-        setMessage: (state, {payload}: PayloadAction<commonApiRes>) => {
+        setPassRes: (state, {payload}: PayloadAction<commonApiRes>) => {
             state.passRes = payload
         },
         setIsLoading: (state, action: PayloadAction<boolean>) => {
@@ -29,6 +29,6 @@ const accountSlice = createSlice({
     }
 })
 
-export const {setUser, setMessage, setIsLoading} = accountSlice.actions
+export const {setUser, setPassRes, setIsLoading} = accountSlice.actions
 
 export default accountSlice.reducer

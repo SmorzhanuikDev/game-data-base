@@ -5,7 +5,7 @@ import {SettingErrorMessage} from "./SettingErrorMessage";
 import {useAppDispatch, useAppSelector} from "../../../../hooks";
 import {accountAction} from "../../AccountSaga";
 import {ButtonLoader} from "../../../../Common/Components/ButtongLoader/ButtonLoader";
-import {setMessage} from "../../AccountSlice";
+import {setPassRes} from "../../AccountSlice";
 import {FieldBlock} from "./FieldBlock";
 
 interface formData {
@@ -49,7 +49,7 @@ export const ChangePass = () => {
     };
 
     const submitForm = (values: formData, {setSubmitting, resetForm}: FormikHelpers<formData>) => {
-        dispatch(setMessage({success: false, message: ''}));
+        dispatch(setPassRes({success: false, message: ''}));
         setIsLoading(true)
         dispatch(accountAction.changePassword(
             {oldPassword: values.currentPassword, newPassword: values.newPassword},
@@ -61,7 +61,7 @@ export const ChangePass = () => {
     useEffect(() => {
         if (changePassRes.message) {
             setIsLoading(false);
-            setTimeout(() => dispatch(setMessage({success: false, message: ''})), 10000)
+            setTimeout(() => dispatch(setPassRes({success: false, message: ''})), 10000)
         }
     }, [changePassRes, dispatch]);
 
