@@ -9,6 +9,7 @@ import {setDeleteAccountRes, setPassRes} from "../../../AccountSlice";
 import {accountAction} from "../../../AccountSaga";
 import {useAppDispatch, useAppSelector} from "../../../../../hooks";
 import {Success} from "./Success";
+import {AccountPassField} from "./AccountPassField";
 
 interface props {
     closeModal: () => void;
@@ -63,17 +64,13 @@ export const DeleteModal: React.FC<props> = ({closeModal, logOut}) => {
                         : <Formik initialValues={formData} onSubmit={submitForm} validate={validate}>
                             {({errors}) => (
                                 <Form>
-
                                     <p className={s.title}>Enter you password</p>
-
-                                    <FieldBlock isLoading={isLoading} type='password' name="password"
-                                                error={errors.password}/>
+                                    <AccountPassField name='password' error={errors.password} isLoading={isLoading} />
                                     <SettingErrorMessage error={deleteAccountRes?.message}>
                                         <button disabled={isLoading} className={s.profileButton} type='submit'>
                                             {isLoading ? <ButtonLoader/> : 'Change'}
                                         </button>
                                     </SettingErrorMessage>
-
                                     <p className={s.description}>
                                         If you want to permanently delete your account
                                         you need to prove that it's is really you.

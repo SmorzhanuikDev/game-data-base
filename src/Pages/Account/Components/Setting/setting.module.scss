@@ -35,6 +35,19 @@ $inputBorder: 2px solid #7e7b7b;
   }
 }
 
+.passWrapper {
+  position: relative;
+  display: flex;
+
+  .showPassIcon {
+    position: absolute;
+    top: 17px;
+    left: 355px;
+    cursor: pointer;
+    font-size: 20px;
+  }
+}
+
 .modal {
   position: fixed;
   top: 0;
@@ -136,11 +149,14 @@ $inputBorder: 2px solid #7e7b7b;
   }
 
   .errorMessage {
-    text-transform: capitalize;
     background: #ddb64b;
     padding: 4px 10px;
     color: #000000;
     border-radius: 4px;
     font-size: 15px;
+
+    &:first-letter {
+      text-transform: capitalize;
+    }
   }
 }

@@ -1,12 +1,12 @@
 import React, {useEffect, useState} from 'react';
 import s from "../setting.module.scss";
-import {Field, Form, Formik, FormikErrors, FormikHelpers} from "formik";
+import {Form, Formik, FormikErrors, FormikHelpers} from "formik";
 import {SettingErrorMessage} from "./SettingErrorMessage";
 import {useAppDispatch, useAppSelector} from "../../../../../hooks";
 import {accountAction} from "../../../AccountSaga";
 import {ButtonLoader} from "../../../../../Common/Components/ButtonLoader/ButtonLoader";
 import {setPassRes} from "../../../AccountSlice";
-import {FieldBlock} from "./FieldBlock";
+import {AccountPassField} from "./AccountPassField";
 
 interface formData {
     currentPassword: string;
@@ -72,12 +72,9 @@ export const ChangePass = () => {
                 <Form>
                     <div className={s.profileBox}>
                         <span className={s.desc}>Change password</span>
-                        <FieldBlock isLoading={isLoading} type='password' name="currentPassword"
-                                    error={errors.currentPassword}/>
-                        <FieldBlock isLoading={isLoading} type='password' name="newPassword"
-                                    error={errors.newPassword}/>
-                        <FieldBlock isLoading={isLoading} type='password' name="confirmPassword"
-                                    error={errors.confirmPassword}/>
+                        <AccountPassField isLoading={isLoading} error={errors.currentPassword} name="currentPassword"/>
+                        <AccountPassField isLoading={isLoading} error={errors.newPassword} name="newPassword"/>
+                        <AccountPassField isLoading={isLoading} error={errors.confirmPassword} name="confirmPassword"/>
                         <SettingErrorMessage error={changePassRes?.message}>
                             <button disabled={isLoading} className={s.profileButton} type='submit'>
                                 {isLoading ? <ButtonLoader/> : 'Change'}
