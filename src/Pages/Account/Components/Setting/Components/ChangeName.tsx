@@ -1,12 +1,12 @@
 import React, {useEffect} from 'react';
-import s from "./setting.module.scss";
+import s from "../setting.module.scss";
 import {Form, Formik, FormikErrors, FormikHelpers} from "formik";
 import {SettingErrorMessage} from "./SettingErrorMessage";
 import {FieldBlock} from "./FieldBlock";
-import {ButtonLoader} from "../../../../Common/Components/ButtonLoader/ButtonLoader";
-import {useAppDispatch, useAppSelector} from "../../../../hooks";
-import {accountAction} from "../../AccountSaga";
-import {setNameRes} from "../../AccountSlice";
+import {ButtonLoader} from "../../../../../Common/Components/ButtonLoader/ButtonLoader";
+import {useAppDispatch, useAppSelector} from "../../../../../hooks";
+import {accountAction} from "../../../AccountSaga";
+import {setNameRes} from "../../../AccountSlice";
 
 interface formData {
     name: string

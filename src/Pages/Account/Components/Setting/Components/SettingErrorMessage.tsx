@@ -1,5 +1,5 @@
 import React, {PropsWithChildren} from 'react';
-import s from './setting.module.scss'
+import s from '../setting.module.scss'
 
 interface props extends PropsWithChildren {
     error: string | undefined;

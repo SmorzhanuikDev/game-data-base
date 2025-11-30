@@ -5,7 +5,8 @@ import {changeNameRes, commonApiRes} from "../Authorization/authTypes";
 type initialStateType = {
     currentUser: user | null
     passRes: commonApiRes
-    nameRes: commonApiRes
+    nameRes: changeNameRes
+    deleteAccountRes: commonApiRes
     isLoading: boolean
 }
 
@@ -13,7 +14,8 @@ const initialState: initialStateType = {
     currentUser: null,
     passRes: {} as commonApiRes,
     isLoading: false,
-    nameRes: {} as commonApiRes,
+    nameRes: {} as changeNameRes,
+    deleteAccountRes: {} as commonApiRes
 }
 const accountSlice = createSlice({
     name: 'account',
@@ -24,6 +26,9 @@ const accountSlice = createSlice({
         },
         setPassRes: (state, {payload}: PayloadAction<commonApiRes>) => {
             state.passRes = payload
+        },
+        setDeleteAccountRes: (state, {payload}: PayloadAction<commonApiRes>) => {
+            state.deleteAccountRes = payload
         },
         setNameRes: (state, {payload}: PayloadAction<changeNameRes>) => {
             state.nameRes = payload
@@ -37,6 +42,6 @@ const accountSlice = createSlice({
     }
 })
 
-export const {setUser, setPassRes, setIsLoading, setNameRes} = accountSlice.actions
+export const {setUser, setPassRes, setIsLoading, setNameRes, setDeleteAccountRes} = accountSlice.actions
 
 export default accountSlice.reducer

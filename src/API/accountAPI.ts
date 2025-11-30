@@ -29,8 +29,12 @@ export const accountAPI = {
         const response = await accountInstance.put<changeNameRes>('account', {name})
         return response.data
     },
-    deleteAccount: async (name: string): Promise<commonApiRes> => {
-        const response = await accountInstance.delete<commonApiRes>('account')
+    deleteAccount: async (password: string): Promise<commonApiRes> => {
+        const response = await accountInstance.delete<commonApiRes>('account', {
+            params: {
+                password
+            }
+        })
         return response.data
     },
 }

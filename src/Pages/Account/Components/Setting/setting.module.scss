@@ -2,6 +2,20 @@ $btnColor: #252525;
 $btnBorder: 2px solid #c1c1c1;
 $inputBorder: 2px solid #7e7b7b;
 
+@mixin modalBox {
+  background: #1b1919;
+  padding: 50px 70px;
+  border-radius: 10px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  .title {
+    font-size: 24px;
+  }
+}
+
 .profileBox {
   border-bottom: white 1px solid;
   font-size: 20px;
@@ -18,6 +32,45 @@ $inputBorder: 2px solid #7e7b7b;
       color: #bab3b3;
       margin-right: 5px;
     }
+  }
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 2;
+
+  .modalShadow {
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+  }
+
+  .modalWarning {
+    @include modalBox;
+    border: 2px solid #f4760e;
+  }
+
+  .modalSuccess {
+    @include modalBox;
+    border: 2px solid #0d9e09;
+
+  }
+}
+
+.successRes {
+  span {
+    font-size: 21px;
+  }
+  .successIcon {
+    font-size: 40px;
+    color: #0d9e09;
+    position: relative;
+    top: 10px;
+    right: 7px;
   }
 }
 

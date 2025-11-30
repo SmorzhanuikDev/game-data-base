@@ -1,22 +1,14 @@
 import React from 'react';
-import s from "./setting.module.scss";
-import {setToken} from "../../../Authorization/authSlice";
-import {useNavigate} from "react-router-dom";
-import {useAppDispatch, useAppSelector} from "../../../../hooks";
+import s from "../setting.module.scss";
+import {useAppSelector} from "../../../../../hooks";
 
-export const ProfileData = () => {
+interface props {
+    logOut: () => void;
+}
 
-    const navigate = useNavigate();
+export const ProfileData: React.FC<props> = ({logOut}) => {
+
     const user = useAppSelector(state => state.accountData.currentUser);
-    const dispatch = useAppDispatch();
-
-
-    const logOut = () => {
-        localStorage.removeItem("token");
-        dispatch(setToken(''));
-        navigate('/home')
-    }
-
 
     return (
         <div className={s.profileBox}>
@@ -24,7 +16,7 @@ export const ProfileData = () => {
                     <span className={s.desc}>
                         Login:
                     </span>
-                    <span>
+                <span>
                         {user?.login}
                     </span>
             </div>

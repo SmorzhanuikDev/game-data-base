@@ -1,7 +1,7 @@
 import React, {FC} from 'react';
 import {SettingErrorMessage} from "./SettingErrorMessage";
 import {Field} from "formik";
-import s from "./setting.module.scss";
+import s from "../setting.module.scss";
 
 interface props {
     error: string | undefined;

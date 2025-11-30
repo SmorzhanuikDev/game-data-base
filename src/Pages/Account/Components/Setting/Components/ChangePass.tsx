@@ -1,11 +1,11 @@
 import React, {useEffect, useState} from 'react';
-import s from "./setting.module.scss";
+import s from "../setting.module.scss";
 import {Field, Form, Formik, FormikErrors, FormikHelpers} from "formik";
 import {SettingErrorMessage} from "./SettingErrorMessage";
-import {useAppDispatch, useAppSelector} from "../../../../hooks";
-import {accountAction} from "../../AccountSaga";
-import {ButtonLoader} from "../../../../Common/Components/ButtonLoader/ButtonLoader";
-import {setPassRes} from "../../AccountSlice";
+import {useAppDispatch, useAppSelector} from "../../../../../hooks";
+import {accountAction} from "../../../AccountSaga";
+import {ButtonLoader} from "../../../../../Common/Components/ButtonLoader/ButtonLoader";
+import {setPassRes} from "../../../AccountSlice";
 import {FieldBlock} from "./FieldBlock";
 
 interface formData {
