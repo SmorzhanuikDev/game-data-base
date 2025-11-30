@@ -36,6 +36,15 @@ function* changeName({payload}: PayloadAction<string>) {
     }
 }
 
+function* deleteAccount({payload}: PayloadAction<string>) {
+    try {
+        const response: changeNameRes = yield call(() => accountAPI.changeName(payload));
+        yield put(setNameRes(response))
+    } catch (e: any) {
+        yield put({type: 'ERROR', message: e.message})
+    }
+}
+
 export const accountAction = {
     fetchUser: createAction(FETCH_USER),
     changePassword: createAction(CHANGE_PASSWORD,

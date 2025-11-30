@@ -7,6 +7,7 @@ import {ProfileData} from "./ProfileData";
 import {ChangeName} from "./ChangeName";
 import {ChangePass} from "./ChangePass";
 import {ProfileLoader} from "../ProfileLoader/ProfileLoader";
+import {DeleteAccount} from "./DeleteAccount";
 
 
 export const Setting = () => {
@@ -27,15 +28,7 @@ export const Setting = () => {
             <ProfileData/>
             <ChangeName/>
             <ChangePass/>
-            <div className={s.profileBox}>
-                <div className={s.deleteInfo}>
-                    <CiWarning className={s.warningIcon}/>
-                    <span>
-                        Once deleted, your game lists and ratings cannot be restored.
-                    </span>
-                </div>
-                <button className={s.profileButton}>Delete account</button>
-            </div>
+            <DeleteAccount/>
         </div>
     );
 };

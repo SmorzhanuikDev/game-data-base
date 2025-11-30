@@ -40,7 +40,9 @@ export const ChangeName = () => {
     useEffect(() => {
         if (changeNameRes.message) {
             setIsLoading(false);
-            setTimeout(() => dispatch(setNameRes({success: false, message: ''})), 10000)
+            setTimeout(
+                () => dispatch(setNameRes({success: false, message: '', newName: ''})),
+                10000)
         }
     }, [changeNameRes, dispatch]);
 
