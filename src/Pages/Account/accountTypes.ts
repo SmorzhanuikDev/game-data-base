@@ -2,6 +2,7 @@ import {commonApiRes} from "../Authorization/authTypes";
 
 export const FETCH_USER = 'FETCH_USER'
 export const CHANGE_PASSWORD = 'CHANGE_PASSWORD'
+export const CHANGE_NAME = 'CHANGE_NAME'
 
 export interface gameListItem {
     id: number,

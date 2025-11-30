@@ -1,9 +1,9 @@
 import {call, put, takeEvery} from 'redux-saga/effects'
 import {createAction, PayloadAction} from "@reduxjs/toolkit";
-import {CHANGE_PASSWORD, changePassData, FETCH_USER, userRes} from "./accountTypes";
+import {CHANGE_NAME, CHANGE_PASSWORD, changePassData, FETCH_USER, userRes} from "./accountTypes";
 import {accountAPI} from "../../API/accountAPI";
-import {setIsLoading, setPassRes, setUser} from "./AccountSlice";
-import {commonApiRes} from "../Authorization/authTypes";
+import {setIsLoading, setNameRes, setPassRes, setUser} from "./AccountSlice";
+import {changeNameRes, commonApiRes} from "../Authorization/authTypes";
 
 function* fetchUser() {
     try {
@@ -27,15 +27,27 @@ function* changePassword({payload}: PayloadAction<changePassData>) {
     }
 }
 
+function* changeName({payload}: PayloadAction<string>) {
+    try {
+        const response: changeNameRes = yield call(() => accountAPI.changeName(payload));
+        yield put(setNameRes(response))
+    } catch (e: any) {
+        yield put({type: 'ERROR', message: e.message})
+    }
+}
+
 export const accountAction = {
     fetchUser: createAction(FETCH_USER),
     changePassword: createAction(CHANGE_PASSWORD,
         (changePassData: changePassData) => ({payload: changePassData})),
+    changeName: createAction(CHANGE_NAME,
+        (newName: string) => ({payload: newName})),
 }
 
 function* userSaga() {
     yield takeEvery(FETCH_USER, fetchUser)
     yield takeEvery(CHANGE_PASSWORD, changePassword)
+    yield takeEvery(CHANGE_NAME, changeName)
 }
 
 export default userSaga

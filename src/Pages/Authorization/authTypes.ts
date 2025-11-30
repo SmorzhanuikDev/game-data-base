@@ -29,5 +29,9 @@ export interface singUpData {
     password: string
 }
 
+export interface changeNameRes extends commonApiRes {
+    newName: string
+}
+
 
 
