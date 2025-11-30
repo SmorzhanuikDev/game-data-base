@@ -1,11 +1,9 @@
 import React, {useEffect} from 'react';
 import s from "../setting.module.scss";
-import {IoIosCheckmarkCircle} from "react-icons/io";
 import {Form, Formik, FormikErrors, FormikHelpers} from "formik";
-import {FieldBlock} from "./FieldBlock";
 import {SettingErrorMessage} from "./SettingErrorMessage";
 import {ButtonLoader} from "../../../../../Common/Components/ButtonLoader/ButtonLoader";
-import {setDeleteAccountRes, setPassRes} from "../../../AccountSlice";
+import {setDeleteAccountRes} from "../../../AccountSlice";
 import {accountAction} from "../../../AccountSaga";
 import {useAppDispatch, useAppSelector} from "../../../../../hooks";
 import {Success} from "./Success";
@@ -60,15 +58,15 @@ export const DeleteModal: React.FC<props> = ({closeModal, logOut}) => {
             <div className={deleteAccountRes.success ? s.modalSuccess : s.modalWarning}>
                 {
                     deleteAccountRes.success
-                        ? <Success logOut={logOut} />
+                        ? <Success logOut={logOut}/>
                         : <Formik initialValues={formData} onSubmit={submitForm} validate={validate}>
                             {({errors}) => (
                                 <Form>
                                     <p className={s.title}>Enter you password</p>
-                                    <AccountPassField name='password' error={errors.password} isLoading={isLoading} />
+                                    <AccountPassField name='password' error={errors.password} isLoading={isLoading}/>
                                     <SettingErrorMessage error={deleteAccountRes?.message}>
                                         <button disabled={isLoading} className={s.profileButton} type='submit'>
-                                            {isLoading ? <ButtonLoader/> : 'Change'}
+                                            {isLoading ? <ButtonLoader/> : 'Delete'}
                                         </button>
                                     </SettingErrorMessage>
                                     <p className={s.description}>
