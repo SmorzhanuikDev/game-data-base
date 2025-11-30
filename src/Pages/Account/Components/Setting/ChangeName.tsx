@@ -2,6 +2,7 @@ import React from 'react';
 import s from "./setting.module.scss";
 import {Field, Form, Formik, FormikErrors, FormikHelpers} from "formik";
 import {SettingErrorMessage} from "./SettingErrorMessage";
+import {FieldBlock} from "./FieldBlock";
 
 interface formData {
     name: string
@@ -31,9 +32,7 @@ export const ChangeName = () => {
                 <Form>
                     <div className={s.profileBox}>
                         <span className={s.desc}>Change name</span>
-                        <SettingErrorMessage error={errors.name}>
-                            <Field name='name' type="text" className={s.profileInput} autoComplete={'off'}/>
-                        </SettingErrorMessage>
+                        <FieldBlock name='name' type='text' error={errors.name} isLoading={false}/>
                         <button className={s.profileButton} type='submit'>Change</button>
                     </div>
                 </Form>

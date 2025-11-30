@@ -6,6 +6,7 @@ import {useAppDispatch, useAppSelector} from "../../../../hooks";
 import {accountAction} from "../../AccountSaga";
 import {ButtonLoader} from "../../../../Common/Components/ButtongLoader/ButtonLoader";
 import {setMessage} from "../../AccountSlice";
+import {FieldBlock} from "./FieldBlock";
 
 interface formData {
     currentPassword: string;
@@ -46,7 +47,7 @@ export const ChangePass = () => {
         }
         return errors;
     };
-    
+
     const submitForm = (values: formData, {setSubmitting, resetForm}: FormikHelpers<formData>) => {
         dispatch(setMessage({success: false, message: ''}));
         setIsLoading(true)
@@ -71,18 +72,12 @@ export const ChangePass = () => {
                 <Form>
                     <div className={s.profileBox}>
                         <span className={s.desc}>Change password</span>
-                        <SettingErrorMessage error={errors.currentPassword}>
-                            <Field disabled={isLoading} name='currentPassword' type="text" className={s.profileInput}
-                                   autoComplete={'off'}/>
-                        </SettingErrorMessage>
-                        <SettingErrorMessage error={errors.newPassword}>
-                            <Field disabled={isLoading} name='newPassword' type="text" className={s.profileInput}
-                                   autoComplete={'off'}/>
-                        </SettingErrorMessage>
-                        <SettingErrorMessage error={errors.confirmPassword}>
-                            <Field disabled={isLoading} name='confirmPassword' type="text" className={s.profileInput}
-                                   autoComplete={'off'}/>
-                        </SettingErrorMessage>
+                        <FieldBlock isLoading={isLoading} type='password' name="currentPassword"
+                                    error={errors.currentPassword}/>
+                        <FieldBlock isLoading={isLoading} type='password' name="newPassword"
+                                    error={errors.newPassword}/>
+                        <FieldBlock isLoading={isLoading} type='password' name="confirmPassword"
+                                    error={errors.confirmPassword}/>
                         <SettingErrorMessage error={changePassRes?.message}>
                             <button disabled={isLoading} className={s.profileButton} type='submit'>
                                 {isLoading ? <ButtonLoader/> : 'Change'}
